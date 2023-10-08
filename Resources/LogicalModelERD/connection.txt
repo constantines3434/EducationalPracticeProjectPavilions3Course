@@ -1,0 +1,28 @@
+WIN-OMJN02Q49QC
+PavilionsBase
+private static PavilionsBase context_;
+        public PavilionsBase()
+            : base("name=PavilionsBase")
+        {
+        }
+        public static PavilionsBase GetContext()
+        {
+            if (context_ == null)
+                context_ = new PavilionsBase();
+            return context_;
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //Data Source=WIN-OMJN02Q49QC; Initial Catalog=Base; Integrated Security=True
+            optionsBuilder.UseSqlServer("Source=WIN-OMJN02Q49QC; Initial Catalog=Base; Integrated Security=True");
+        }
+
+
+Elizor@gmai.com
+yntiRS

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d715bbc60c894e2b9f71a4b778a03e8b" Name="Diagram1">
+        <EntityTypeShape EntityType="PavilionsModel.Cities" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.Employees" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.Pavilions" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.Rent" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.Roles" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.ShoppingMalls" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.StatusEmployee" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.StatusPavilions" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.StatusRent" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.StatusShoppingMalls" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.Tenants" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsModel.StatePavilions" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="PavilionsModel.FK_ShoppingMalls_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="PavilionsModel.FK_Employees_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="PavilionsModel.FK_Employees_StatusEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="PavilionsModel.FK_StatePavilions_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="PavilionsModel.FK_Pavilions_ShoppingMalls" ManuallyRouted="false" />
+        <AssociationConnector Association="PavilionsModel.FK_Pavilions_StatusPavilions" ManuallyRouted="false" />
+        <AssociationConnector Association="PavilionsModel.FK_Rent_Pavilions" ManuallyRouted="false" />
+        <AssociationConnector Association="PavilionsModel.FK_StatePavilions_Pavilions" ManuallyRouted="false" />
+        <AssociationConnector Association="PavilionsModel.FK_Rent_StatusRent" ManuallyRouted="false" />
+        <AssociationConnector Association="PavilionsModel.FK_Rent_Tenants" ManuallyRouted="false" />
+        <AssociationConnector Association="PavilionsModel.FK_ShoppingMalls_StatusShoppingMalls" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
