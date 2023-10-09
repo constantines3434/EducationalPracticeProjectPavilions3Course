@@ -39,19 +39,21 @@ namespace EducationalPracticePavilions.View
 
             if (string.IsNullOrWhiteSpace(_currentEmployee.Surname))
                 errors.AppendLine("Укажите корректно фамилию работника");
-            if (string.IsNullOrWhiteSpace(_currentEmployee.Name))
+            if (string.IsNullOrWhiteSpace(_currentEmployee.NameEmployee))
                 errors.AppendLine("Укажите корректно имя работника");
             if (string.IsNullOrWhiteSpace(_currentEmployee.Patronimic))
                 errors.AppendLine("Укажите корректно отчество работника");
-            if (string.IsNullOrWhiteSpace(_currentEmployee.Login))
+            if (string.IsNullOrWhiteSpace(_currentEmployee.LoginEmployee))
                 errors.AppendLine("Укажите корректно логин работника");
-            if (string.IsNullOrWhiteSpace(_currentEmployee.Password))
+            if (string.IsNullOrWhiteSpace(_currentEmployee.PasswordEmployee))
                 errors.AppendLine("Укажите корректно пароль работника");
             if (_currentEmployee.StatusEmployee == null)
                 errors.AppendLine("Корректно выберите статус работника");
             if (_currentEmployee.Roles == null)
                 errors.AppendLine("Корректно выберите роль работника");
             if (string.IsNullOrWhiteSpace(_currentEmployee.PhoneNumber))
+                errors.AppendLine("Укажите корректно номер телефона работника");
+            if (string.IsNullOrWhiteSpace(_currentEmployee.Gender))
                 errors.AppendLine("Укажите корректно номер телефона работника");
             //if ((_currentEmployee.Gender != "М") || (_currentEmployee.Gender != "Ж"))
             //    errors.AppendLine("Укажите корректно пол работника");
@@ -62,7 +64,7 @@ namespace EducationalPracticePavilions.View
                 return;
             }
 
-            if (_currentEmployee.Id == 0)
+            if (_currentEmployee.IdEmployee == 0)
                 PavilionsBase.GetContext().Employees.Add(_currentEmployee);
 
             try

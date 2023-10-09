@@ -36,7 +36,7 @@ namespace EducationalPracticePavilions
                 "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
-                { 
+                {
                     PavilionsBase.GetContext().Employees.RemoveRange(employeeForRemoving);
                     PavilionsBase.GetContext().SaveChanges();
                     MessageBox.Show("Элементы удалены");

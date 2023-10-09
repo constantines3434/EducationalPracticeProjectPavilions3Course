@@ -21,7 +21,7 @@ namespace EducationalPracticePavilions.Model
         }
     
         public int IdStatusEmployee { get; set; }
-        public string Status { get; set; }
+        public string StatusName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employees> Employees { get; set; }

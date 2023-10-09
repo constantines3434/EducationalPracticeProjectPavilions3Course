@@ -20,8 +20,8 @@ namespace EducationalPracticePavilions.Model
             this.ShoppingMalls = new HashSet<ShoppingMalls>();
         }
     
-        public int IdStatusShoppingMall { get; set; }
-        public string Status { get; set; }
+        public int IdStatusShoppingMalls { get; set; }
+        public string StatusTicketName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShoppingMalls> ShoppingMalls { get; set; }

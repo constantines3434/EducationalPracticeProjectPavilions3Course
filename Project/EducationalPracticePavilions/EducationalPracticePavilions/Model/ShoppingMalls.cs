@@ -21,15 +21,16 @@ namespace EducationalPracticePavilions.Model
         }
     
         public int IdShoppingMall { get; set; }
-        public string Name { get; set; }
-        public int IdStatusShoppingMall { get; set; }
-        public int IdCity { get; set; }
-        public float Price { get; set; }
-        public float ValueAddedFactor { get; set; }
-        public int NumberOfStoreys { get; set; }
-        public string Image { get; set; }
+        public string NameShoppingMalls { get; set; }
+        public Nullable<int> IdStatusShoppingMalls { get; set; }
+        public Nullable<int> IdCity { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<double> ValueAddedFactor { get; set; }
+        public Nullable<int> NumberOfStoreys { get; set; }
+        public Nullable<int> IdImageShoppingMall { get; set; }
     
         public virtual Cities Cities { get; set; }
+        public virtual ImagesShoppingMalls ImagesShoppingMalls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pavilions> Pavilions { get; set; }
         public virtual StatusShoppingMalls StatusShoppingMalls { get; set; }

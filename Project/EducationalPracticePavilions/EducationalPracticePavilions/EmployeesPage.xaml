@@ -21,7 +21,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Header="Id работника"
-                    Binding="{Binding Id}"
+                    Binding="{Binding IdEmployee}"
                     Width="150"/>
                 <DataGridTextColumn
                     Header="Фамилия работника"
@@ -29,7 +29,7 @@
                     Width="150"/>
                 <DataGridTextColumn
                     Header="Имя работника"
-                    Binding="{Binding Name}"
+                    Binding="{Binding NameEmployee}"
                     Width="150"/>
                 <DataGridTextColumn
                     Header="Отчество работника"
@@ -37,19 +37,19 @@
                     Width="150"/>
                 <DataGridTextColumn
                     Header="Логин работника"
-                    Binding="{Binding Login}"
+                    Binding="{Binding LoginEmployee}"
                     Width="150"/>
                 <DataGridTextColumn
                     Header="Пароль работника"
-                    Binding="{Binding Password}"
+                    Binding="{Binding PasswordEmployee}"
                     Width="150"/>
                 <DataGridTextColumn
                     Header="Статус работника"
-                    Binding="{Binding StatusEmployee.Status}"
+                    Binding="{Binding StatusEmployee.StatusName}"
                     Width="250"/>
                 <DataGridTextColumn
                     Header="Роль работника"
-                    Binding="{Binding Roles.Role}"
+                    Binding="{Binding Roles.NameRole}"
                     Width="250"/>
                 <DataGridTextColumn
                     Header="Номер телефона работника"
@@ -61,7 +61,7 @@
                     Width="250"/>
                 <DataGridTextColumn
                     Header="Фото работника"
-                    Binding="{Binding Photo}"
+                    Binding="{Binding PhotoEmployee.Photo}"
                     Width="250"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>

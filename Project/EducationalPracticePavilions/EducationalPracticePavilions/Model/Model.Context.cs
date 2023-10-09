@@ -20,14 +20,12 @@ namespace EducationalPracticePavilions.Model
             : base("name=PavilionsBase")
         {
         }
-
         public static PavilionsBase GetContext()
-        { 
-            if(_context == null)
+        {
+            if (_context == null)
                 _context = new PavilionsBase();
             return _context;
         }
-    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -35,16 +33,17 @@ namespace EducationalPracticePavilions.Model
     
         public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<ImagesShoppingMalls> ImagesShoppingMalls { get; set; }
         public virtual DbSet<Pavilions> Pavilions { get; set; }
+        public virtual DbSet<PhotoEmployee> PhotoEmployee { get; set; }
         public virtual DbSet<Rent> Rent { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<ShoppingMalls> ShoppingMalls { get; set; }
+        public virtual DbSet<StatePavilions> StatePavilions { get; set; }
         public virtual DbSet<StatusEmployee> StatusEmployee { get; set; }
         public virtual DbSet<StatusPavilions> StatusPavilions { get; set; }
         public virtual DbSet<StatusRent> StatusRent { get; set; }
         public virtual DbSet<StatusShoppingMalls> StatusShoppingMalls { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tenants> Tenants { get; set; }
-        public virtual DbSet<StatePavilions> StatePavilions { get; set; }
     }
 }

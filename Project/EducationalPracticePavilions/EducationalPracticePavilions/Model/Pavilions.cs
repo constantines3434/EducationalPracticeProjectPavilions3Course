@@ -14,25 +14,19 @@ namespace EducationalPracticePavilions.Model
     
     public partial class Pavilions
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Pavilions()
-        {
-            this.Rent = new HashSet<Rent>();
-        }
-    
         public int IdPavilion { get; set; }
-        public string Name { get; set; }
-        public int IdShoppingMall { get; set; }
-        public int Floor { get; set; }
-        public int IdStatusPavilion { get; set; }
-        public float Square { get; set; }
-        public float CostPerMeter { get; set; }
-        public float ValueAddedFactor { get; set; }
+        public Nullable<int> IdShoppingMall { get; set; }
+        public string NamePavilions { get; set; }
+        public Nullable<int> FloorPavilion { get; set; }
+        public Nullable<int> IdStatusPavilion { get; set; }
+        public Nullable<double> SquarePavilions { get; set; }
+        public Nullable<double> CostPerMeter { get; set; }
+        public Nullable<double> ValueAddedFactor { get; set; }
+        public Nullable<int> IdRent { get; set; }
     
+        public virtual Rent Rent { get; set; }
         public virtual ShoppingMalls ShoppingMalls { get; set; }
         public virtual StatusPavilions StatusPavilions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rent> Rent { get; set; }
         public virtual StatePavilions StatePavilions { get; set; }
     }
 }

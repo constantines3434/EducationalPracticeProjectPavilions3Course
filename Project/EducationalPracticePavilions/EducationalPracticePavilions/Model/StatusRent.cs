@@ -21,7 +21,7 @@ namespace EducationalPracticePavilions.Model
         }
     
         public int IdStatusRent { get; set; }
-        public string Status { get; set; }
+        public string StatusRentName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rent> Rent { get; set; }

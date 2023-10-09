@@ -14,14 +14,21 @@ namespace EducationalPracticePavilions.Model
     
     public partial class Rent
     {
-        public int IdRent { get; set; }
-        public int IdTenant { get; set; }
-        public int IdPavilion { get; set; }
-        public int IdStatusRent { get; set; }
-        public System.DateTime StartOfLease { get; set; }
-        public System.DateTime EndOfLease { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Rent()
+        {
+            this.Pavilions = new HashSet<Pavilions>();
+        }
     
-        public virtual Pavilions Pavilions { get; set; }
+        public int IdRent { get; set; }
+        public Nullable<int> IdTenant { get; set; }
+        public Nullable<int> IdPavilion { get; set; }
+        public Nullable<int> IdStatusRent { get; set; }
+        public Nullable<System.DateTime> StartOfLease { get; set; }
+        public Nullable<System.DateTime> EndOfLease { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pavilions> Pavilions { get; set; }
         public virtual StatusRent StatusRent { get; set; }
         public virtual Tenants Tenants { get; set; }
     }

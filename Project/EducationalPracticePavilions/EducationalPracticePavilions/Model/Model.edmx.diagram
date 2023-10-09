@@ -4,31 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d715bbc60c894e2b9f71a4b778a03e8b" Name="Diagram1">
-        <EntityTypeShape EntityType="PavilionsModel.Cities" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.Employees" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.Pavilions" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.Rent" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.Roles" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.ShoppingMalls" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.StatusEmployee" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.StatusPavilions" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.StatusRent" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.StatusShoppingMalls" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.Tenants" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsModel.StatePavilions" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="PavilionsModel.FK_ShoppingMalls_Cities" ManuallyRouted="false" />
-        <AssociationConnector Association="PavilionsModel.FK_Employees_Roles" ManuallyRouted="false" />
-        <AssociationConnector Association="PavilionsModel.FK_Employees_StatusEmployee" ManuallyRouted="false" />
-        <AssociationConnector Association="PavilionsModel.FK_StatePavilions_Employees" ManuallyRouted="false" />
-        <AssociationConnector Association="PavilionsModel.FK_Pavilions_ShoppingMalls" ManuallyRouted="false" />
-        <AssociationConnector Association="PavilionsModel.FK_Pavilions_StatusPavilions" ManuallyRouted="false" />
-        <AssociationConnector Association="PavilionsModel.FK_Rent_Pavilions" ManuallyRouted="false" />
-        <AssociationConnector Association="PavilionsModel.FK_StatePavilions_Pavilions" ManuallyRouted="false" />
-        <AssociationConnector Association="PavilionsModel.FK_Rent_StatusRent" ManuallyRouted="false" />
-        <AssociationConnector Association="PavilionsModel.FK_Rent_Tenants" ManuallyRouted="false" />
-        <AssociationConnector Association="PavilionsModel.FK_ShoppingMalls_StatusShoppingMalls" ManuallyRouted="false" />
+      <Diagram DiagramId="034f060e84bb4eed9e2928300f779c56" Name="Diagram1">
+        <EntityTypeShape EntityType="Pavilions.Cities" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.Employees" Width="1.5" PointX="5.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.ImagesShoppingMalls" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.Pavilions" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.PhotoEmployee" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.Rent" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.Roles" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.ShoppingMalls" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.StatePavilions" Width="1.5" PointX="7.5" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.StatusEmployee" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.StatusPavilions" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.StatusRent" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.StatusShoppingMalls" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pavilions.Tenants" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <AssociationConnector Association="Pavilions.FK__ShoppingM__IdCit__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__Employees__IdPho__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__Employees__IdRol__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__Employees__IdSta__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__StatePavi__IdEmp__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__ShoppingM__IdIma__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__Pavilions__IdRen__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__Pavilions__IdSho__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__Pavilions__IdSta__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__StatePavi__IdPav__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__Rent__IdStatusRe__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__Rent__IdTenant__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="Pavilions.FK__ShoppingM__IdSta__47DBAE45" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -84,7 +84,7 @@
             Grid.Column="1"
             Grid.Row="1"
             HorizontalAlignment="Left"
-            Text="{Binding Name}"
+            Text="{Binding NameEmployee}"
             BorderBrush="Black"
             BorderThickness="1,1,1,1"/>
         <TextBox
@@ -100,24 +100,24 @@
             Grid.Column="1"
             Grid.Row="3"
             HorizontalAlignment="Left"
-            Text="{Binding Login}"/>
+            Text="{Binding LoginEmployee}"/>
         <TextBox
             Width="550"
             MaxLength="100"
             Grid.Column="1"
             Grid.Row="4"
             HorizontalAlignment="Left"
-            Text="{Binding Password}"/>
+            Text="{Binding PasswordEmployee}"/>
         <ComboBox
             x:Name="ComboBoxStatusEmployee"
-            DisplayMemberPath="Status"
+            DisplayMemberPath="StatusName"
             Grid.Row="5"
             Grid.Column="1"
             SelectedItem="{Binding StatusEmployee}"
             />
         <ComboBox
             x:Name="ComboBoxRoleEmployee"
-            DisplayMemberPath="Role"
+            DisplayMemberPath="NameRole"
             Grid.Row="6"
             Grid.Column="1"
             SelectedItem="{Binding Roles}"

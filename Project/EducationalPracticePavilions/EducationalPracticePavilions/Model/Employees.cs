@@ -11,38 +11,28 @@ namespace EducationalPracticePavilions.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
-
-    public class Employees : INotifyPropertyChanged
+    
+    public partial class Employees
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employees()
         {
             this.StatePavilions = new HashSet<StatePavilions>();
         }
-        
-        public int Id  { get; set; }
+    
+        public int IdEmployee { get; set; }
         public string Surname { get; set; }
-        public string Name { get; set; }
+        public string NameEmployee { get; set; }
         public string Patronimic { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public int IdStatusEmployee { get; set; }
-        public int IdRole { get; set; }
+        public string LoginEmployee { get; set; }
+        public string PasswordEmployee { get; set; }
+        public Nullable<int> IdStatusEmployee { get; set; }
+        public Nullable<int> IdRole { get; set; }
         public string PhoneNumber { get; set; }
         public string Gender { get; set; }
-        public string Photo { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanded([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-            }
-        }
+        public Nullable<int> IdPhoto { get; set; }
     
+        public virtual PhotoEmployee PhotoEmployee { get; set; }
         public virtual Roles Roles { get; set; }
         public virtual StatusEmployee StatusEmployee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

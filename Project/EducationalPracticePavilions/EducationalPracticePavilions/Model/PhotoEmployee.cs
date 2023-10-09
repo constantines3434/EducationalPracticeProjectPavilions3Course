@@ -12,18 +12,18 @@ namespace EducationalPracticePavilions.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class StatusPavilions
+    public partial class PhotoEmployee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StatusPavilions()
+        public PhotoEmployee()
         {
-            this.Pavilions = new HashSet<Pavilions>();
+            this.Employees = new HashSet<Employees>();
         }
     
-        public int IdStatusPavilion { get; set; }
-        public string StatusName { get; set; }
+        public int IdPhoto { get; set; }
+        public byte[] Photo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pavilions> Pavilions { get; set; }
+        public virtual ICollection<Employees> Employees { get; set; }
     }
 }

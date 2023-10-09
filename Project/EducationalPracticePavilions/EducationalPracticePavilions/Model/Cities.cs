@@ -21,7 +21,7 @@ namespace EducationalPracticePavilions.Model
         }
     
         public int IdCity { get; set; }
-        public string Name { get; set; }
+        public string NameCity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShoppingMalls> ShoppingMalls { get; set; }
