@@ -1,4 +1,5 @@
 ﻿using EducationalPracticePavilions.Model;
+using EducationalPracticePavilions.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace EducationalPracticePavilions
-{
+{   
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -24,7 +25,8 @@ namespace EducationalPracticePavilions
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new EmployeesPage());
+            //MainFrame.Navigate(new EmployeesPage());
+            MainFrame.Navigate(new ShoppingMallPage());
             Manager.MainFrame = MainFrame;
         }
 
