@@ -30,9 +30,8 @@ namespace EducationalPracticePavilions.Model
         public Nullable<int> IdRole { get; set; }
         public string PhoneNumber { get; set; }
         public string Gender { get; set; }
-        public Nullable<int> IdPhoto { get; set; }
+        public byte[] Photo { get; set; }
     
-        public virtual PhotoEmployee PhotoEmployee { get; set; }
         public virtual Roles Roles { get; set; }
         public virtual StatusEmployee StatusEmployee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

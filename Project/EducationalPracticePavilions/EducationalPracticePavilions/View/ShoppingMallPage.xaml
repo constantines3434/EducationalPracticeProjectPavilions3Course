@@ -9,20 +9,44 @@
       Title="ShoppingMallPage">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="1" Name="ListViewPavilions">
+
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Введите название для поиска:" Width="175" TextAlignment="Right"/>
+                <TextBox Width="225" Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Выберите статус:" Width="175" TextAlignment="Right"/>
+                <ComboBox Width="225" Name="ComboStatus" SelectionChanged="ComboStatus_SelectionChanged"
+                                  DisplayMemberPath="StatusTicketName"/>
+            </StackPanel>
+            <CheckBox x:Name="CheckActual" Checked="CheckActual_Checked" Unchecked="CheckActual_Checked"
+                      Content="Показывать только реализованные ТЦ" HorizontalAlignment="Center"/>
+        </WrapPanel>
+        <ListView Grid.Row="1" Name="ListViewPavilions" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  HorizontalContentAlignment="Center">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"
+                               HorizontalAlignment="Center"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            
+            
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="20" Width="400">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="70" />
-                            <RowDefinition Height="310" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="210" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
-                        <Image Width="400"
+                        <Image Width="200"
+                               Height="200"
                                Grid.Row="1"
                                Stretch="UniformToFill"
                                HorizontalAlignment="Center"
@@ -39,15 +63,16 @@
                         <TextBlock
                             VerticalAlignment="Center"
                             TextAlignment="Center"
-                            Width="20"
+                            Width="390"
                             TextWrapping="Wrap"
                             HorizontalAlignment="Center"
                             Margin="5, 5"
-                            FontSize="26"
+                            FontSize="20"
                             Grid.Row="0"
-                            Text="{Binding IdShoppingMall}"/>
-                        <TextBlock Grid.Row="2" Margin="5 5 5 15" HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" />
-                        <TextBlock Grid.Row="3" FontSize="14" HorizontalAlignment="Right">Some Text Here</TextBlock>
+                            Text="{Binding NameShoppingMalls}"/>
+                        <TextBlock Text="{Binding Price, StringFormat={}{0:N2} РУБ}" Grid.Row="2" Margin="5 5 5 15" HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" />
+                        <TextBlock Text="{Binding StatusShoppingMalls.StatusTicketName, StringFormat='Статус: {0}'}" Grid.Row="3" FontSize="14" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding Cities.NameCity, StringFormat='Город: {0}'}" Grid.Row="3" FontSize="14" HorizontalAlignment="Left"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

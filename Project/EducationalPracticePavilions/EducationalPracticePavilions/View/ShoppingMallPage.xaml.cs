@@ -25,27 +25,43 @@ namespace EducationalPracticePavilions.View
         public ShoppingMallPage()
         {
             InitializeComponent();
-            LoadShoppingMallData();
-        }
-
-        private void LoadShoppingMallData()
-        {
-            using (var context = PavilionsBase.GetContext())
+            
+            var allStatuses = PavilionsBase.GetContext().StatusShoppingMalls.ToList();
+            allStatuses.Insert(0, new StatusShoppingMalls
             {
-                var shoppingMallItems = (from mall in context.ShoppingMalls
-                                         select new ShoppingMall
-                                         {
-                                             IdShoppingMall = mall.IdShoppingMall,
-                                             ImageShoppingMall = GetImageFromDatabase(mall.ImageShoppingMall)
-                                         }).ToList();
+                StatusTicketName = "Все статусы"
+            });
+            ComboStatus.ItemsSource = allStatuses;
 
-                ListViewPavilions.ItemsSource = shoppingMallItems;
-            }
+            CheckActual.IsChecked= true; 
+            ComboStatus.SelectedIndex = 0;
+
+            var currentMall = PavilionsBase.GetContext().ShoppingMalls.ToList();
+            ListViewPavilions.ItemsSource = currentMall;
+            
+        }
+        //ошибка
+        private void UpdateMalls()
+        {
+            var currentMall = PavilionsBase.GetContext().ShoppingMalls.ToList();
+            if (ComboStatus.SelectedIndex > 0)
+                currentMall = currentMall.Where(p => p.StatusShoppingMalls == (ComboStatus.SelectedItem as StatusShoppingMalls)).ToList();
+            
         }
 
-        private BitmapImage GetImageFromDatabase(byte[] imageData)
+        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Вставьте код из первого шага сюда
+
+        }
+
+        private void ComboStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void CheckActual_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

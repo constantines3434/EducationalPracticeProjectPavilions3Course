@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Pavilions" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище PavilionsBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cities">
           <Key>
             <PropertyRef Name="IdCity" />
@@ -26,14 +26,7 @@
           <Property Name="IdRole" Type="int" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="100" />
           <Property Name="Gender" Type="nvarchar" MaxLength="1" />
-          <Property Name="IdPhoto" Type="int" />
-        </EntityType>
-        <EntityType Name="ImagesShoppingMalls">
-          <Key>
-            <PropertyRef Name="IdImageShoppingMall" />
-          </Key>
-          <Property Name="IdImageShoppingMall" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ImageName" Type="varbinary(max)" />
+          <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Pavilions">
           <Key>
@@ -48,13 +41,6 @@
           <Property Name="CostPerMeter" Type="float" />
           <Property Name="ValueAddedFactor" Type="float" />
           <Property Name="IdRent" Type="int" />
-        </EntityType>
-        <EntityType Name="PhotoEmployee">
-          <Key>
-            <PropertyRef Name="IdPhoto" />
-          </Key>
-          <Property Name="IdPhoto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Rent">
           <Key>
@@ -85,7 +71,7 @@
           <Property Name="Price" Type="float" />
           <Property Name="ValueAddedFactor" Type="float" />
           <Property Name="NumberOfStoreys" Type="int" />
-          <Property Name="IdImageShoppingMall" Type="int" />
+          <Property Name="ImageShoppingMall" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="StatePavilions">
           <Key>
@@ -131,21 +117,7 @@
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" />
           <Property Name="Adress" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <Association Name="FK__Employees__IdPho__3E52440B">
-          <End Role="PhotoEmployee" Type="Self.PhotoEmployee" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PhotoEmployee">
-              <PropertyRef Name="IdPhoto" />
-            </Principal>
-            <Dependent Role="Employees">
-              <PropertyRef Name="IdPhoto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Employees__IdRol__3D5E1FD2">
+        <Association Name="FK__Employees__IdRol__3B75D760">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -159,7 +131,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Employees__IdSta__3F466844">
+        <Association Name="FK__Employees__IdSta__3C69FB99">
           <End Role="StatusEmployee" Type="Self.StatusEmployee" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -173,7 +145,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pavilions__IdRen__5812160E">
+        <Association Name="FK__Pavilions__IdRen__52593CB8">
           <End Role="Rent" Type="Self.Rent" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -187,7 +159,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pavilions__IdSho__5629CD9C">
+        <Association Name="FK__Pavilions__IdSho__5070F446">
           <End Role="ShoppingMalls" Type="Self.ShoppingMalls" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -201,7 +173,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pavilions__IdSta__571DF1D5">
+        <Association Name="FK__Pavilions__IdSta__5165187F">
           <End Role="StatusPavilions" Type="Self.StatusPavilions" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -215,7 +187,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rent__IdStatusRe__534D60F1">
+        <Association Name="FK__Rent__IdStatusRe__4D94879B">
           <End Role="StatusRent" Type="Self.StatusRent" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -229,7 +201,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rent__IdTenant__52593CB8">
+        <Association Name="FK__Rent__IdTenant__4CA06362">
           <End Role="Tenants" Type="Self.Tenants" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -243,7 +215,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ShoppingM__IdCit__49C3F6B7">
+        <Association Name="FK__ShoppingM__IdCit__440B1D61">
           <End Role="Cities" Type="Self.Cities" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -257,21 +229,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ShoppingM__IdIma__48CFD27E">
-          <End Role="ImagesShoppingMalls" Type="Self.ImagesShoppingMalls" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ShoppingMalls" Type="Self.ShoppingMalls" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ImagesShoppingMalls">
-              <PropertyRef Name="IdImageShoppingMall" />
-            </Principal>
-            <Dependent Role="ShoppingMalls">
-              <PropertyRef Name="IdImageShoppingMall" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ShoppingM__IdSta__47DBAE45">
+        <Association Name="FK__ShoppingM__IdSta__4316F928">
           <End Role="StatusShoppingMalls" Type="Self.StatusShoppingMalls" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -285,7 +243,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StatePavi__IdEmp__5BE2A6F2">
+        <Association Name="FK__StatePavi__IdEmp__5629CD9C">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -299,7 +257,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StatePavi__IdPav__5AEE82B9">
+        <Association Name="FK__StatePavi__IdPav__5535A963">
           <End Role="Pavilions" Type="Self.Pavilions" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -313,12 +271,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище PavilionsContainer">
+        <EntityContainer Name="Хранилище PavilionsBaseModelContainer">
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ImagesShoppingMalls" EntityType="Self.ImagesShoppingMalls" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pavilions" EntityType="Self.Pavilions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PhotoEmployee" EntityType="Self.PhotoEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rent" EntityType="Self.Rent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShoppingMalls" EntityType="Self.ShoppingMalls" Schema="dbo" store:Type="Tables" />
@@ -328,55 +284,47 @@
           <EntitySet Name="StatusRent" EntityType="Self.StatusRent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusShoppingMalls" EntityType="Self.StatusShoppingMalls" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tenants" EntityType="Self.Tenants" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Employees__IdPho__3E52440B" Association="Self.FK__Employees__IdPho__3E52440B">
-            <End Role="PhotoEmployee" EntitySet="PhotoEmployee" />
-            <End Role="Employees" EntitySet="Employees" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Employees__IdRol__3D5E1FD2" Association="Self.FK__Employees__IdRol__3D5E1FD2">
+          <AssociationSet Name="FK__Employees__IdRol__3B75D760" Association="Self.FK__Employees__IdRol__3B75D760">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__Employees__IdSta__3F466844" Association="Self.FK__Employees__IdSta__3F466844">
+          <AssociationSet Name="FK__Employees__IdSta__3C69FB99" Association="Self.FK__Employees__IdSta__3C69FB99">
             <End Role="StatusEmployee" EntitySet="StatusEmployee" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdRen__5812160E" Association="Self.FK__Pavilions__IdRen__5812160E">
+          <AssociationSet Name="FK__Pavilions__IdRen__52593CB8" Association="Self.FK__Pavilions__IdRen__52593CB8">
             <End Role="Rent" EntitySet="Rent" />
             <End Role="Pavilions" EntitySet="Pavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdSho__5629CD9C" Association="Self.FK__Pavilions__IdSho__5629CD9C">
+          <AssociationSet Name="FK__Pavilions__IdSho__5070F446" Association="Self.FK__Pavilions__IdSho__5070F446">
             <End Role="ShoppingMalls" EntitySet="ShoppingMalls" />
             <End Role="Pavilions" EntitySet="Pavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdSta__571DF1D5" Association="Self.FK__Pavilions__IdSta__571DF1D5">
+          <AssociationSet Name="FK__Pavilions__IdSta__5165187F" Association="Self.FK__Pavilions__IdSta__5165187F">
             <End Role="StatusPavilions" EntitySet="StatusPavilions" />
             <End Role="Pavilions" EntitySet="Pavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rent__IdStatusRe__534D60F1" Association="Self.FK__Rent__IdStatusRe__534D60F1">
+          <AssociationSet Name="FK__Rent__IdStatusRe__4D94879B" Association="Self.FK__Rent__IdStatusRe__4D94879B">
             <End Role="StatusRent" EntitySet="StatusRent" />
             <End Role="Rent" EntitySet="Rent" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rent__IdTenant__52593CB8" Association="Self.FK__Rent__IdTenant__52593CB8">
+          <AssociationSet Name="FK__Rent__IdTenant__4CA06362" Association="Self.FK__Rent__IdTenant__4CA06362">
             <End Role="Tenants" EntitySet="Tenants" />
             <End Role="Rent" EntitySet="Rent" />
           </AssociationSet>
-          <AssociationSet Name="FK__ShoppingM__IdCit__49C3F6B7" Association="Self.FK__ShoppingM__IdCit__49C3F6B7">
+          <AssociationSet Name="FK__ShoppingM__IdCit__440B1D61" Association="Self.FK__ShoppingM__IdCit__440B1D61">
             <End Role="Cities" EntitySet="Cities" />
             <End Role="ShoppingMalls" EntitySet="ShoppingMalls" />
           </AssociationSet>
-          <AssociationSet Name="FK__ShoppingM__IdIma__48CFD27E" Association="Self.FK__ShoppingM__IdIma__48CFD27E">
-            <End Role="ImagesShoppingMalls" EntitySet="ImagesShoppingMalls" />
-            <End Role="ShoppingMalls" EntitySet="ShoppingMalls" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ShoppingM__IdSta__47DBAE45" Association="Self.FK__ShoppingM__IdSta__47DBAE45">
+          <AssociationSet Name="FK__ShoppingM__IdSta__4316F928" Association="Self.FK__ShoppingM__IdSta__4316F928">
             <End Role="StatusShoppingMalls" EntitySet="StatusShoppingMalls" />
             <End Role="ShoppingMalls" EntitySet="ShoppingMalls" />
           </AssociationSet>
-          <AssociationSet Name="FK__StatePavi__IdEmp__5BE2A6F2" Association="Self.FK__StatePavi__IdEmp__5BE2A6F2">
+          <AssociationSet Name="FK__StatePavi__IdEmp__5629CD9C" Association="Self.FK__StatePavi__IdEmp__5629CD9C">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="StatePavilions" EntitySet="StatePavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__StatePavi__IdPav__5AEE82B9" Association="Self.FK__StatePavi__IdPav__5AEE82B9">
+          <AssociationSet Name="FK__StatePavi__IdPav__5535A963" Association="Self.FK__StatePavi__IdPav__5535A963">
             <End Role="Pavilions" EntitySet="Pavilions" />
             <End Role="StatePavilions" EntitySet="StatePavilions" />
           </AssociationSet>
@@ -385,14 +333,14 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Pavilions" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PavilionsBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Cities">
           <Key>
             <PropertyRef Name="IdCity" />
           </Key>
           <Property Name="IdCity" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameCity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ShoppingMalls" Relationship="Self.FK__ShoppingM__IdCit__49C3F6B7" FromRole="Cities" ToRole="ShoppingMalls" />
+          <NavigationProperty Name="ShoppingMalls" Relationship="Self.FK__ShoppingM__IdCit__440B1D61" FromRole="Cities" ToRole="ShoppingMalls" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -408,19 +356,10 @@
           <Property Name="IdRole" Type="Int32" />
           <Property Name="PhoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="IdPhoto" Type="Int32" />
-          <NavigationProperty Name="PhotoEmployee" Relationship="Self.FK__Employees__IdPho__3E52440B" FromRole="Employees" ToRole="PhotoEmployee" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK__Employees__IdRol__3D5E1FD2" FromRole="Employees" ToRole="Roles" />
-          <NavigationProperty Name="StatusEmployee" Relationship="Self.FK__Employees__IdSta__3F466844" FromRole="Employees" ToRole="StatusEmployee" />
-          <NavigationProperty Name="StatePavilions" Relationship="Self.FK__StatePavi__IdEmp__5BE2A6F2" FromRole="Employees" ToRole="StatePavilions" />
-        </EntityType>
-        <EntityType Name="ImagesShoppingMalls">
-          <Key>
-            <PropertyRef Name="IdImageShoppingMall" />
-          </Key>
-          <Property Name="IdImageShoppingMall" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ImageName" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="ShoppingMalls" Relationship="Self.FK__ShoppingM__IdIma__48CFD27E" FromRole="ImagesShoppingMalls" ToRole="ShoppingMalls" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Employees__IdRol__3B75D760" FromRole="Employees" ToRole="Roles" />
+          <NavigationProperty Name="StatusEmployee" Relationship="Self.FK__Employees__IdSta__3C69FB99" FromRole="Employees" ToRole="StatusEmployee" />
+          <NavigationProperty Name="StatePavilions" Relationship="Self.FK__StatePavi__IdEmp__5629CD9C" FromRole="Employees" ToRole="StatePavilions" />
         </EntityType>
         <EntityType Name="Pavilions">
           <Key>
@@ -435,18 +374,10 @@
           <Property Name="CostPerMeter" Type="Double" />
           <Property Name="ValueAddedFactor" Type="Double" />
           <Property Name="IdRent" Type="Int32" />
-          <NavigationProperty Name="Rent" Relationship="Self.FK__Pavilions__IdRen__5812160E" FromRole="Pavilions" ToRole="Rent" />
-          <NavigationProperty Name="ShoppingMalls" Relationship="Self.FK__Pavilions__IdSho__5629CD9C" FromRole="Pavilions" ToRole="ShoppingMalls" />
-          <NavigationProperty Name="StatusPavilions" Relationship="Self.FK__Pavilions__IdSta__571DF1D5" FromRole="Pavilions" ToRole="StatusPavilions" />
-          <NavigationProperty Name="StatePavilions" Relationship="Self.FK__StatePavi__IdPav__5AEE82B9" FromRole="Pavilions" ToRole="StatePavilions" />
-        </EntityType>
-        <EntityType Name="PhotoEmployee">
-          <Key>
-            <PropertyRef Name="IdPhoto" />
-          </Key>
-          <Property Name="IdPhoto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__IdPho__3E52440B" FromRole="PhotoEmployee" ToRole="Employees" />
+          <NavigationProperty Name="Rent" Relationship="Self.FK__Pavilions__IdRen__52593CB8" FromRole="Pavilions" ToRole="Rent" />
+          <NavigationProperty Name="ShoppingMalls" Relationship="Self.FK__Pavilions__IdSho__5070F446" FromRole="Pavilions" ToRole="ShoppingMalls" />
+          <NavigationProperty Name="StatusPavilions" Relationship="Self.FK__Pavilions__IdSta__5165187F" FromRole="Pavilions" ToRole="StatusPavilions" />
+          <NavigationProperty Name="StatePavilions" Relationship="Self.FK__StatePavi__IdPav__5535A963" FromRole="Pavilions" ToRole="StatePavilions" />
         </EntityType>
         <EntityType Name="Rent">
           <Key>
@@ -458,9 +389,9 @@
           <Property Name="IdStatusRent" Type="Int32" />
           <Property Name="StartOfLease" Type="DateTime" Precision="0" />
           <Property Name="EndOfLease" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Pavilions" Relationship="Self.FK__Pavilions__IdRen__5812160E" FromRole="Rent" ToRole="Pavilions" />
-          <NavigationProperty Name="StatusRent" Relationship="Self.FK__Rent__IdStatusRe__534D60F1" FromRole="Rent" ToRole="StatusRent" />
-          <NavigationProperty Name="Tenants" Relationship="Self.FK__Rent__IdTenant__52593CB8" FromRole="Rent" ToRole="Tenants" />
+          <NavigationProperty Name="Pavilions" Relationship="Self.FK__Pavilions__IdRen__52593CB8" FromRole="Rent" ToRole="Pavilions" />
+          <NavigationProperty Name="StatusRent" Relationship="Self.FK__Rent__IdStatusRe__4D94879B" FromRole="Rent" ToRole="StatusRent" />
+          <NavigationProperty Name="Tenants" Relationship="Self.FK__Rent__IdTenant__4CA06362" FromRole="Rent" ToRole="Tenants" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -468,7 +399,7 @@
           </Key>
           <Property Name="IdRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameRole" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__IdRol__3D5E1FD2" FromRole="Roles" ToRole="Employees" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__IdRol__3B75D760" FromRole="Roles" ToRole="Employees" />
         </EntityType>
         <EntityType Name="ShoppingMalls">
           <Key>
@@ -481,11 +412,10 @@
           <Property Name="Price" Type="Double" />
           <Property Name="ValueAddedFactor" Type="Double" />
           <Property Name="NumberOfStoreys" Type="Int32" />
-          <Property Name="IdImageShoppingMall" Type="Int32" />
-          <NavigationProperty Name="Cities" Relationship="Self.FK__ShoppingM__IdCit__49C3F6B7" FromRole="ShoppingMalls" ToRole="Cities" />
-          <NavigationProperty Name="ImagesShoppingMalls" Relationship="Self.FK__ShoppingM__IdIma__48CFD27E" FromRole="ShoppingMalls" ToRole="ImagesShoppingMalls" />
-          <NavigationProperty Name="Pavilions" Relationship="Self.FK__Pavilions__IdSho__5629CD9C" FromRole="ShoppingMalls" ToRole="Pavilions" />
-          <NavigationProperty Name="StatusShoppingMalls" Relationship="Self.FK__ShoppingM__IdSta__47DBAE45" FromRole="ShoppingMalls" ToRole="StatusShoppingMalls" />
+          <Property Name="ImageShoppingMall" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK__ShoppingM__IdCit__440B1D61" FromRole="ShoppingMalls" ToRole="Cities" />
+          <NavigationProperty Name="Pavilions" Relationship="Self.FK__Pavilions__IdSho__5070F446" FromRole="ShoppingMalls" ToRole="Pavilions" />
+          <NavigationProperty Name="StatusShoppingMalls" Relationship="Self.FK__ShoppingM__IdSta__4316F928" FromRole="ShoppingMalls" ToRole="StatusShoppingMalls" />
         </EntityType>
         <EntityType Name="StatePavilions">
           <Key>
@@ -493,8 +423,8 @@
           </Key>
           <Property Name="IdPavilion" Type="Int32" Nullable="false" />
           <Property Name="IdEmployee" Type="Int32" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__StatePavi__IdEmp__5BE2A6F2" FromRole="StatePavilions" ToRole="Employees" />
-          <NavigationProperty Name="Pavilions" Relationship="Self.FK__StatePavi__IdPav__5AEE82B9" FromRole="StatePavilions" ToRole="Pavilions" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__StatePavi__IdEmp__5629CD9C" FromRole="StatePavilions" ToRole="Employees" />
+          <NavigationProperty Name="Pavilions" Relationship="Self.FK__StatePavi__IdPav__5535A963" FromRole="StatePavilions" ToRole="Pavilions" />
         </EntityType>
         <EntityType Name="StatusEmployee">
           <Key>
@@ -502,7 +432,7 @@
           </Key>
           <Property Name="IdStatusEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__IdSta__3F466844" FromRole="StatusEmployee" ToRole="Employees" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__IdSta__3C69FB99" FromRole="StatusEmployee" ToRole="Employees" />
         </EntityType>
         <EntityType Name="StatusPavilions">
           <Key>
@@ -510,7 +440,7 @@
           </Key>
           <Property Name="IdStatusPavilion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusName" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Pavilions" Relationship="Self.FK__Pavilions__IdSta__571DF1D5" FromRole="StatusPavilions" ToRole="Pavilions" />
+          <NavigationProperty Name="Pavilions" Relationship="Self.FK__Pavilions__IdSta__5165187F" FromRole="StatusPavilions" ToRole="Pavilions" />
         </EntityType>
         <EntityType Name="StatusRent">
           <Key>
@@ -518,7 +448,7 @@
           </Key>
           <Property Name="IdStatusRent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusRentName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Rent" Relationship="Self.FK__Rent__IdStatusRe__534D60F1" FromRole="StatusRent" ToRole="Rent" />
+          <NavigationProperty Name="Rent" Relationship="Self.FK__Rent__IdStatusRe__4D94879B" FromRole="StatusRent" ToRole="Rent" />
         </EntityType>
         <EntityType Name="StatusShoppingMalls">
           <Key>
@@ -526,7 +456,7 @@
           </Key>
           <Property Name="IdStatusShoppingMalls" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusTicketName" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ShoppingMalls" Relationship="Self.FK__ShoppingM__IdSta__47DBAE45" FromRole="StatusShoppingMalls" ToRole="ShoppingMalls" />
+          <NavigationProperty Name="ShoppingMalls" Relationship="Self.FK__ShoppingM__IdSta__4316F928" FromRole="StatusShoppingMalls" ToRole="ShoppingMalls" />
         </EntityType>
         <EntityType Name="Tenants">
           <Key>
@@ -536,9 +466,9 @@
           <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Rent" Relationship="Self.FK__Rent__IdTenant__52593CB8" FromRole="Tenants" ToRole="Rent" />
+          <NavigationProperty Name="Rent" Relationship="Self.FK__Rent__IdTenant__4CA06362" FromRole="Tenants" ToRole="Rent" />
         </EntityType>
-        <Association Name="FK__ShoppingM__IdCit__49C3F6B7">
+        <Association Name="FK__ShoppingM__IdCit__440B1D61">
           <End Role="Cities" Type="Self.Cities" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -552,21 +482,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Employees__IdPho__3E52440B">
-          <End Role="PhotoEmployee" Type="Self.PhotoEmployee" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PhotoEmployee">
-              <PropertyRef Name="IdPhoto" />
-            </Principal>
-            <Dependent Role="Employees">
-              <PropertyRef Name="IdPhoto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Employees__IdRol__3D5E1FD2">
+        <Association Name="FK__Employees__IdRol__3B75D760">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -580,7 +496,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Employees__IdSta__3F466844">
+        <Association Name="FK__Employees__IdSta__3C69FB99">
           <End Role="StatusEmployee" Type="Self.StatusEmployee" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -594,7 +510,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StatePavi__IdEmp__5BE2A6F2">
+        <Association Name="FK__StatePavi__IdEmp__5629CD9C">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -608,21 +524,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ShoppingM__IdIma__48CFD27E">
-          <End Role="ImagesShoppingMalls" Type="Self.ImagesShoppingMalls" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ShoppingMalls" Type="Self.ShoppingMalls" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ImagesShoppingMalls">
-              <PropertyRef Name="IdImageShoppingMall" />
-            </Principal>
-            <Dependent Role="ShoppingMalls">
-              <PropertyRef Name="IdImageShoppingMall" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Pavilions__IdRen__5812160E">
+        <Association Name="FK__Pavilions__IdRen__52593CB8">
           <End Role="Rent" Type="Self.Rent" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -636,7 +538,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pavilions__IdSho__5629CD9C">
+        <Association Name="FK__Pavilions__IdSho__5070F446">
           <End Role="ShoppingMalls" Type="Self.ShoppingMalls" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -650,7 +552,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pavilions__IdSta__571DF1D5">
+        <Association Name="FK__Pavilions__IdSta__5165187F">
           <End Role="StatusPavilions" Type="Self.StatusPavilions" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -664,7 +566,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StatePavi__IdPav__5AEE82B9">
+        <Association Name="FK__StatePavi__IdPav__5535A963">
           <End Role="Pavilions" Type="Self.Pavilions" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -678,7 +580,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rent__IdStatusRe__534D60F1">
+        <Association Name="FK__Rent__IdStatusRe__4D94879B">
           <End Role="StatusRent" Type="Self.StatusRent" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -692,7 +594,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rent__IdTenant__52593CB8">
+        <Association Name="FK__Rent__IdTenant__4CA06362">
           <End Role="Tenants" Type="Self.Tenants" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -706,7 +608,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ShoppingM__IdSta__47DBAE45">
+        <Association Name="FK__ShoppingM__IdSta__4316F928">
           <End Role="StatusShoppingMalls" Type="Self.StatusShoppingMalls" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -723,9 +625,7 @@
         <EntityContainer Name="PavilionsBase" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cities" EntityType="Self.Cities" />
           <EntitySet Name="Employees" EntityType="Self.Employees" />
-          <EntitySet Name="ImagesShoppingMalls" EntityType="Self.ImagesShoppingMalls" />
           <EntitySet Name="Pavilions" EntityType="Self.Pavilions" />
-          <EntitySet Name="PhotoEmployee" EntityType="Self.PhotoEmployee" />
           <EntitySet Name="Rent" EntityType="Self.Rent" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="ShoppingMalls" EntityType="Self.ShoppingMalls" />
@@ -735,55 +635,47 @@
           <EntitySet Name="StatusRent" EntityType="Self.StatusRent" />
           <EntitySet Name="StatusShoppingMalls" EntityType="Self.StatusShoppingMalls" />
           <EntitySet Name="Tenants" EntityType="Self.Tenants" />
-          <AssociationSet Name="FK__ShoppingM__IdCit__49C3F6B7" Association="Self.FK__ShoppingM__IdCit__49C3F6B7">
+          <AssociationSet Name="FK__ShoppingM__IdCit__440B1D61" Association="Self.FK__ShoppingM__IdCit__440B1D61">
             <End Role="Cities" EntitySet="Cities" />
             <End Role="ShoppingMalls" EntitySet="ShoppingMalls" />
           </AssociationSet>
-          <AssociationSet Name="FK__Employees__IdPho__3E52440B" Association="Self.FK__Employees__IdPho__3E52440B">
-            <End Role="PhotoEmployee" EntitySet="PhotoEmployee" />
-            <End Role="Employees" EntitySet="Employees" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Employees__IdRol__3D5E1FD2" Association="Self.FK__Employees__IdRol__3D5E1FD2">
+          <AssociationSet Name="FK__Employees__IdRol__3B75D760" Association="Self.FK__Employees__IdRol__3B75D760">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__Employees__IdSta__3F466844" Association="Self.FK__Employees__IdSta__3F466844">
+          <AssociationSet Name="FK__Employees__IdSta__3C69FB99" Association="Self.FK__Employees__IdSta__3C69FB99">
             <End Role="StatusEmployee" EntitySet="StatusEmployee" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__StatePavi__IdEmp__5BE2A6F2" Association="Self.FK__StatePavi__IdEmp__5BE2A6F2">
+          <AssociationSet Name="FK__StatePavi__IdEmp__5629CD9C" Association="Self.FK__StatePavi__IdEmp__5629CD9C">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="StatePavilions" EntitySet="StatePavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__ShoppingM__IdIma__48CFD27E" Association="Self.FK__ShoppingM__IdIma__48CFD27E">
-            <End Role="ImagesShoppingMalls" EntitySet="ImagesShoppingMalls" />
-            <End Role="ShoppingMalls" EntitySet="ShoppingMalls" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdRen__5812160E" Association="Self.FK__Pavilions__IdRen__5812160E">
+          <AssociationSet Name="FK__Pavilions__IdRen__52593CB8" Association="Self.FK__Pavilions__IdRen__52593CB8">
             <End Role="Rent" EntitySet="Rent" />
             <End Role="Pavilions" EntitySet="Pavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdSho__5629CD9C" Association="Self.FK__Pavilions__IdSho__5629CD9C">
+          <AssociationSet Name="FK__Pavilions__IdSho__5070F446" Association="Self.FK__Pavilions__IdSho__5070F446">
             <End Role="ShoppingMalls" EntitySet="ShoppingMalls" />
             <End Role="Pavilions" EntitySet="Pavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdSta__571DF1D5" Association="Self.FK__Pavilions__IdSta__571DF1D5">
+          <AssociationSet Name="FK__Pavilions__IdSta__5165187F" Association="Self.FK__Pavilions__IdSta__5165187F">
             <End Role="StatusPavilions" EntitySet="StatusPavilions" />
             <End Role="Pavilions" EntitySet="Pavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__StatePavi__IdPav__5AEE82B9" Association="Self.FK__StatePavi__IdPav__5AEE82B9">
+          <AssociationSet Name="FK__StatePavi__IdPav__5535A963" Association="Self.FK__StatePavi__IdPav__5535A963">
             <End Role="Pavilions" EntitySet="Pavilions" />
             <End Role="StatePavilions" EntitySet="StatePavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rent__IdStatusRe__534D60F1" Association="Self.FK__Rent__IdStatusRe__534D60F1">
+          <AssociationSet Name="FK__Rent__IdStatusRe__4D94879B" Association="Self.FK__Rent__IdStatusRe__4D94879B">
             <End Role="StatusRent" EntitySet="StatusRent" />
             <End Role="Rent" EntitySet="Rent" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rent__IdTenant__52593CB8" Association="Self.FK__Rent__IdTenant__52593CB8">
+          <AssociationSet Name="FK__Rent__IdTenant__4CA06362" Association="Self.FK__Rent__IdTenant__4CA06362">
             <End Role="Tenants" EntitySet="Tenants" />
             <End Role="Rent" EntitySet="Rent" />
           </AssociationSet>
-          <AssociationSet Name="FK__ShoppingM__IdSta__47DBAE45" Association="Self.FK__ShoppingM__IdSta__47DBAE45">
+          <AssociationSet Name="FK__ShoppingM__IdSta__4316F928" Association="Self.FK__ShoppingM__IdSta__4316F928">
             <End Role="StatusShoppingMalls" EntitySet="StatusShoppingMalls" />
             <End Role="ShoppingMalls" EntitySet="ShoppingMalls" />
           </AssociationSet>
@@ -793,9 +685,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище PavilionsContainer" CdmEntityContainer="PavilionsBase">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PavilionsBaseModelContainer" CdmEntityContainer="PavilionsBase">
           <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="Pavilions.Cities">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.Cities">
               <MappingFragment StoreEntitySet="Cities">
                 <ScalarProperty Name="IdCity" ColumnName="IdCity" />
                 <ScalarProperty Name="NameCity" ColumnName="NameCity" />
@@ -803,7 +695,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="Pavilions.Employees">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.Employees">
               <MappingFragment StoreEntitySet="Employees">
                 <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -815,20 +707,12 @@
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ImagesShoppingMalls">
-            <EntityTypeMapping TypeName="Pavilions.ImagesShoppingMalls">
-              <MappingFragment StoreEntitySet="ImagesShoppingMalls">
-                <ScalarProperty Name="IdImageShoppingMall" ColumnName="IdImageShoppingMall" />
-                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pavilions">
-            <EntityTypeMapping TypeName="Pavilions.Pavilions">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.Pavilions">
               <MappingFragment StoreEntitySet="Pavilions">
                 <ScalarProperty Name="IdPavilion" ColumnName="IdPavilion" />
                 <ScalarProperty Name="IdShoppingMall" ColumnName="IdShoppingMall" />
@@ -842,16 +726,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PhotoEmployee">
-            <EntityTypeMapping TypeName="Pavilions.PhotoEmployee">
-              <MappingFragment StoreEntitySet="PhotoEmployee">
-                <ScalarProperty Name="IdPhoto" ColumnName="IdPhoto" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Rent">
-            <EntityTypeMapping TypeName="Pavilions.Rent">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.Rent">
               <MappingFragment StoreEntitySet="Rent">
                 <ScalarProperty Name="IdRent" ColumnName="IdRent" />
                 <ScalarProperty Name="IdTenant" ColumnName="IdTenant" />
@@ -863,7 +739,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="Pavilions.Roles">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.Roles">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="NameRole" ColumnName="NameRole" />
@@ -871,7 +747,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ShoppingMalls">
-            <EntityTypeMapping TypeName="Pavilions.ShoppingMalls">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.ShoppingMalls">
               <MappingFragment StoreEntitySet="ShoppingMalls">
                 <ScalarProperty Name="IdShoppingMall" ColumnName="IdShoppingMall" />
                 <ScalarProperty Name="NameShoppingMalls" ColumnName="NameShoppingMalls" />
@@ -880,12 +756,12 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ValueAddedFactor" ColumnName="ValueAddedFactor" />
                 <ScalarProperty Name="NumberOfStoreys" ColumnName="NumberOfStoreys" />
-                <ScalarProperty Name="IdImageShoppingMall" ColumnName="IdImageShoppingMall" />
+                <ScalarProperty Name="ImageShoppingMall" ColumnName="ImageShoppingMall" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StatePavilions">
-            <EntityTypeMapping TypeName="Pavilions.StatePavilions">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.StatePavilions">
               <MappingFragment StoreEntitySet="StatePavilions">
                 <ScalarProperty Name="IdPavilion" ColumnName="IdPavilion" />
                 <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
@@ -893,7 +769,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StatusEmployee">
-            <EntityTypeMapping TypeName="Pavilions.StatusEmployee">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.StatusEmployee">
               <MappingFragment StoreEntitySet="StatusEmployee">
                 <ScalarProperty Name="IdStatusEmployee" ColumnName="IdStatusEmployee" />
                 <ScalarProperty Name="StatusName" ColumnName="StatusName" />
@@ -901,7 +777,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StatusPavilions">
-            <EntityTypeMapping TypeName="Pavilions.StatusPavilions">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.StatusPavilions">
               <MappingFragment StoreEntitySet="StatusPavilions">
                 <ScalarProperty Name="IdStatusPavilion" ColumnName="IdStatusPavilion" />
                 <ScalarProperty Name="StatusName" ColumnName="StatusName" />
@@ -909,7 +785,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StatusRent">
-            <EntityTypeMapping TypeName="Pavilions.StatusRent">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.StatusRent">
               <MappingFragment StoreEntitySet="StatusRent">
                 <ScalarProperty Name="IdStatusRent" ColumnName="IdStatusRent" />
                 <ScalarProperty Name="StatusRentName" ColumnName="StatusRentName" />
@@ -917,7 +793,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StatusShoppingMalls">
-            <EntityTypeMapping TypeName="Pavilions.StatusShoppingMalls">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.StatusShoppingMalls">
               <MappingFragment StoreEntitySet="StatusShoppingMalls">
                 <ScalarProperty Name="IdStatusShoppingMalls" ColumnName="IdStatusShoppingMalls" />
                 <ScalarProperty Name="StatusTicketName" ColumnName="StatusTicketName" />
@@ -925,7 +801,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tenants">
-            <EntityTypeMapping TypeName="Pavilions.Tenants">
+            <EntityTypeMapping TypeName="PavilionsBaseModel.Tenants">
               <MappingFragment StoreEntitySet="Tenants">
                 <ScalarProperty Name="IdTenant" ColumnName="IdTenant" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />

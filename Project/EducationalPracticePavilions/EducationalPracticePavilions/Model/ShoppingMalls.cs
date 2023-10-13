@@ -27,10 +27,9 @@ namespace EducationalPracticePavilions.Model
         public Nullable<double> Price { get; set; }
         public Nullable<double> ValueAddedFactor { get; set; }
         public Nullable<int> NumberOfStoreys { get; set; }
-        public Nullable<int> IdImageShoppingMall { get; set; }
+        public byte[] ImageShoppingMall { get; set; }
     
         public virtual Cities Cities { get; set; }
-        public virtual ImagesShoppingMalls ImagesShoppingMalls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pavilions> Pavilions { get; set; }
         public virtual StatusShoppingMalls StatusShoppingMalls { get; set; }

@@ -16,19 +16,16 @@ namespace EducationalPracticePavilions.Model
     public partial class PavilionsBase : DbContext
     {
         private static PavilionsBase context_;
-
         public PavilionsBase()
             : base("name=PavilionsBase")
         {
         }
-
         public static PavilionsBase GetContext()
         {
             if (context_ == null)
                 context_ = new PavilionsBase();
             return context_;
         }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -37,9 +34,7 @@ namespace EducationalPracticePavilions.Model
     
         public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<ImagesShoppingMalls> ImagesShoppingMalls { get; set; }
         public virtual DbSet<Pavilions> Pavilions { get; set; }
-        public virtual DbSet<PhotoEmployee> PhotoEmployee { get; set; }
         public virtual DbSet<Rent> Rent { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<ShoppingMalls> ShoppingMalls { get; set; }
