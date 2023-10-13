@@ -12,29 +12,18 @@ namespace EducationalPracticePavilions.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Employees
+    public partial class StatusPavilion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employees()
+        public StatusPavilion()
         {
-            this.StatePavilions = new HashSet<StatePavilions>();
+            this.Pavilions = new HashSet<Pavilion>();
         }
     
-        public int IdEmployee { get; set; }
-        public string Surname { get; set; }
-        public string NameEmployee { get; set; }
-        public string Patronimic { get; set; }
-        public string LoginEmployee { get; set; }
-        public string PasswordEmployee { get; set; }
-        public Nullable<int> IdStatusEmployee { get; set; }
-        public Nullable<int> IdRole { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Gender { get; set; }
-        public byte[] Photo { get; set; }
+        public int IdStatusPavilion { get; set; }
+        public string StatusName { get; set; }
     
-        public virtual Roles Roles { get; set; }
-        public virtual StatusEmployee StatusEmployee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StatePavilions> StatePavilions { get; set; }
+        public virtual ICollection<Pavilion> Pavilions { get; set; }
     }
 }

@@ -26,42 +26,52 @@ namespace EducationalPracticePavilions.View
         {
             InitializeComponent();
             
-            var allStatuses = PavilionsBase.GetContext().StatusShoppingMalls.ToList();
-            allStatuses.Insert(0, new StatusShoppingMalls
+            var allStatuses = PavilionsBase.GetContext().StatusMalls.ToList();
+            allStatuses.Insert(0, new StatusMall
             {
-                StatusTicketName = "Все статусы"
+                StatusMallName = "Все статусы"
             });
             ComboStatus.ItemsSource = allStatuses;
 
             CheckActual.IsChecked= true; 
             ComboStatus.SelectedIndex = 0;
 
-            var currentMall = PavilionsBase.GetContext().ShoppingMalls.ToList();
-            ListViewPavilions.ItemsSource = currentMall;
-            
+            var currentMalls = PavilionsBase.GetContext().Malls.ToList();
+            ListViewPavilions.ItemsSource = currentMalls;
+            UpdateMalls();
         }
         //ошибка
         private void UpdateMalls()
         {
-            var currentMall = PavilionsBase.GetContext().ShoppingMalls.ToList();
+            var currentMalls = PavilionsBase.GetContext().Malls.ToList();
             if (ComboStatus.SelectedIndex > 0)
-                currentMall = currentMall.Where(p => p.StatusShoppingMalls == (ComboStatus.SelectedItem as StatusShoppingMalls)).ToList();
-            
+            {
+                var selectedStatus = ComboStatus.SelectedItem as StatusMall;
+                if (selectedStatus != null)
+                    currentMalls = currentMalls.Where(p => p.StatusMall == (ComboStatus.SelectedItem as StatusMall)).ToList();
+                currentMalls = currentMalls.Where(p=>p.NameMalls.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
+            }
+
+            //if(CheckActual.IsChecked.Value)
+            //    currentMalls = currentMalls.Where(p=>p.StatusMall.StatusMallName).ToList();
+                        
+            ListViewPavilions.ItemsSource= currentMalls.OrderBy(p=>p.Price).ToList(); //сортировка по свойству
+                
         }
 
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            UpdateMalls();
         }
 
         private void ComboStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            UpdateMalls();
         }
 
         private void CheckActual_Checked(object sender, RoutedEventArgs e)
         {
-
+            UpdateMalls();
         }
     }
 }

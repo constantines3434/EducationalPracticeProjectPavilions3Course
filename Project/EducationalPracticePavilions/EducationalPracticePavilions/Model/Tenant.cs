@@ -12,12 +12,12 @@ namespace EducationalPracticePavilions.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Tenants
+    public partial class Tenant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tenants()
+        public Tenant()
         {
-            this.Rent = new HashSet<Rent>();
+            this.Rents = new HashSet<Rent>();
         }
     
         public int IdTenant { get; set; }
@@ -26,6 +26,6 @@ namespace EducationalPracticePavilions.Model
         public string Adress { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rent> Rent { get; set; }
+        public virtual ICollection<Rent> Rents { get; set; }
     }
 }

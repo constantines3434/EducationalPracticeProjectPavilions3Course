@@ -12,12 +12,21 @@ namespace EducationalPracticePavilions.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class StatePavilions
+    public partial class Pavilion
     {
         public int IdPavilion { get; set; }
-        public Nullable<int> IdEmployee { get; set; }
+        public Nullable<int> IdShoppingMall { get; set; }
+        public string NamePavilions { get; set; }
+        public Nullable<int> FloorPavilion { get; set; }
+        public Nullable<int> IdStatusPavilion { get; set; }
+        public Nullable<double> SquarePavilions { get; set; }
+        public Nullable<double> CostPerMeter { get; set; }
+        public Nullable<double> ValueAddedFactor { get; set; }
+        public Nullable<int> IdRent { get; set; }
     
-        public virtual Employees Employees { get; set; }
-        public virtual Pavilions Pavilions { get; set; }
+        public virtual Mall Mall { get; set; }
+        public virtual Rent Rent { get; set; }
+        public virtual StatusPavilion StatusPavilion { get; set; }
+        public virtual StatePavilion StatePavilion { get; set; }
     }
 }

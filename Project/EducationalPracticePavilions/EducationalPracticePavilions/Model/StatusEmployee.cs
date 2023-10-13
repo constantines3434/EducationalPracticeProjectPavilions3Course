@@ -17,13 +17,13 @@ namespace EducationalPracticePavilions.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public StatusEmployee()
         {
-            this.Employees = new HashSet<Employees>();
+            this.Employees = new HashSet<Employee>();
         }
     
         public int IdStatusEmployee { get; set; }
         public string StatusName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employees> Employees { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

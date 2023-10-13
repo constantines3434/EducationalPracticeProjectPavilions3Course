@@ -12,10 +12,10 @@ namespace EducationalPracticePavilions.ViewModel
 {
     internal class ViewModelEmployees
     {
-        private Employees selectedEmployee;
+        private Employee selectedEmployee;
 
-        public ObservableCollection<Employees> Workers { get; set; }
-        public Employees SelectedEmployee
+        public ObservableCollection<Employee> Workers { get; set; }
+        public Employee SelectedEmployee
         {
             get
             {

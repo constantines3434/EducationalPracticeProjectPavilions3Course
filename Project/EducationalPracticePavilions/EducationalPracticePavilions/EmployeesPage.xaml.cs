@@ -30,7 +30,7 @@ namespace EducationalPracticePavilions
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
-            var employeeForRemoving = DGEmployees.SelectedItems.Cast<Employees>().ToList();
+            var employeeForRemoving = DGEmployees.SelectedItems.Cast<Employee>().ToList();
 
             if (MessageBox.Show($"Вы точно хотите удалить следующие {employeeForRemoving.Count()} элементов",
                 "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
@@ -55,7 +55,7 @@ namespace EducationalPracticePavilions
 
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditPage((sender as Button).DataContext as Employees));
+            Manager.MainFrame.Navigate(new AddEditPage((sender as Button).DataContext as Employee));
         }
 
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

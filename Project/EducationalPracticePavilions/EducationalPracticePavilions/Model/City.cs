@@ -12,26 +12,18 @@ namespace EducationalPracticePavilions.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class ShoppingMalls
+    public partial class City
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ShoppingMalls()
+        public City()
         {
-            this.Pavilions = new HashSet<Pavilions>();
+            this.Malls = new HashSet<Mall>();
         }
     
-        public int IdShoppingMall { get; set; }
-        public string NameShoppingMalls { get; set; }
-        public Nullable<int> IdStatusShoppingMalls { get; set; }
-        public Nullable<int> IdCity { get; set; }
-        public Nullable<double> Price { get; set; }
-        public Nullable<double> ValueAddedFactor { get; set; }
-        public Nullable<int> NumberOfStoreys { get; set; }
-        public byte[] ImageShoppingMall { get; set; }
+        public int IdCity { get; set; }
+        public string NameCity { get; set; }
     
-        public virtual Cities Cities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pavilions> Pavilions { get; set; }
-        public virtual StatusShoppingMalls StatusShoppingMalls { get; set; }
+        public virtual ICollection<Mall> Malls { get; set; }
     }
 }

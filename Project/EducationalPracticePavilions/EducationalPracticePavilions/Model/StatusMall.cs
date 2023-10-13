@@ -12,18 +12,18 @@ namespace EducationalPracticePavilions.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class StatusShoppingMalls
+    public partial class StatusMall
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StatusShoppingMalls()
+        public StatusMall()
         {
-            this.ShoppingMalls = new HashSet<ShoppingMalls>();
+            this.Malls = new HashSet<Mall>();
         }
     
-        public int IdStatusShoppingMalls { get; set; }
-        public string StatusTicketName { get; set; }
+        public int IdStatusMall { get; set; }
+        public string StatusMallName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShoppingMalls> ShoppingMalls { get; set; }
+        public virtual ICollection<Mall> Malls { get; set; }
     }
 }

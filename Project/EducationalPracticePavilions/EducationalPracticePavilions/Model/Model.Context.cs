@@ -16,10 +16,12 @@ namespace EducationalPracticePavilions.Model
     public partial class PavilionsBase : DbContext
     {
         private static PavilionsBase context_;
+
         public PavilionsBase()
             : base("name=PavilionsBase")
         {
         }
+
         public static PavilionsBase GetContext()
         {
             if (context_ == null)
@@ -27,22 +29,23 @@ namespace EducationalPracticePavilions.Model
             return context_;
         }
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cities> Cities { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<Pavilions> Pavilions { get; set; }
-        public virtual DbSet<Rent> Rent { get; set; }
-        public virtual DbSet<Roles> Roles { get; set; }
-        public virtual DbSet<ShoppingMalls> ShoppingMalls { get; set; }
-        public virtual DbSet<StatePavilions> StatePavilions { get; set; }
-        public virtual DbSet<StatusEmployee> StatusEmployee { get; set; }
-        public virtual DbSet<StatusPavilions> StatusPavilions { get; set; }
-        public virtual DbSet<StatusRent> StatusRent { get; set; }
-        public virtual DbSet<StatusShoppingMalls> StatusShoppingMalls { get; set; }
-        public virtual DbSet<Tenants> Tenants { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Mall> Malls { get; set; }
+        public virtual DbSet<Pavilion> Pavilions { get; set; }
+        public virtual DbSet<Rent> Rents { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<StatePavilion> StatePavilions { get; set; }
+        public virtual DbSet<StatusEmployee> StatusEmployees { get; set; }
+        public virtual DbSet<StatusMall> StatusMalls { get; set; }
+        public virtual DbSet<StatusPavilion> StatusPavilions { get; set; }
+        public virtual DbSet<StatusRent> StatusRents { get; set; }
+        public virtual DbSet<Tenant> Tenants { get; set; }
     }
 }

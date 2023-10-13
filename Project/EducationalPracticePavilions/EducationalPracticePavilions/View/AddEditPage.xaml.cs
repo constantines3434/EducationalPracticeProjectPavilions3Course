@@ -19,8 +19,8 @@ namespace EducationalPracticePavilions.View
 {
     public partial class AddEditPage : Page
     {
-        private Employees _currentEmployee = new Employees();
-        public AddEditPage(Employees selectedEmployee)
+        private Employee _currentEmployee = new Employee();
+        public AddEditPage(Employee selectedEmployee)
         {
             InitializeComponent();
 
@@ -29,7 +29,7 @@ namespace EducationalPracticePavilions.View
                 _currentEmployee= selectedEmployee;
             }
             DataContext = _currentEmployee;
-            ComboBoxStatusEmployee.ItemsSource = PavilionsBase.GetContext().StatusEmployee.ToList();
+            ComboBoxStatusEmployee.ItemsSource = PavilionsBase.GetContext().StatusEmployees.ToList();
             ComboBoxRoleEmployee.ItemsSource = PavilionsBase.GetContext().Roles.ToList();
         }
 
@@ -49,7 +49,7 @@ namespace EducationalPracticePavilions.View
                 errors.AppendLine("Укажите корректно пароль работника");
             if (_currentEmployee.StatusEmployee == null)
                 errors.AppendLine("Корректно выберите статус работника");
-            if (_currentEmployee.Roles == null)
+            if (_currentEmployee.Role == null)
                 errors.AppendLine("Корректно выберите роль работника");
             if (string.IsNullOrWhiteSpace(_currentEmployee.PhoneNumber))
                 errors.AppendLine("Укажите корректно номер телефона работника");

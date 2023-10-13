@@ -17,13 +17,13 @@ namespace EducationalPracticePavilions.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public StatusRent()
         {
-            this.Rent = new HashSet<Rent>();
+            this.Rents = new HashSet<Rent>();
         }
     
         public int IdStatusRent { get; set; }
         public string StatusRentName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rent> Rent { get; set; }
+        public virtual ICollection<Rent> Rents { get; set; }
     }
 }
