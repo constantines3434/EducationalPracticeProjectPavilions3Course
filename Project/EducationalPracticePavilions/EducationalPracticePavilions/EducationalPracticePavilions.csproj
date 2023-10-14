@@ -119,10 +119,24 @@
     <Compile Include="Model\Tenant.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="View\Authorization.xaml.cs">
+      <DependentUpon>Authorization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Captcha.xaml.cs">
+      <DependentUpon>Captcha.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ShoppingMallPage.xaml.cs">
       <DependentUpon>ShoppingMallPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="EmployeesPage.xaml">
+    <Page Include="View\Authorization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Captcha.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmployeesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,10 +153,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="EmployeesPage.xaml.cs">
+    <Compile Include="View\EmployeesPage.xaml.cs">
       <DependentUpon>EmployeesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Manager.cs" />
+    <Compile Include="Commands\Manager.cs" />
     <Compile Include="ViewModel\ViewModelEmployees.cs" />
     <Compile Include="View\AddEditPage.xaml.cs">
       <DependentUpon>AddEditPage.xaml</DependentUpon>

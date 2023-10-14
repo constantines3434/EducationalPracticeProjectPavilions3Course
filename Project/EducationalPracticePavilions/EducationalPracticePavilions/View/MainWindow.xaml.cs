@@ -26,8 +26,9 @@ namespace EducationalPracticePavilions
         {
             InitializeComponent();
             //MainFrame.Navigate(new EmployeesPage());
-            MainFrame.Navigate(new ShoppingMallPage());
             Manager.MainFrame = MainFrame;
+            MainFrame.Navigate(new Authorization());
+            
         }
 
         private void ButtonBackClick(object sender, RoutedEventArgs e)
