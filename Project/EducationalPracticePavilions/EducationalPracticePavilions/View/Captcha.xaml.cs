@@ -69,7 +69,7 @@ namespace EducationalPracticePavilions.View
             }
             else
             {
-                MessageBox.Show("Неправильная CAPTCHA");
+                MessageBox.Show("Неправильное введённое значение");
                 CaptchaTextBox.Text = "";
                 CaptchaTextLoad();
             }
