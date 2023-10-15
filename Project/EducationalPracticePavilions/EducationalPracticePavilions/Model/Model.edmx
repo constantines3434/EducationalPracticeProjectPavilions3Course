@@ -61,7 +61,7 @@
           </Key>
           <Property Name="IdRent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdTenant" Type="int" />
-          <Property Name="IdPavilion" Type="int" />
+          <Property Name="IdStatePavilion" Type="int" />
           <Property Name="IdStatusRent" Type="int" />
           <Property Name="StartOfLease" Type="date" />
           <Property Name="EndOfLease" Type="date" />
@@ -75,9 +75,10 @@
         </EntityType>
         <EntityType Name="StatePavilions">
           <Key>
-            <PropertyRef Name="IdPavilion" />
+            <PropertyRef Name="IdStatePavilion" />
           </Key>
-          <Property Name="IdPavilion" Type="int" Nullable="false" />
+          <Property Name="IdStatePavilion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPavilion" Type="int" />
           <Property Name="IdEmployee" Type="int" />
         </EntityType>
         <EntityType Name="StatusEmployee">
@@ -117,7 +118,7 @@
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" />
           <Property Name="Adress" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <Association Name="FK__Employees__IdRol__3B75D760">
+        <Association Name="FK__Employees__IdRol__4316F928">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -131,7 +132,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Employees__IdSta__3C69FB99">
+        <Association Name="FK__Employees__IdSta__440B1D61">
           <End Role="StatusEmployee" Type="Self.StatusEmployee" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -145,7 +146,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Malls__IdCity__440B1D61">
+        <Association Name="FK__Malls__IdCity__3C69FB99">
           <End Role="Cities" Type="Self.Cities" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -159,7 +160,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Malls__IdStatusM__4316F928">
+        <Association Name="FK__Malls__IdStatusM__3B75D760">
           <End Role="StatusMalls" Type="Self.StatusMalls" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -173,21 +174,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pavilions__IdRen__52593CB8">
-          <End Role="Rent" Type="Self.Rent" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Pavilions" Type="Self.Pavilions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rent">
-              <PropertyRef Name="IdRent" />
-            </Principal>
-            <Dependent Role="Pavilions">
-              <PropertyRef Name="IdRent" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Pavilions__IdSho__5070F446">
+        <Association Name="FK__Pavilions__IdSho__48CFD27E">
           <End Role="Malls" Type="Self.Malls" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -201,7 +188,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pavilions__IdSta__5165187F">
+        <Association Name="FK__Pavilions__IdSta__49C3F6B7">
           <End Role="StatusPavilions" Type="Self.StatusPavilions" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -215,7 +202,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rent__IdStatusRe__4D94879B">
+        <Association Name="FK__Rent__IdStatePav__5629CD9C">
+          <End Role="StatePavilions" Type="Self.StatePavilions" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Rent" Type="Self.Rent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatePavilions">
+              <PropertyRef Name="IdStatePavilion" />
+            </Principal>
+            <Dependent Role="Rent">
+              <PropertyRef Name="IdStatePavilion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rent__IdStatusRe__5535A963">
           <End Role="StatusRent" Type="Self.StatusRent" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -229,7 +230,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rent__IdTenant__4CA06362">
+        <Association Name="FK__Rent__IdTenant__5441852A">
           <End Role="Tenants" Type="Self.Tenants" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -243,7 +244,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StatePavi__IdEmp__5629CD9C">
+        <Association Name="FK__StatePavi__IdEmp__4D94879B">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -257,11 +258,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StatePavi__IdPav__5535A963">
-          <End Role="Pavilions" Type="Self.Pavilions" Multiplicity="1">
+        <Association Name="FK__StatePavi__IdPav__4CA06362">
+          <End Role="Pavilions" Type="Self.Pavilions" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="StatePavilions" Type="Self.StatePavilions" Multiplicity="0..1" />
+          <End Role="StatePavilions" Type="Self.StatePavilions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pavilions">
               <PropertyRef Name="IdPavilion" />
@@ -284,47 +285,47 @@
           <EntitySet Name="StatusPavilions" EntityType="Self.StatusPavilions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusRent" EntityType="Self.StatusRent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tenants" EntityType="Self.Tenants" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Employees__IdRol__3B75D760" Association="Self.FK__Employees__IdRol__3B75D760">
+          <AssociationSet Name="FK__Employees__IdRol__4316F928" Association="Self.FK__Employees__IdRol__4316F928">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__Employees__IdSta__3C69FB99" Association="Self.FK__Employees__IdSta__3C69FB99">
+          <AssociationSet Name="FK__Employees__IdSta__440B1D61" Association="Self.FK__Employees__IdSta__440B1D61">
             <End Role="StatusEmployee" EntitySet="StatusEmployee" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__Malls__IdCity__440B1D61" Association="Self.FK__Malls__IdCity__440B1D61">
+          <AssociationSet Name="FK__Malls__IdCity__3C69FB99" Association="Self.FK__Malls__IdCity__3C69FB99">
             <End Role="Cities" EntitySet="Cities" />
             <End Role="Malls" EntitySet="Malls" />
           </AssociationSet>
-          <AssociationSet Name="FK__Malls__IdStatusM__4316F928" Association="Self.FK__Malls__IdStatusM__4316F928">
+          <AssociationSet Name="FK__Malls__IdStatusM__3B75D760" Association="Self.FK__Malls__IdStatusM__3B75D760">
             <End Role="StatusMalls" EntitySet="StatusMalls" />
             <End Role="Malls" EntitySet="Malls" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdRen__52593CB8" Association="Self.FK__Pavilions__IdRen__52593CB8">
-            <End Role="Rent" EntitySet="Rent" />
-            <End Role="Pavilions" EntitySet="Pavilions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdSho__5070F446" Association="Self.FK__Pavilions__IdSho__5070F446">
+          <AssociationSet Name="FK__Pavilions__IdSho__48CFD27E" Association="Self.FK__Pavilions__IdSho__48CFD27E">
             <End Role="Malls" EntitySet="Malls" />
             <End Role="Pavilions" EntitySet="Pavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdSta__5165187F" Association="Self.FK__Pavilions__IdSta__5165187F">
+          <AssociationSet Name="FK__Pavilions__IdSta__49C3F6B7" Association="Self.FK__Pavilions__IdSta__49C3F6B7">
             <End Role="StatusPavilions" EntitySet="StatusPavilions" />
             <End Role="Pavilions" EntitySet="Pavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rent__IdStatusRe__4D94879B" Association="Self.FK__Rent__IdStatusRe__4D94879B">
+          <AssociationSet Name="FK__Rent__IdStatePav__5629CD9C" Association="Self.FK__Rent__IdStatePav__5629CD9C">
+            <End Role="StatePavilions" EntitySet="StatePavilions" />
+            <End Role="Rent" EntitySet="Rent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rent__IdStatusRe__5535A963" Association="Self.FK__Rent__IdStatusRe__5535A963">
             <End Role="StatusRent" EntitySet="StatusRent" />
             <End Role="Rent" EntitySet="Rent" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rent__IdTenant__4CA06362" Association="Self.FK__Rent__IdTenant__4CA06362">
+          <AssociationSet Name="FK__Rent__IdTenant__5441852A" Association="Self.FK__Rent__IdTenant__5441852A">
             <End Role="Tenants" EntitySet="Tenants" />
             <End Role="Rent" EntitySet="Rent" />
           </AssociationSet>
-          <AssociationSet Name="FK__StatePavi__IdEmp__5629CD9C" Association="Self.FK__StatePavi__IdEmp__5629CD9C">
+          <AssociationSet Name="FK__StatePavi__IdEmp__4D94879B" Association="Self.FK__StatePavi__IdEmp__4D94879B">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="StatePavilions" EntitySet="StatePavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__StatePavi__IdPav__5535A963" Association="Self.FK__StatePavi__IdPav__5535A963">
+          <AssociationSet Name="FK__StatePavi__IdPav__4CA06362" Association="Self.FK__StatePavi__IdPav__4CA06362">
             <End Role="Pavilions" EntitySet="Pavilions" />
             <End Role="StatePavilions" EntitySet="StatePavilions" />
           </AssociationSet>
@@ -340,7 +341,7 @@
           </Key>
           <Property Name="IdCity" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameCity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Malls" Relationship="Self.FK__Malls__IdCity__440B1D61" FromRole="Cities" ToRole="Malls" />
+          <NavigationProperty Name="Malls" Relationship="Self.FK__Malls__IdCity__3C69FB99" FromRole="Cities" ToRole="Malls" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -357,9 +358,9 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Role" Relationship="Self.FK__Employees__IdRol__3B75D760" FromRole="Employees" ToRole="Roles" />
-          <NavigationProperty Name="StatusEmployee" Relationship="Self.FK__Employees__IdSta__3C69FB99" FromRole="Employees" ToRole="StatusEmployee" />
-          <NavigationProperty Name="StatePavilions" Relationship="Self.FK__StatePavi__IdEmp__5629CD9C" FromRole="Employees" ToRole="StatePavilions" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Employees__IdRol__4316F928" FromRole="Employees" ToRole="Roles" />
+          <NavigationProperty Name="StatusEmployee" Relationship="Self.FK__Employees__IdSta__440B1D61" FromRole="Employees" ToRole="StatusEmployee" />
+          <NavigationProperty Name="StatePavilions" Relationship="Self.FK__StatePavi__IdEmp__4D94879B" FromRole="Employees" ToRole="StatePavilions" />
         </EntityType>
         <EntityType Name="Mall">
           <Key>
@@ -373,9 +374,9 @@
           <Property Name="ValueAddedFactor" Type="Double" />
           <Property Name="NumberOfStoreys" Type="Int32" />
           <Property Name="ImageShoppingMall" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="City" Relationship="Self.FK__Malls__IdCity__440B1D61" FromRole="Malls" ToRole="Cities" />
-          <NavigationProperty Name="StatusMall" Relationship="Self.FK__Malls__IdStatusM__4316F928" FromRole="Malls" ToRole="StatusMalls" />
-          <NavigationProperty Name="Pavilions" Relationship="Self.FK__Pavilions__IdSho__5070F446" FromRole="Malls" ToRole="Pavilions" />
+          <NavigationProperty Name="City" Relationship="Self.FK__Malls__IdCity__3C69FB99" FromRole="Malls" ToRole="Cities" />
+          <NavigationProperty Name="StatusMall" Relationship="Self.FK__Malls__IdStatusM__3B75D760" FromRole="Malls" ToRole="StatusMalls" />
+          <NavigationProperty Name="Pavilions" Relationship="Self.FK__Pavilions__IdSho__48CFD27E" FromRole="Malls" ToRole="Pavilions" />
         </EntityType>
         <EntityType Name="Pavilion">
           <Key>
@@ -390,10 +391,9 @@
           <Property Name="CostPerMeter" Type="Double" />
           <Property Name="ValueAddedFactor" Type="Double" />
           <Property Name="IdRent" Type="Int32" />
-          <NavigationProperty Name="Mall" Relationship="Self.FK__Pavilions__IdSho__5070F446" FromRole="Pavilions" ToRole="Malls" />
-          <NavigationProperty Name="Rent" Relationship="Self.FK__Pavilions__IdRen__52593CB8" FromRole="Pavilions" ToRole="Rent" />
-          <NavigationProperty Name="StatusPavilion" Relationship="Self.FK__Pavilions__IdSta__5165187F" FromRole="Pavilions" ToRole="StatusPavilions" />
-          <NavigationProperty Name="StatePavilion" Relationship="Self.FK__StatePavi__IdPav__5535A963" FromRole="Pavilions" ToRole="StatePavilions" />
+          <NavigationProperty Name="Mall" Relationship="Self.FK__Pavilions__IdSho__48CFD27E" FromRole="Pavilions" ToRole="Malls" />
+          <NavigationProperty Name="StatusPavilion" Relationship="Self.FK__Pavilions__IdSta__49C3F6B7" FromRole="Pavilions" ToRole="StatusPavilions" />
+          <NavigationProperty Name="StatePavilions" Relationship="Self.FK__StatePavi__IdPav__4CA06362" FromRole="Pavilions" ToRole="StatePavilions" />
         </EntityType>
         <EntityType Name="Rent">
           <Key>
@@ -401,13 +401,13 @@
           </Key>
           <Property Name="IdRent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdTenant" Type="Int32" />
-          <Property Name="IdPavilion" Type="Int32" />
+          <Property Name="IdStatePavilion" Type="Int32" />
           <Property Name="IdStatusRent" Type="Int32" />
           <Property Name="StartOfLease" Type="DateTime" Precision="0" />
           <Property Name="EndOfLease" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Pavilions" Relationship="Self.FK__Pavilions__IdRen__52593CB8" FromRole="Rent" ToRole="Pavilions" />
-          <NavigationProperty Name="StatusRent" Relationship="Self.FK__Rent__IdStatusRe__4D94879B" FromRole="Rent" ToRole="StatusRent" />
-          <NavigationProperty Name="Tenant" Relationship="Self.FK__Rent__IdTenant__4CA06362" FromRole="Rent" ToRole="Tenants" />
+          <NavigationProperty Name="StatePavilion" Relationship="Self.FK__Rent__IdStatePav__5629CD9C" FromRole="Rent" ToRole="StatePavilions" />
+          <NavigationProperty Name="StatusRent" Relationship="Self.FK__Rent__IdStatusRe__5535A963" FromRole="Rent" ToRole="StatusRent" />
+          <NavigationProperty Name="Tenant" Relationship="Self.FK__Rent__IdTenant__5441852A" FromRole="Rent" ToRole="Tenants" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -415,16 +415,18 @@
           </Key>
           <Property Name="IdRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameRole" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__IdRol__3B75D760" FromRole="Roles" ToRole="Employees" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__IdRol__4316F928" FromRole="Roles" ToRole="Employees" />
         </EntityType>
         <EntityType Name="StatePavilion">
           <Key>
-            <PropertyRef Name="IdPavilion" />
+            <PropertyRef Name="IdStatePavilion" />
           </Key>
-          <Property Name="IdPavilion" Type="Int32" Nullable="false" />
+          <Property Name="IdStatePavilion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPavilion" Type="Int32" />
           <Property Name="IdEmployee" Type="Int32" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK__StatePavi__IdEmp__5629CD9C" FromRole="StatePavilions" ToRole="Employees" />
-          <NavigationProperty Name="Pavilion" Relationship="Self.FK__StatePavi__IdPav__5535A963" FromRole="StatePavilions" ToRole="Pavilions" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__StatePavi__IdEmp__4D94879B" FromRole="StatePavilions" ToRole="Employees" />
+          <NavigationProperty Name="Pavilion" Relationship="Self.FK__StatePavi__IdPav__4CA06362" FromRole="StatePavilions" ToRole="Pavilions" />
+          <NavigationProperty Name="Rents" Relationship="Self.FK__Rent__IdStatePav__5629CD9C" FromRole="StatePavilions" ToRole="Rent" />
         </EntityType>
         <EntityType Name="StatusEmployee">
           <Key>
@@ -432,7 +434,7 @@
           </Key>
           <Property Name="IdStatusEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__IdSta__3C69FB99" FromRole="StatusEmployee" ToRole="Employees" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__IdSta__440B1D61" FromRole="StatusEmployee" ToRole="Employees" />
         </EntityType>
         <EntityType Name="StatusMall">
           <Key>
@@ -440,7 +442,7 @@
           </Key>
           <Property Name="IdStatusMall" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusMallName" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Malls" Relationship="Self.FK__Malls__IdStatusM__4316F928" FromRole="StatusMalls" ToRole="Malls" />
+          <NavigationProperty Name="Malls" Relationship="Self.FK__Malls__IdStatusM__3B75D760" FromRole="StatusMalls" ToRole="Malls" />
         </EntityType>
         <EntityType Name="StatusPavilion">
           <Key>
@@ -448,7 +450,7 @@
           </Key>
           <Property Name="IdStatusPavilion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusName" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Pavilions" Relationship="Self.FK__Pavilions__IdSta__5165187F" FromRole="StatusPavilions" ToRole="Pavilions" />
+          <NavigationProperty Name="Pavilions" Relationship="Self.FK__Pavilions__IdSta__49C3F6B7" FromRole="StatusPavilions" ToRole="Pavilions" />
         </EntityType>
         <EntityType Name="StatusRent">
           <Key>
@@ -456,7 +458,7 @@
           </Key>
           <Property Name="IdStatusRent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusRentName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Rents" Relationship="Self.FK__Rent__IdStatusRe__4D94879B" FromRole="StatusRent" ToRole="Rent" />
+          <NavigationProperty Name="Rents" Relationship="Self.FK__Rent__IdStatusRe__5535A963" FromRole="StatusRent" ToRole="Rent" />
         </EntityType>
         <EntityType Name="Tenant">
           <Key>
@@ -466,9 +468,9 @@
           <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Rents" Relationship="Self.FK__Rent__IdTenant__4CA06362" FromRole="Tenants" ToRole="Rent" />
+          <NavigationProperty Name="Rents" Relationship="Self.FK__Rent__IdTenant__5441852A" FromRole="Tenants" ToRole="Rent" />
         </EntityType>
-        <Association Name="FK__Malls__IdCity__440B1D61">
+        <Association Name="FK__Malls__IdCity__3C69FB99">
           <End Role="Cities" Type="Self.City" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -482,7 +484,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Employees__IdRol__3B75D760">
+        <Association Name="FK__Employees__IdRol__4316F928">
           <End Role="Roles" Type="Self.Role" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -496,7 +498,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Employees__IdSta__3C69FB99">
+        <Association Name="FK__Employees__IdSta__440B1D61">
           <End Role="StatusEmployee" Type="Self.StatusEmployee" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -510,7 +512,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StatePavi__IdEmp__5629CD9C">
+        <Association Name="FK__StatePavi__IdEmp__4D94879B">
           <End Role="Employees" Type="Self.Employee" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -524,7 +526,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Malls__IdStatusM__4316F928">
+        <Association Name="FK__Malls__IdStatusM__3B75D760">
           <End Role="StatusMalls" Type="Self.StatusMall" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -538,7 +540,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pavilions__IdSho__5070F446">
+        <Association Name="FK__Pavilions__IdSho__48CFD27E">
           <End Role="Malls" Type="Self.Mall" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -552,21 +554,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pavilions__IdRen__52593CB8">
-          <End Role="Rent" Type="Self.Rent" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Pavilions" Type="Self.Pavilion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rent">
-              <PropertyRef Name="IdRent" />
-            </Principal>
-            <Dependent Role="Pavilions">
-              <PropertyRef Name="IdRent" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Pavilions__IdSta__5165187F">
+        <Association Name="FK__Pavilions__IdSta__49C3F6B7">
           <End Role="StatusPavilions" Type="Self.StatusPavilion" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -580,11 +568,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StatePavi__IdPav__5535A963">
-          <End Role="Pavilions" Type="Self.Pavilion" Multiplicity="1">
+        <Association Name="FK__StatePavi__IdPav__4CA06362">
+          <End Role="Pavilions" Type="Self.Pavilion" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="StatePavilions" Type="Self.StatePavilion" Multiplicity="0..1" />
+          <End Role="StatePavilions" Type="Self.StatePavilion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pavilions">
               <PropertyRef Name="IdPavilion" />
@@ -594,7 +582,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rent__IdStatusRe__4D94879B">
+        <Association Name="FK__Rent__IdStatePav__5629CD9C">
+          <End Role="StatePavilions" Type="Self.StatePavilion" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Rent" Type="Self.Rent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatePavilions">
+              <PropertyRef Name="IdStatePavilion" />
+            </Principal>
+            <Dependent Role="Rent">
+              <PropertyRef Name="IdStatePavilion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rent__IdStatusRe__5535A963">
           <End Role="StatusRent" Type="Self.StatusRent" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -608,7 +610,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rent__IdTenant__4CA06362">
+        <Association Name="FK__Rent__IdTenant__5441852A">
           <End Role="Tenants" Type="Self.Tenant" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -635,47 +637,47 @@
           <EntitySet Name="StatusPavilions" EntityType="Self.StatusPavilion" />
           <EntitySet Name="StatusRents" EntityType="Self.StatusRent" />
           <EntitySet Name="Tenants" EntityType="Self.Tenant" />
-          <AssociationSet Name="FK__Malls__IdCity__440B1D61" Association="Self.FK__Malls__IdCity__440B1D61">
+          <AssociationSet Name="FK__Malls__IdCity__3C69FB99" Association="Self.FK__Malls__IdCity__3C69FB99">
             <End Role="Cities" EntitySet="Cities" />
             <End Role="Malls" EntitySet="Malls" />
           </AssociationSet>
-          <AssociationSet Name="FK__Employees__IdRol__3B75D760" Association="Self.FK__Employees__IdRol__3B75D760">
+          <AssociationSet Name="FK__Employees__IdRol__4316F928" Association="Self.FK__Employees__IdRol__4316F928">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__Employees__IdSta__3C69FB99" Association="Self.FK__Employees__IdSta__3C69FB99">
+          <AssociationSet Name="FK__Employees__IdSta__440B1D61" Association="Self.FK__Employees__IdSta__440B1D61">
             <End Role="StatusEmployee" EntitySet="StatusEmployees" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__StatePavi__IdEmp__5629CD9C" Association="Self.FK__StatePavi__IdEmp__5629CD9C">
+          <AssociationSet Name="FK__StatePavi__IdEmp__4D94879B" Association="Self.FK__StatePavi__IdEmp__4D94879B">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="StatePavilions" EntitySet="StatePavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Malls__IdStatusM__4316F928" Association="Self.FK__Malls__IdStatusM__4316F928">
+          <AssociationSet Name="FK__Malls__IdStatusM__3B75D760" Association="Self.FK__Malls__IdStatusM__3B75D760">
             <End Role="StatusMalls" EntitySet="StatusMalls" />
             <End Role="Malls" EntitySet="Malls" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdSho__5070F446" Association="Self.FK__Pavilions__IdSho__5070F446">
+          <AssociationSet Name="FK__Pavilions__IdSho__48CFD27E" Association="Self.FK__Pavilions__IdSho__48CFD27E">
             <End Role="Malls" EntitySet="Malls" />
             <End Role="Pavilions" EntitySet="Pavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdRen__52593CB8" Association="Self.FK__Pavilions__IdRen__52593CB8">
-            <End Role="Rent" EntitySet="Rents" />
-            <End Role="Pavilions" EntitySet="Pavilions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Pavilions__IdSta__5165187F" Association="Self.FK__Pavilions__IdSta__5165187F">
+          <AssociationSet Name="FK__Pavilions__IdSta__49C3F6B7" Association="Self.FK__Pavilions__IdSta__49C3F6B7">
             <End Role="StatusPavilions" EntitySet="StatusPavilions" />
             <End Role="Pavilions" EntitySet="Pavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__StatePavi__IdPav__5535A963" Association="Self.FK__StatePavi__IdPav__5535A963">
+          <AssociationSet Name="FK__StatePavi__IdPav__4CA06362" Association="Self.FK__StatePavi__IdPav__4CA06362">
             <End Role="Pavilions" EntitySet="Pavilions" />
             <End Role="StatePavilions" EntitySet="StatePavilions" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rent__IdStatusRe__4D94879B" Association="Self.FK__Rent__IdStatusRe__4D94879B">
+          <AssociationSet Name="FK__Rent__IdStatePav__5629CD9C" Association="Self.FK__Rent__IdStatePav__5629CD9C">
+            <End Role="StatePavilions" EntitySet="StatePavilions" />
+            <End Role="Rent" EntitySet="Rents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rent__IdStatusRe__5535A963" Association="Self.FK__Rent__IdStatusRe__5535A963">
             <End Role="StatusRent" EntitySet="StatusRents" />
             <End Role="Rent" EntitySet="Rents" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rent__IdTenant__4CA06362" Association="Self.FK__Rent__IdTenant__4CA06362">
+          <AssociationSet Name="FK__Rent__IdTenant__5441852A" Association="Self.FK__Rent__IdTenant__5441852A">
             <End Role="Tenants" EntitySet="Tenants" />
             <End Role="Rent" EntitySet="Rents" />
           </AssociationSet>
@@ -745,7 +747,7 @@
               <MappingFragment StoreEntitySet="Rent">
                 <ScalarProperty Name="IdRent" ColumnName="IdRent" />
                 <ScalarProperty Name="IdTenant" ColumnName="IdTenant" />
-                <ScalarProperty Name="IdPavilion" ColumnName="IdPavilion" />
+                <ScalarProperty Name="IdStatePavilion" ColumnName="IdStatePavilion" />
                 <ScalarProperty Name="IdStatusRent" ColumnName="IdStatusRent" />
                 <ScalarProperty Name="StartOfLease" ColumnName="StartOfLease" />
                 <ScalarProperty Name="EndOfLease" ColumnName="EndOfLease" />
@@ -763,6 +765,7 @@
           <EntitySetMapping Name="StatePavilions">
             <EntityTypeMapping TypeName="PavilionsBaseModel.StatePavilion">
               <MappingFragment StoreEntitySet="StatePavilions">
+                <ScalarProperty Name="IdStatePavilion" ColumnName="IdStatePavilion" />
                 <ScalarProperty Name="IdPavilion" ColumnName="IdPavilion" />
                 <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
               </MappingFragment>

@@ -14,6 +14,12 @@ namespace EducationalPracticePavilions.Model
     
     public partial class Pavilion
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Pavilion()
+        {
+            this.StatePavilions = new HashSet<StatePavilion>();
+        }
+    
         public int IdPavilion { get; set; }
         public Nullable<int> IdShoppingMall { get; set; }
         public string NamePavilions { get; set; }
@@ -25,8 +31,8 @@ namespace EducationalPracticePavilions.Model
         public Nullable<int> IdRent { get; set; }
     
         public virtual Mall Mall { get; set; }
-        public virtual Rent Rent { get; set; }
         public virtual StatusPavilion StatusPavilion { get; set; }
-        public virtual StatePavilion StatePavilion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StatePavilion> StatePavilions { get; set; }
     }
 }
