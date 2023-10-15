@@ -26,7 +26,7 @@ namespace EducationalPracticePavilions.View
             RoleEmployee.SelectedIndex = 0;
         }
         //преобразовать в ref
-        private ref int countOfAttempt = 0; // Объявляем счетчик попыток как поле класса
+        private int countOfAttempt = 0; // Объявляем счетчик попыток как поле класса
         /// <summary>
         /// Авторизация пользователя
         /// </summary>
@@ -39,34 +39,37 @@ namespace EducationalPracticePavilions.View
             if ((login != "") && (password != ""))
             {
                 Employee authorizationEmployee = null;
-                EmoloyeeAuthorization(authorizationEmployee, role, login, password);
+                EmoloyeeAuthorization(authorizationEmployee, role, login, password, countOfAttempt);
             }
             else
-            {
-                GoToCaptcha(countOfAttempt);
-            }
+                countOfAttempt = GoToCaptcha(countOfAttempt);
         }
-        private void GoToCaptcha(ref int countOfAttempt)
+        //из-за ошибки с .Net не получается использовать ref .( 
+        private int GoToCaptcha(int countOfAttempt)
         {
+            int localCountOfAttempt = countOfAttempt;
             MessageBox.Show("Ошибка входа. Пожалуйста, проверьте свои учетные данные.");
-            countOfAttempt++;
-            if (countOfAttempt >= 3)
+            localCountOfAttempt++;
+            if (localCountOfAttempt >= 3)
             {
                 //переход на капчу
                 if (captcha == null)
                 {
                     captcha = new Captcha();
                     captcha.Show();
-                    countOfAttempt = 0;
+                    localCountOfAttempt = 0;
                     MainWindow.GetWindow(this)?.Close();
                 }
                 else
                     captcha.Activate();
-                countOfAttempt = 0;
+                localCountOfAttempt = 0;
             }
+            return localCountOfAttempt;
         }
-        private void EmoloyeeAuthorization(Employee authorizationEmployee, string role, string login, string password)
+        private int EmoloyeeAuthorization(Employee authorizationEmployee, string role,
+                                          string login, string password, int countOfAttempt)
         {
+            int localCountOfAttempt = countOfAttempt;
             authorizationEmployee = PavilionsBase.GetContext().Employees.Where(p => p.LoginEmployee.ToLower() == login
                                                        && p.PasswordEmployee == password).FirstOrDefault();
             if (authorizationEmployee != null) //сделать зависимость от роли пользователя
@@ -76,8 +79,9 @@ namespace EducationalPracticePavilions.View
             }
             else
             {
-                GoToCaptcha(countOfAttempt);
+                localCountOfAttempt+= GoToCaptcha(countOfAttempt);
             }
+            return localCountOfAttempt;
         }
     }
 }
