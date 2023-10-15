@@ -71,7 +71,7 @@ namespace EducationalPracticePavilions.View
             {
                 MessageBox.Show("Вход выполнен успешно!");
                 if (authorizationEmployee.IdRole == 3) //Менеджер С
-                    Manager.MainFrame.Navigate(new EmployeesPage()); //переход на view соответствующей роли
+                    Manager.MainFrame.Navigate(new ListMalls()); //переход на view соответствующей роли
             }
             else
             {

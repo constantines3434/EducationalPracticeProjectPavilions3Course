@@ -128,8 +128,8 @@
     <Compile Include="View\Captcha.xaml.cs">
       <DependentUpon>Captcha.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ShoppingMallPage.xaml.cs">
-      <DependentUpon>ShoppingMallPage.xaml</DependentUpon>
+    <Compile Include="View\ListMalls.xaml.cs">
+      <DependentUpon>ListMalls.xaml</DependentUpon>
     </Compile>
     <Page Include="View\Authorization.xaml">
       <SubType>Designer</SubType>
@@ -144,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ListMalls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,10 +172,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\ShoppingMallPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
