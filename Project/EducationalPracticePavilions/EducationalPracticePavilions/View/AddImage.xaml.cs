@@ -25,7 +25,7 @@ namespace EducationalPracticePavilions.View
     /// </summary>
     public partial class AddImage : Window
     {
-        private string con = @"Data Source=WIN-OMJN02Q49QC\Constantine;Initial Catalog=Test;Integrated Security=True";
+        private string con = @"Data Source=WIN-OMJN02Q49QC; Initial Catalog=TestBase; Integrated Security=True";
         public AddImage()
         {
             InitializeComponent();
@@ -46,32 +46,34 @@ namespace EducationalPracticePavilions.View
         {
             if (!string.IsNullOrEmpty(IdPhotoTextBox.Text) && int.TryParse(IdPhotoTextBox.Text, out int id))
             {
+                
                 var retriever = new ImageRetriever(con);
                 retriever.Retrieve(Image2, id);
+              //  MessageBox.Show("работает ViewPhoto");
             }
             else
             {
                 // Обработка случая, когда ID не введен или введен некорректно
+                MessageBox.Show("Пожалуйста, введите корректный ID изображения.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void Select_Click(object sender, RoutedEventArgs e)
         {
-            using (var openFileDialog = new OpenFileDialog())
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+
+            if (openFileDialog.ShowDialog() == true)
             {
-                openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
-                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(openFileDialog.FileName);
+                bitmap.EndInit();
 
-                if (openFileDialog.ShowDialog() == true)
-                {
-                    // Создаем BitmapImage из выбранного файла
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(openFileDialog.FileName);
-                    bitmap.EndInit();
+                Image1.Source = bitmap;
 
-                    // Устанавливаем BitmapImage в Image1
-                    Image1.Source = bitmap;
-                }
+                // Освобождаем ресурсы OpenFileDialog после использования
+                openFileDialog = null;
             }
         }
     }
@@ -83,14 +85,14 @@ namespace EducationalPracticePavilions.View
         {
             _connectionString = connectionString;
         }
-        public void Upload(Image image)
+        public void Upload(System.Windows.Controls.Image image)
         {
             if (image.Source is BitmapImage bitmapImage)
             {
                 using (var connection = new SqlConnection(_connectionString))
                 using (var command = connection.CreateCommand())
                 {
-                    command.CommandText = "INSERT INTO myTable (image) VALUES (@image)";
+                    command.CommandText = "INSERT INTO Images (ImageName) VALUES (@image)";
 
                     using (var stream = new MemoryStream())
                     {
@@ -105,13 +107,15 @@ namespace EducationalPracticePavilions.View
                         };
                         command.Parameters.Add(sqlParameter);
                     }
+
                     connection.Open();
                     command.ExecuteNonQuery();
+                    MessageBox.Show("Работает Upload");
                 }
             }
         }
     }
-    class ImageRetriever
+    public class ImageRetriever
     {
         private readonly string _connectionString;
 
@@ -119,30 +123,35 @@ namespace EducationalPracticePavilions.View
         {
             _connectionString = connectionString;
         }
-        public void Retrieve(Image image, int id)
-        {
-            if (image is ImageSource)
-            {
-                using (var connection = new SqlConnection(_connectionString))
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = "SELECT image FROM myTable WHERE id = @id";
-                    command.Parameters.AddWithValue("@id", id);
-                    connection.Open();
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            var imageData = (byte[])reader["image"];
-                            using (var stream = new MemoryStream(imageData))
-                            {
-                                BitmapImage bitmapImage = new BitmapImage();
-                                bitmapImage.BeginInit();
-                                bitmapImage.StreamSource = stream;
-                                bitmapImage.EndInit();
 
-                                image.Source = bitmapImage;
+        public void Retrieve(System.Windows.Controls.Image image, int id)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT ImageName FROM Images WHERE Id = @id";
+                command.Parameters.AddWithValue("@id", id);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        var imageData = (byte[])reader["ImageName"];
+                        using (var stream = new MemoryStream(imageData))
+                        {
+                            BitmapImage bitmapImage = new BitmapImage();
+                            bitmapImage.BeginInit();
+                            bitmapImage.StreamSource = stream;
+                            bitmapImage.EndInit();
+
+                            // Приводим image к правильному типу
+                            var wpfImage = image as System.Windows.Controls.Image;
+                            if (wpfImage != null)
+                            {
+                                wpfImage.Source = bitmapImage;
                             }
+                            MessageBox.Show("Показ изображения из Базы данных");
+
                         }
                     }
                 }

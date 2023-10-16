@@ -77,7 +77,7 @@
                 Grid.Column="1"
                 Background="LightGray"
                 Width="120"
-                Content="Подтвердить фото"    
+                Content="Показать фото"    
                 x:Name="ViewPhoto" Click="ViewPhoto_Click"
             />
     </Grid>
