@@ -93,7 +93,7 @@
         <ComboBox
             x:Name="ComboCities"
             DisplayMemberPath="NameCity"
-            Grid.Row="5"
+            Grid.Row="4"
             Grid.Column="1"
             SelectedItem="{Binding Cities}" Margin="0,12,0,0" VerticalAlignment="Top"
             
@@ -105,6 +105,13 @@
             Grid.Row="6"
             HorizontalAlignment="Left"
             Text="{Binding NumberOfStoreys}"/>
+        <TextBox
+            Width="550"
+            MaxLength="100"
+            Grid.Column="1"
+            Grid.Row="7"
+            HorizontalAlignment="Left"
+            Text="{Binding PavilionCount}"/>
         
         <Button x:Name="ButtonSave"
                 Click="ButtonSave_Click"

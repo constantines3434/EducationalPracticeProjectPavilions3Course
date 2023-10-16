@@ -29,67 +29,68 @@ namespace EducationalPracticePavilions.View
             if (selectedMall != null)
                 _currentMall = selectedMall;
 
-            _currentMall = selectedMall;
-            //ComboBoxStatusEmployee.ItemsSource = PavilionsBase.GetContext().StatusEmployees.ToList();
-            //ComboBoxRoleEmployee.ItemsSource = PavilionsBase.GetContext().Roles.ToList();
-        }
+             DataContext = _currentMall;
 
+            //статусы ТЦ
+            var statusMalls = PavilionsBase.GetContext().StatusMalls.ToList();
+            var statusToRemove = statusMalls.SingleOrDefault(s => s.StatusMallName == "Удалён");
+            if (statusToRemove != null)
+                statusMalls.Remove(statusToRemove);
+
+            ComboStatus.ItemsSource = statusMalls;
+
+            ComboCities.ItemsSource = PavilionsBase.GetContext().Cities.ToList();
+        }
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
+            StringBuilder errors = new StringBuilder();
 
+            // Присвоение значения статуса
+            _currentMall.StatusMall = ComboStatus.SelectedItem as StatusMall;
+            // Присвоение значения статуса
+            _currentMall.City = ComboCities.SelectedItem as City;
+
+            if (string.IsNullOrWhiteSpace(_currentMall.NameMalls))
+                errors.AppendLine("Укажите корректное название ТЦ");
+            if (_currentMall.ValueAddedFactor <= 0)
+                errors.AppendLine("Укажите корректный коэффициент добавочной стоимости ТЦ");
+            if (_currentMall.StatusMall == null)
+                errors.AppendLine("Корректно выберите статус");
+            if (_currentMall.Price <= 0)
+                errors.AppendLine("Укажите корректные затраты на строительство торгового центра");
+            if (_currentMall.City == null)
+                errors.AppendLine("Корректно выберите город");
+            if (_currentMall.NumberOfStoreys <= 0)
+                errors.AppendLine("Укажите корректное количество этажей в ТЦ");
+            if (_currentMall.PavilionCount < 0)
+                errors.AppendLine("Укажите корректное количество павильонов в ТЦ");
+
+            if (errors.Length > 0)
+            {
+                MessageBox.Show(errors.ToString());
+                return;
+            }
+
+            if (_currentMall.IdShoppingMall == 0)
+                PavilionsBase.GetContext().Malls.Add(_currentMall);
+
+            try
+            {
+                PavilionsBase.GetContext().SaveChanges();
+                MessageBox.Show("Информация сохранена");
+             //   Manager.MainFrame.GoBack();
+            }
+                catch (DbEntityValidationException ex)
+            {
+                foreach (DbEntityValidationResult validationError in ex.EntityValidationErrors)
+                {
+                    MessageBox.Show("Object: " + validationError.Entry.Entity.ToString());
+                    foreach (DbValidationError err in validationError.ValidationErrors)
+                    {
+                        MessageBox.Show(err.ErrorMessage + "");
+                    }
+                }
+            }
         }
-
-        //private void ButtonSave_Click(object sender, RoutedEventArgs e)
-        //{
-        //    StringBuilder errors = new StringBuilder();
-
-        //    if (string.IsNullOrWhiteSpace(_currentEmployee.Surname))
-        //        errors.AppendLine("Укажите корректно фамилию работника");
-        //    if (string.IsNullOrWhiteSpace(_currentEmployee.NameEmployee))
-        //        errors.AppendLine("Укажите корректно имя работника");
-        //    if (string.IsNullOrWhiteSpace(_currentEmployee.Patronimic))
-        //        errors.AppendLine("Укажите корректно отчество работника");
-        //    if (string.IsNullOrWhiteSpace(_currentEmployee.LoginEmployee))
-        //        errors.AppendLine("Укажите корректно логин работника");
-        //    if (string.IsNullOrWhiteSpace(_currentEmployee.PasswordEmployee))
-        //        errors.AppendLine("Укажите корректно пароль работника");
-        //    if (_currentEmployee.StatusEmployee == null)
-        //        errors.AppendLine("Корректно выберите статус работника");
-        //    if (_currentEmployee.Role == null)
-        //        errors.AppendLine("Корректно выберите роль работника");
-        //    if (string.IsNullOrWhiteSpace(_currentEmployee.PhoneNumber))
-        //        errors.AppendLine("Укажите корректно номер телефона работника");
-        //    if (string.IsNullOrWhiteSpace(_currentEmployee.Gender))
-        //        errors.AppendLine("Укажите корректно номер телефона работника");
-        //    //if ((_currentEmployee.Gender != "М") || (_currentEmployee.Gender != "Ж"))
-        //    //    errors.AppendLine("Укажите корректно пол работника");
-
-        //    if (errors.Length > 0)
-        //    {
-        //        MessageBox.Show(errors.ToString());
-        //        return;
-        //    }
-
-        //    if (_currentEmployee.IdEmployee == 0)
-        //        PavilionsBase.GetContext().Employees.Add(_currentEmployee);
-
-        //    try
-        //    {
-        //        PavilionsBase.GetContext().SaveChanges();
-        //        MessageBox.Show("Информация сохранена");
-        //        Manager.MainFrame.GoBack();
-        //    }
-        //    catch (DbEntityValidationException ex)
-        //    {
-        //        foreach (DbEntityValidationResult validationError in ex.EntityValidationErrors)
-        //        {
-        //            MessageBox.Show("Object: " + validationError.Entry.Entity.ToString());
-        //            foreach (DbValidationError err in validationError.ValidationErrors)
-        //            {
-        //                MessageBox.Show(err.ErrorMessage + "");
-        //            }
-        //        }
-        //    }
-        //}
     }
 }

@@ -79,7 +79,7 @@
                             Text="{Binding NameMalls}"/>
                         <TextBlock Text="{Binding Price, StringFormat={}{0:N2} РУБ}" Grid.Row="2" Margin="5 5 5 15" HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" />
                         <TextBlock Text="{Binding StatusMall.StatusMallName, StringFormat='Статус: {0}'}" Grid.Row="3" FontSize="14" HorizontalAlignment="Left"/>
-                        <TextBlock Text= "{Binding CountPavilions, StringFormat='Количество павильонов: {0}'}" Grid.Row="3" FontSize="14" HorizontalAlignment="Right"/>
+                        <TextBlock Text= "{Binding PavilionCount, StringFormat='Количество павильонов: {0}'}" Grid.Row="3" FontSize="14" HorizontalAlignment="Right"/>
                         <TextBlock Text="{Binding City.NameCity, StringFormat='Город: {0}'}" Grid.Row="4" FontSize="14" HorizontalAlignment="Left"/>
                         <TextBlock Text="{Binding NumberOfStoreys, StringFormat='Этажей: {0}'}" Grid.Row="4" FontSize="14" HorizontalAlignment="Right"/>
                         <TextBlock Text="{Binding ValueAddedFactor, StringFormat='коэффициент добавочной стоимости ТЦ: {0}'}" Grid.Row="5" FontSize="14" HorizontalAlignment="Left"/>

@@ -35,7 +35,7 @@ namespace EducationalPracticePavilions.View
             ComboStatus.ItemsSource = allStatuses;
             ComboStatus.SelectedIndex = 0;
 
-            //статус тц
+            //города
             var allCities = PavilionsBase.GetContext().Cities.ToList();
             allCities.Insert(0, new City
             {
@@ -45,9 +45,7 @@ namespace EducationalPracticePavilions.View
             ComboCities.SelectedIndex = 0;
 
             //число павильонов
-            var currentMalls = PavilionsBase.GetContext().Malls
-                .Include(m => m.Pavilions)
-                .ToList();
+            var currentMalls = PavilionsBase.GetContext().Malls.ToList();
 
             // Изначальная сортировка по городам, затем по статусу
             currentMalls = currentMalls
@@ -59,9 +57,7 @@ namespace EducationalPracticePavilions.View
         }
         private void UpdateMalls()
         {
-            var currentMalls = PavilionsBase.GetContext().Malls
-                .Include(m => m.Pavilions)
-                .ToList();
+            var currentMalls = PavilionsBase.GetContext().Malls.ToList();
 
             if (ComboStatus.SelectedIndex > 0)
             {
@@ -81,22 +77,18 @@ namespace EducationalPracticePavilions.View
             }
             ListViewMalls.ItemsSource = currentMalls;
         }
-
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateMalls();
         }
-
         private void ComboStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateMalls();
         }
-
         private void CheckActual_Checked(object sender, RoutedEventArgs e)
         {
             UpdateMalls();
         }
-
         private void ComboCities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateMalls();
@@ -123,9 +115,7 @@ namespace EducationalPracticePavilions.View
                     {
                         MessageBox.Show($"{ex.Message.ToString()}");
                     }
-                }
-
-                
+                }       
             }
         }
     }
