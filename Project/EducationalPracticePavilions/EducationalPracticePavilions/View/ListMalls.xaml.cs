@@ -75,6 +75,19 @@ namespace EducationalPracticePavilions.View
                         .ToList();
                 }
             }
+            // Применяем фильтрацию по коэффициенту добавочной стоимости
+            if (!string.IsNullOrEmpty(TBoxSearch.Text) && double.TryParse(TBoxSearch.Text, out double searchValue))
+            {
+                currentMalls = currentMalls
+                    .Where(p => p.ValueAddedFactor == searchValue)
+                    .ToList();
+            }
+            // Изначальная сортировка по городам, затем по статусу
+            currentMalls = currentMalls
+                .OrderBy(m => m.City.NameCity)
+                .ThenBy(m => m.StatusMall.StatusMallName)
+                .ToList();
+
             ListViewMalls.ItemsSource = currentMalls;
         }
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)

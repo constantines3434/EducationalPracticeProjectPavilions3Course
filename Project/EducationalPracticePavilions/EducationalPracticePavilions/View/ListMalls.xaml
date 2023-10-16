@@ -16,7 +16,8 @@
 
         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Введите название для поиска:" Width="175" HorizontalAlignment="Left" TextAlignment="Right"/>
+                <TextBlock Text="Введите коэффициент добавочной стоимости ТЦ" Width="175" HorizontalAlignment="Left"
+                           TextAlignment="Right"/>
                 <TextBox Width="225" Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" HorizontalAlignment="Left"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
