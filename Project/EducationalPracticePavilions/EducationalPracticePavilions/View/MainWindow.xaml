@@ -14,11 +14,6 @@
         </Grid.RowDefinitions>
         <Grid Background="LightSteelBlue" Panel.ZIndex="-2"/>
         <Grid Grid.Row="2" Background="LightCoral"/>
-        <TextBlock
-            Text="Header"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="30"/>
         <Frame
             Grid.Row="1"
             NavigationUIVisibility="Hidden"
@@ -26,7 +21,7 @@
             Name="MainFrame"/>
         <Button
             Content="Back"
-            HorizontalAlignment="Right"
+            HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Width="100"
             Height="30"

@@ -39,6 +39,7 @@
           <Property Name="Price" Type="float" />
           <Property Name="ValueAddedFactor" Type="float" />
           <Property Name="NumberOfStoreys" Type="int" />
+          <Property Name="PavilionCount" Type="int" />
           <Property Name="ImageShoppingMall" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Pavilions">
@@ -53,7 +54,6 @@
           <Property Name="SquarePavilions" Type="float" />
           <Property Name="CostPerMeter" Type="float" />
           <Property Name="ValueAddedFactor" Type="float" />
-          <Property Name="IdRent" Type="int" />
         </EntityType>
         <EntityType Name="Rent">
           <Key>
@@ -272,6 +272,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AddPavilionToMall" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MallId" Type="int" Mode="In" />
+          <Parameter Name="PavilionName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Floor" Type="int" Mode="In" />
+          <Parameter Name="StatusId" Type="int" Mode="In" />
+          <Parameter Name="Square" Type="float" Mode="In" />
+          <Parameter Name="Cost" Type="float" Mode="In" />
+          <Parameter Name="PavilionCount" Type="int" Mode="In" />
+          <Parameter Name="ValueAddedFactor" Type="float" Mode="In" />
+        </Function>
+        <Function Name="DeletePavilion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PavilionId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="Хранилище PavilionsBaseModelContainer">
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
@@ -373,6 +386,7 @@
           <Property Name="Price" Type="Double" />
           <Property Name="ValueAddedFactor" Type="Double" />
           <Property Name="NumberOfStoreys" Type="Int32" />
+          <Property Name="PavilionCount" Type="Int32" />
           <Property Name="ImageShoppingMall" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="City" Relationship="Self.FK__Malls__IdCity__3C69FB99" FromRole="Malls" ToRole="Cities" />
           <NavigationProperty Name="StatusMall" Relationship="Self.FK__Malls__IdStatusM__3B75D760" FromRole="Malls" ToRole="StatusMalls" />
@@ -390,7 +404,6 @@
           <Property Name="SquarePavilions" Type="Double" />
           <Property Name="CostPerMeter" Type="Double" />
           <Property Name="ValueAddedFactor" Type="Double" />
-          <Property Name="IdRent" Type="Int32" />
           <NavigationProperty Name="Mall" Relationship="Self.FK__Pavilions__IdSho__48CFD27E" FromRole="Pavilions" ToRole="Malls" />
           <NavigationProperty Name="StatusPavilion" Relationship="Self.FK__Pavilions__IdSta__49C3F6B7" FromRole="Pavilions" ToRole="StatusPavilions" />
           <NavigationProperty Name="StatePavilions" Relationship="Self.FK__StatePavi__IdPav__4CA06362" FromRole="Pavilions" ToRole="StatePavilions" />
@@ -681,6 +694,19 @@
             <End Role="Tenants" EntitySet="Tenants" />
             <End Role="Rent" EntitySet="Rents" />
           </AssociationSet>
+          <FunctionImport Name="AddPavilionToMall">
+            <Parameter Name="MallId" Mode="In" Type="Int32" />
+            <Parameter Name="PavilionName" Mode="In" Type="String" />
+            <Parameter Name="Floor" Mode="In" Type="Int32" />
+            <Parameter Name="StatusId" Mode="In" Type="Int32" />
+            <Parameter Name="Square" Mode="In" Type="Double" />
+            <Parameter Name="Cost" Mode="In" Type="Double" />
+            <Parameter Name="PavilionCount" Mode="In" Type="Int32" />
+            <Parameter Name="ValueAddedFactor" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="DeletePavilion">
+            <Parameter Name="PavilionId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -723,6 +749,7 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ValueAddedFactor" ColumnName="ValueAddedFactor" />
                 <ScalarProperty Name="NumberOfStoreys" ColumnName="NumberOfStoreys" />
+                <ScalarProperty Name="PavilionCount" ColumnName="PavilionCount" />
                 <ScalarProperty Name="ImageShoppingMall" ColumnName="ImageShoppingMall" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -738,7 +765,6 @@
                 <ScalarProperty Name="SquarePavilions" ColumnName="SquarePavilions" />
                 <ScalarProperty Name="CostPerMeter" ColumnName="CostPerMeter" />
                 <ScalarProperty Name="ValueAddedFactor" ColumnName="ValueAddedFactor" />
-                <ScalarProperty Name="IdRent" ColumnName="IdRent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -813,6 +839,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddPavilionToMall" FunctionName="Хранилище PavilionsBaseModel.AddPavilionToMall" />
+          <FunctionImportMapping FunctionImportName="DeletePavilion" FunctionName="Хранилище PavilionsBaseModel.DeletePavilion" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

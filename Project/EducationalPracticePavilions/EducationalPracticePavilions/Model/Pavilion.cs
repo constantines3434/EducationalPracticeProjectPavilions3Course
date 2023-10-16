@@ -28,7 +28,6 @@ namespace EducationalPracticePavilions.Model
         public Nullable<double> SquarePavilions { get; set; }
         public Nullable<double> CostPerMeter { get; set; }
         public Nullable<double> ValueAddedFactor { get; set; }
-        public Nullable<int> IdRent { get; set; }
     
         public virtual Mall Mall { get; set; }
         public virtual StatusPavilion StatusPavilion { get; set; }

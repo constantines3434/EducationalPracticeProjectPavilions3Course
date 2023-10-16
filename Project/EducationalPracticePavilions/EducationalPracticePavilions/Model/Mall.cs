@@ -27,6 +27,7 @@ namespace EducationalPracticePavilions.Model
         public Nullable<double> Price { get; set; }
         public Nullable<double> ValueAddedFactor { get; set; }
         public Nullable<int> NumberOfStoreys { get; set; }
+        public Nullable<int> PavilionCount { get; set; }
         public byte[] ImageShoppingMall { get; set; }
     
         public virtual City City { get; set; }

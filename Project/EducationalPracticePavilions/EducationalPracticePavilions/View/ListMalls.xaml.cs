@@ -108,12 +108,24 @@ namespace EducationalPracticePavilions.View
 
             if (selectedMall != null)
             {
-                // Удалите выбранный Mall из исходного списка
-                PavilionsBase.GetContext().Malls.Remove(selectedMall);
-                PavilionsBase.GetContext().SaveChanges();
+                if (MessageBox.Show($"Вы точно хотите удалить выбранный элемент?",
+                "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        // Удаление выбранного Mall из исходного списка
+                        PavilionsBase.GetContext().Malls.Remove(selectedMall);
+                        PavilionsBase.GetContext().SaveChanges();
 
-                // Обновите отображение после удаления
-                UpdateMalls();
+                        UpdateMalls();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"{ex.Message.ToString()}");
+                    }
+                }
+
+                
             }
         }
     }

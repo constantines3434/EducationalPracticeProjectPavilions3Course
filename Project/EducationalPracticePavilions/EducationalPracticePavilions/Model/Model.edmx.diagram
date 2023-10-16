@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="902d1557a89e42eb89e7219fb23288ec" Name="Diagram1">
+      <Diagram DiagramId="95b56506599c40dbae36a1c05bdec5e7" Name="Diagram1">
         <EntityTypeShape EntityType="PavilionsBaseModel.City" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PavilionsBaseModel.Employee" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsBaseModel.Mall" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PavilionsBaseModel.Pavilion" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsBaseModel.Mall" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavilionsBaseModel.Pavilion" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PavilionsBaseModel.Rent" Width="1.5" PointX="9.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PavilionsBaseModel.Role" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PavilionsBaseModel.StatePavilion" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />

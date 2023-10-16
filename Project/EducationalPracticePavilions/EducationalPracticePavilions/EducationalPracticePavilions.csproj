@@ -128,6 +128,9 @@
     <Compile Include="View\Captcha.xaml.cs">
       <DependentUpon>Captcha.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\InterfaceMall.xaml.cs">
+      <DependentUpon>InterfaceMall.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ListMalls.xaml.cs">
       <DependentUpon>ListMalls.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InterfaceMall.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
