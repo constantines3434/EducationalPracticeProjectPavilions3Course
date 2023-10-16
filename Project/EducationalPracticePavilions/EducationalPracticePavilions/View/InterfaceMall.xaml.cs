@@ -22,6 +22,7 @@ namespace EducationalPracticePavilions.View
     /// </summary>
     public partial class InterfaceMall : Page
     {
+        public static AddImage addImage;
         private Mall _currentMall = new Mall();
         public InterfaceMall(Mall selectedMall)
         {
@@ -91,6 +92,20 @@ namespace EducationalPracticePavilions.View
                     }
                 }
             }
+        }
+
+        private void AddImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            //переход на капчу
+            if (addImage == null)
+            {
+                addImage = new AddImage();
+                addImage.Show();
+                MainWindow.GetWindow(this)?.Close();
+            }
+            else
+                addImage.Activate();
+
         }
     }
 }

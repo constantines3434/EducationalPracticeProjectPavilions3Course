@@ -122,6 +122,9 @@
     <Compile Include="Model\Tenant.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="View\AddImage.xaml.cs">
+      <DependentUpon>AddImage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,10 @@
     <Compile Include="View\ListMalls.xaml.cs">
       <DependentUpon>ListMalls.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

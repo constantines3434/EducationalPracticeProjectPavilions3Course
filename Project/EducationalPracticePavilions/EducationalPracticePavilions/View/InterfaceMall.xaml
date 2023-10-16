@@ -98,6 +98,15 @@
             SelectedItem="{Binding Cities}" Margin="0,12,0,0" VerticalAlignment="Top"
             
             />
+        <Button
+                Background="LightGray"
+                Content="Добавить Изображение"
+                Grid.Row="5"
+                Grid.Column="1"
+                HorizontalAlignment="Left"
+                x:Name="AddImageButton"
+                Click="AddImageButton_Click"
+        />
         <TextBox
             Width="550"
             MaxLength="100"

@@ -80,7 +80,6 @@
                 Content="Войти"
                 x:Name="AuthorizationButton"
                 Click="AuthorizationButton_Click"
-                
-                />
+        />
     </Grid>
 </Page>
