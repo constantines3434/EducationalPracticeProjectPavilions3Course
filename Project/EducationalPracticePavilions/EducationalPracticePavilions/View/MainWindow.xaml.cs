@@ -25,9 +25,9 @@ namespace EducationalPracticePavilions
         public MainWindow()
         {
             InitializeComponent();
-            //MainFrame.Navigate(new EmployeesPage());
             Manager.MainFrame = MainFrame;
-            MainFrame.Navigate(new InterfaceMall(null));
+            MainFrame.Navigate(new EmployeesPage());
+            //MainFrame.Navigate(new InterfaceMall(null));
             //MainFrame.Navigate(new ListMalls());
 
         }

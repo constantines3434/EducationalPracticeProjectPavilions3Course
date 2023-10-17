@@ -131,5 +131,16 @@ namespace EducationalPracticePavilions.View
                 }       
             }
         }
+
+        private void AddMall_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new InterfaceMall(null));
+        }
+
+        private void EditMall_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new InterfaceMall((sender as Button).DataContext as Mall));
+
+        }
     }
 }

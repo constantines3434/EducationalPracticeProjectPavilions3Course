@@ -84,7 +84,6 @@ namespace EducationalPracticePavilions.View
                     }
                 }
             }
-
         }
     }
 }

@@ -11,27 +11,32 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="Введите коэффициент добавочной стоимости ТЦ" Width="175" HorizontalAlignment="Left"
                            TextAlignment="Right"/>
                 <TextBox Width="225" Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" HorizontalAlignment="Left"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="Выберите статус:" Width="175" TextAlignment="Right"/>
                 <ComboBox Width="225" Name="ComboStatus" SelectionChanged="ComboStatus_SelectionChanged"
                                   DisplayMemberPath="StatusMallName"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="Выберите город:" Width="175" TextAlignment="Right"/>
                 <ComboBox Width="225" Name="ComboCities" SelectionChanged="ComboCities_SelectionChanged"
                                   DisplayMemberPath="NameCity"/>
             </StackPanel>
+            <StackPanel  Orientation="Horizontal" >
+                <Button Margin="20" Grid.Row="1" Width="225" Name="AddMall" Click="AddMall_Click" HorizontalAlignment="Center"
+                        Background="LightGray" Content="Добавить ТЦ"/>
+            </StackPanel>
         </WrapPanel>
-        <ListView Grid.Row="1" Name="ListViewMalls" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        <ListView Grid.Row="2" Name="ListViewMalls" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   HorizontalContentAlignment="Center">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -47,6 +52,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40" />
                             <RowDefinition Height="210" />
+                            <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
@@ -85,6 +91,7 @@
                         <TextBlock Text="{Binding NumberOfStoreys, StringFormat='Этажей: {0}'}" Grid.Row="4" FontSize="14" HorizontalAlignment="Right"/>
                         <TextBlock Text="{Binding ValueAddedFactor, StringFormat='коэффициент добавочной стоимости ТЦ: {0}'}" Grid.Row="5" FontSize="14" HorizontalAlignment="Left"/>
                         <Button Content="Удалить" HorizontalAlignment="Center" Grid.Row="6"  Click="DeleteButton_Click"/>
+                        <Button Content="Редактировать" HorizontalAlignment="Center" Grid.Row="7"  Click="EditMall_Click"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
