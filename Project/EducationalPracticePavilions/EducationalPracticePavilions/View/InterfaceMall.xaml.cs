@@ -1,19 +1,19 @@
 ﻿using EducationalPracticePavilions.Model;
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EducationalPracticePavilions.View
 {
@@ -22,7 +22,8 @@ namespace EducationalPracticePavilions.View
     /// </summary>
     public partial class InterfaceMall : Page
     {
-        public static AddImage addImage;
+        private string con = @"Data Source=WIN-OMJN02Q49QC; Initial Catalog=PavilionsBase; Integrated Security=True";
+
         private Mall _currentMall = new Mall();
         public InterfaceMall(Mall selectedMall)
         {
@@ -30,7 +31,7 @@ namespace EducationalPracticePavilions.View
             if (selectedMall != null)
                 _currentMall = selectedMall;
 
-             DataContext = _currentMall;
+            DataContext = _currentMall;
 
             //статусы ТЦ
             var statusMalls = PavilionsBase.GetContext().StatusMalls.ToList();
@@ -71,17 +72,20 @@ namespace EducationalPracticePavilions.View
                 MessageBox.Show(errors.ToString());
                 return;
             }
-
             if (_currentMall.IdShoppingMall == 0)
                 PavilionsBase.GetContext().Malls.Add(_currentMall);
-
             try
             {
                 PavilionsBase.GetContext().SaveChanges();
+
+                // Теперь вызовите метод Upload с идентификатором магазина
+                var uploader = new ImageUploader(con);
+                uploader.Upload(Image1, _currentMall.IdShoppingMall);
+
                 MessageBox.Show("Информация сохранена");
-             //   Manager.MainFrame.GoBack();
+                //   Manager.MainFrame.GoBack();
             }
-                catch (DbEntityValidationException ex)
+            catch (DbEntityValidationException ex)
             {
                 foreach (DbEntityValidationResult validationError in ex.EntityValidationErrors)
                 {
@@ -93,19 +97,71 @@ namespace EducationalPracticePavilions.View
                 }
             }
         }
-
-        private void AddImageButton_Click(object sender, RoutedEventArgs e)
+        private void Select_Click(object sender, RoutedEventArgs e)
         {
-            //переход на капчу
-            if (addImage == null)
-            {
-                addImage = new AddImage();
-                addImage.Show();
-                MainWindow.GetWindow(this)?.Close();
-            }
-            else
-                addImage.Activate();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 
+            if (openFileDialog.ShowDialog() == true)
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(openFileDialog.FileName);
+                bitmap.EndInit();
+
+                Image1.Source = bitmap;
+
+                // Освобождаем ресурсы OpenFileDialog после использования
+                openFileDialog = null;
+            }
+        }
+    }
+    class ImageUploader
+    {
+        private readonly string _connectionString;
+
+        public ImageUploader(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        /// <summary>
+        /// Загрузка изображения в БД
+        /// </summary>
+        public void Upload(System.Windows.Controls.Image image, int Id)
+        {
+            if (image.Source is BitmapImage bitmapImage)
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                using (var command = connection.CreateCommand())
+                {
+                    // Вставка изображения в базу данных для конкретной записи Malls (указываем IdShoppingMall)
+                    command.CommandText = "UPDATE Malls SET ImageShoppingMall = @image WHERE IdShoppingMall = @Id";
+                    using (var stream = new MemoryStream())
+                    {
+                        BitmapEncoder encoder = new JpegBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                        encoder.Save(stream);
+                        stream.Position = 0;
+
+                        var sqlParameterId = new SqlParameter("@Id", SqlDbType.Int)
+                        {
+                            Value = Id
+                        };
+                        command.Parameters.Add(sqlParameterId);
+
+                        var sqlParameterImage = new SqlParameter("@image", SqlDbType.VarBinary, (int)stream.Length)
+                        {
+                            Value = stream.ToArray()
+                        };
+                        command.Parameters.Add(sqlParameterImage);
+                    }
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    //MessageBox.Show("Работает Upload");
+                }
+            }
         }
     }
 }

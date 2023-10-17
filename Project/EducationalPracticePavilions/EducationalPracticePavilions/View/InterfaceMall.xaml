@@ -19,6 +19,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -52,11 +56,11 @@
             Grid.Column="0"/>
         <TextBlock
             Text="Этажность"
-            Grid.Row="6"
+            Grid.Row="9"
             Grid.Column="0"/>
         <TextBlock
             Text="Количество павильонов"
-            Grid.Row="7"
+            Grid.Row="10"
             Grid.Column="0"/>
 
         <TextBox
@@ -99,26 +103,36 @@
             
             />
         <Button
-                Background="LightGray"
-                Content="Добавить Изображение"
                 Grid.Row="5"
                 Grid.Column="1"
+                Background="LightGray"
+                Width="80"
+                Height="20"
+                Content="Выбрать"
                 HorizontalAlignment="Left"
-                x:Name="AddImageButton"
-                Click="AddImageButton_Click"
+                x:Name="Select" Click="Select_Click"
+            />
+        <Image
+                x:Name="Image1"
+                Grid.Row="6"
+                Grid.Column="1"
+                Grid.RowSpan="3"
+                Width="100"
+                Height="90"    
+                HorizontalAlignment="Left"
         />
         <TextBox
             Width="550"
             MaxLength="100"
             Grid.Column="1"
-            Grid.Row="6"
+            Grid.Row="9"
             HorizontalAlignment="Left"
             Text="{Binding NumberOfStoreys}"/>
         <TextBox
             Width="550"
             MaxLength="100"
             Grid.Column="1"
-            Grid.Row="7"
+            Grid.Row="10"
             HorizontalAlignment="Left"
             Text="{Binding PavilionCount}"/>
         
@@ -126,7 +140,7 @@
                 Click="ButtonSave_Click"
                 Content="Сохранение"
                 Grid.Column="1"
-                Grid.Row="10"
+                Grid.Row="11"
                 HorizontalAlignment="Center"
                 />
     </Grid>
