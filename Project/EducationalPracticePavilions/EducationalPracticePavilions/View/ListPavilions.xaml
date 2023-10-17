@@ -1,0 +1,77 @@
+﻿<Page x:Class="EducationalPracticePavilions.View.ListPavilions"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EducationalPracticePavilions.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ListPavilions"
+      IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="377*"/>
+            <RowDefinition Height="73*"/>
+        </Grid.RowDefinitions>
+        <DataGrid
+            x:Name="DGPavilions"
+            AutoGenerateColumns="False"
+            IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Статус ТЦ" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding StatusMalls.StatusMallName}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Название ТЦ" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Malls.NameMalls}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Этаж" Binding="{Binding FloorPavilion}" Width="150"/>
+                <DataGridTextColumn Header="Номер павильона" Binding="{Binding IdPavilion}" Width="150"/>
+                <DataGridTextColumn Header="Площадь" Binding="{Binding SquarePavilions}" Width="150"/>
+                <DataGridTemplateColumn Header="Статус павильона">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding StatusPavilions.StatusName}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="коэффициент добавочной стоимости павильона" Binding="{Binding ValueAddedFactor}" Width="250"/>
+                <DataGridTextColumn Header="Стоимость кв. м" Binding="{Binding CostPerMeter}" Width="250"/>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Content="Редактировать"
+                                Name="ButtonEdit"
+                                Click="ButtonEdit_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Button
+            x:Name="ButtonAdd"
+            Content="Добавить"
+            Click="ButtonAdd_Click"
+           HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Grid.Row="1"/>
+        <Button
+            x:Name="ButtonDelete"
+            Click="ButtonDelete_Click"
+            Content="Удалить"
+           HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Grid.Row="1"/>
+    </Grid>
+</Page>

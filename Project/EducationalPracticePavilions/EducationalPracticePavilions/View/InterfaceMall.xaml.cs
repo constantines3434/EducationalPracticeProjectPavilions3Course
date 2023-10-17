@@ -134,6 +134,11 @@ namespace EducationalPracticePavilions.View
                 openFileDialog = null;
             }
         }
+
+        private void TransitionToThePavilionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new ListPavilions(_currentMall));
+        }
     }
     class ImageUploader
     {
