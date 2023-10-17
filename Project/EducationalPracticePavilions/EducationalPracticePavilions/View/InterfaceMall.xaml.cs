@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -72,10 +73,12 @@ namespace EducationalPracticePavilions.View
                 MessageBox.Show(errors.ToString());
                 return;
             }
+
             if (_currentMall.IdShoppingMall == 0)
                 PavilionsBase.GetContext().Malls.Add(_currentMall);
             try
             {
+                // Попробуйте сохранить изменения
                 PavilionsBase.GetContext().SaveChanges();
 
                 // Теперь вызовите метод Upload с идентификатором магазина
@@ -84,6 +87,20 @@ namespace EducationalPracticePavilions.View
 
                 MessageBox.Show("Информация сохранена");
                 //   Manager.MainFrame.GoBack();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException != null && ex.InnerException.InnerException is SqlException sqlEx)
+                {
+                    if (sqlEx.Message.Contains("Запрещено изменять статус ТЦ на \"план\", так как есть забронированные павильоны."))
+                    {
+                        MessageBox.Show("Запрещено изменять статус ТЦ на 'план', так как есть забронированные павильоны.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Произошла ошибка при сохранении изменений.");
+                    }
+                }
             }
             catch (DbEntityValidationException ex)
             {
@@ -97,6 +114,7 @@ namespace EducationalPracticePavilions.View
                 }
             }
         }
+
         private void Select_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
