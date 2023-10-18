@@ -24,7 +24,7 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="Выберите статус:" Width="175" TextAlignment="Right"/>
                 <ComboBox Width="225" Name="ComboStatus" SelectionChanged="ComboStatus_SelectionChanged"
-                                  DisplayMemberPath="StatusMallName"/>
+                                  DisplayMemberPath="StatusName"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="Выберите город:" Width="175" TextAlignment="Right"/>

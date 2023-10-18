@@ -3,74 +3,110 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EducationalPracticePavilions.View
 {
-    /// <summary>
-    /// Логика взаимодействия для ListPavilions.xaml
-    /// </summary>
     public partial class ListPavilions : Page
     {
-        private Mall _currentMall;
         private List<Pavilion> _pavilions;
 
-        public ListPavilions(Mall currentMall)
+        public ListPavilions()
         {
             InitializeComponent();
-            _currentMall = currentMall;
-            _pavilions = new List<Pavilion>();
+
+            // Загрузка статусов ТЦ в ComboStatus
+            var allStatuses = PavilionsBase.GetContext().StatusPavilions.ToList();
+            allStatuses.Insert(0, new StatusPavilion
+            {
+                StatusName = "Все статусы"
+            });
+            ComboStatus.ItemsSource = allStatuses;
+            ComboStatus.SelectedIndex = 0;
+
+            // Загрузка этажей в ComboFloor
+            List<int> allFloors = new List<int> { 1, 2, 3, 4 /* Добавьте сколько угодно значений */ };
+            allFloors.Insert(0, 0); // Добавьте "Все этажи" в начало списка
+            ComboFloor.ItemsSource = allFloors;
+            ComboFloor.SelectedIndex = 0;
+
+            // Загрузка всех павильонов
+            _pavilions = PavilionsBase.GetContext().Pavilions.ToList();
+            UpdateMalls();
         }
 
-        private void LoadPavilions()
+        private void UpdateMalls()
         {
-            using (var context = new PavilionsBase())
+            var currentPavilion = _pavilions;
+
+            if (ComboFloor.SelectedIndex > 0)
             {
-                // Загружаем павильоны, принадлежащие выбранному ТЦ,
-                // и включаем связанные данные
-                _pavilions = context.Pavilions
-                    .Where(p => p.IdShoppingMall == _currentMall.IdShoppingMall)
-                    .Include(p => p.Mall.StatusMall)
-                    .Include(p => p.StatusPavilion)
-                    .ToList();
+                currentPavilion = currentPavilion.Where(p => p.FloorPavilion == (int)ComboFloor.SelectedItem).ToList();
+            }
+            // Применяем фильтрацию по коэффициенту добавочной стоимости
+            if (!string.IsNullOrEmpty(TBoxSearch.Text) && double.TryParse(TBoxSearch.Text, out double searchValue))
+            {
+                
+                currentPavilion = currentPavilion.Where(p => p.ValueAddedFactor > 0.1 && p.ValueAddedFactor <= searchValue).ToList();
+            }
+            // Применяем фильтрацию по статусу ТЦ
+            var selectedStatus = ComboStatus.SelectedItem as StatusPavilion;
+            if (selectedStatus != null && selectedStatus.StatusName != "Все статусы")
+            {
+                currentPavilion = currentPavilion.Where(p => p.StatusPavilion.StatusName == selectedStatus.StatusName).ToList();
+            }
+
+            ListViewPavilions.ItemsSource = currentPavilion;
+        }
+
+        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateMalls();
+        }
+
+        private void ComboStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateMalls();
+        }
+
+        private void ComboFloor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateMalls();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pavilion selectedPavilion = (Pavilion)ListViewPavilions.SelectedItem;
+
+            if (selectedPavilion != null)
+            {
+                if (MessageBox.Show("Вы точно хотите удалить выбранный элемент?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        PavilionsBase.GetContext().Pavilions.Remove(selectedPavilion);
+                        PavilionsBase.GetContext().SaveChanges();
+
+                        _pavilions.Remove(selectedPavilion);
+                        UpdateMalls();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
             }
         }
-
-        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //переименовать
+        private void AddMall_Click(object sender, RoutedEventArgs e)
         {
-            if (Visibility == Visibility.Visible)
-            {
-                LoadPavilions();
-                DGPavilions.ItemsSource = _pavilions;
-            }
+            Manager.MainFrame.Navigate(new InterfaceMall(null));
         }
 
-        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        private void EditMall_Click(object sender, RoutedEventArgs e)
         {
-            // Добавление нового павильона
-            // ...
-        }
-
-        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
-        {
-            // Удаление выбранного павильона
-            // ...
-        }
-
-        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
-        {
-            // Редактирование выбранного павильона
-            // ...
+            Manager.MainFrame.Navigate(new InterfaceMall((sender as Button).DataContext as Mall));
         }
     }
 }

@@ -6,72 +6,77 @@
       xmlns:local="clr-namespace:EducationalPracticePavilions.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ListPavilions"
-      IsVisibleChanged="Page_IsVisibleChanged">
+      Title="ListPavilions">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="377*"/>
-            <RowDefinition Height="73*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DataGrid
-            x:Name="DGPavilions"
-            AutoGenerateColumns="False"
-            IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Статус ТЦ" Width="200">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding StatusMalls.StatusMallName}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Название ТЦ" Width="200">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Malls.NameMalls}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Этаж" Binding="{Binding FloorPavilion}" Width="150"/>
-                <DataGridTextColumn Header="Номер павильона" Binding="{Binding IdPavilion}" Width="150"/>
-                <DataGridTextColumn Header="Площадь" Binding="{Binding SquarePavilions}" Width="150"/>
-                <DataGridTemplateColumn Header="Статус павильона">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding StatusPavilions.StatusName}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="коэффициент добавочной стоимости павильона" Binding="{Binding ValueAddedFactor}" Width="250"/>
-                <DataGridTextColumn Header="Стоимость кв. м" Binding="{Binding CostPerMeter}" Width="250"/>
 
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button
-                                Content="Редактировать"
-                                Name="ButtonEdit"
-                                Click="ButtonEdit_Click"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-
-        </DataGrid>
-        <Button
-            x:Name="ButtonAdd"
-            Content="Добавить"
-            Click="ButtonAdd_Click"
-           HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Grid.Row="1"/>
-        <Button
-            x:Name="ButtonDelete"
-            Click="ButtonDelete_Click"
-            Content="Удалить"
-           HorizontalAlignment="Right"
-            VerticalAlignment="Center"
-            Grid.Row="1"/>
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="Введите коэффициент добавочной стоимости ТЦ" Width="175" HorizontalAlignment="Left"
+                           TextAlignment="Right"/>
+                <TextBox Width="225" Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="Выберите статус:" Width="175" TextAlignment="Right"/>
+                <ComboBox Width="225" Name="ComboStatus" SelectionChanged="ComboStatus_SelectionChanged"
+                                  DisplayMemberPath="StatusName"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="Выберите этаж:" Width="175" TextAlignment="Right"/>
+                <ComboBox Width="225" Name="ComboFloor" SelectionChanged="ComboFloor_SelectionChanged"/>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" >
+                <Button Margin="20" Grid.Row="1" Width="225" Name="AddMall" Click="AddMall_Click" HorizontalAlignment="Center"
+                        Background="LightGray" Content="Добавить ТЦ"/>
+            </StackPanel>
+        </WrapPanel>
+        <ListView Grid.Row="2" Name="ListViewPavilions" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  HorizontalContentAlignment="Center">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"
+                               HorizontalAlignment="Center"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="20" Width="400">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            TextAlignment="Center"
+                            Width="200"
+                            TextWrapping="Wrap"
+                            HorizontalAlignment="Center"
+                            Margin="5, 5"
+                            FontSize="20"
+                            Grid.Row="0"
+                            Text="{Binding Mall.NameMalls}"/>
+                        <TextBlock Text="{Binding StatusPavilion.StatusMall.StatusMallName, StringFormat='Статус: {0}'}" Grid.Row="2" Margin="5 5 5 15" HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" />
+                        <TextBlock Text="{Binding FloorPavilion, StringFormat='Этаж: {0}'}" Grid.Row="3" FontSize="14" HorizontalAlignment="Left"/>
+                        <TextBlock Text= "{Binding NamePavilions, StringFormat='Название павильона: {0}'}" Grid.Row="3" FontSize="14" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding SquarePavilions, StringFormat='Площадь павильона: {0}'}" Grid.Row="4" FontSize="14" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding StatusPavilion.StatusName, StringFormat='Статус павильона: {0}'}" Grid.Row="4" FontSize="14" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding ValueAddedFactor, StringFormat='коэффициент добавочной стоимости павильона: {0}'}" Grid.Row="5" FontSize="14" HorizontalAlignment="Left"/>
+                        <Button Content="Удалить" HorizontalAlignment="Center" Grid.Row="6"  Click="DeleteButton_Click"/>
+                        <Button Content="Редактировать" HorizontalAlignment="Center" Grid.Row="7"  Click="EditMall_Click"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

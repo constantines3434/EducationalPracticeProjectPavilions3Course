@@ -137,7 +137,7 @@ namespace EducationalPracticePavilions.View
 
         private void TransitionToThePavilionsButton_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new ListPavilions(_currentMall));
+            Manager.MainFrame.Navigate(new ListPavilions());
         }
     }
     class ImageUploader
