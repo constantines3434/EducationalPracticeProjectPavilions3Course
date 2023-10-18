@@ -88,6 +88,7 @@ namespace EducationalPracticePavilions.View
 
             if (selectedPavilion != null)
             {
+                //if(selectedPavilion.IdStatusPavilion != )
                 if (MessageBox.Show("Вы точно хотите удалить выбранный элемент?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     try

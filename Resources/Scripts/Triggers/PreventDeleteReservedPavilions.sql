@@ -1,4 +1,4 @@
-CREATE TRIGGER PreventDeleteReservedPavilions
+ CREATE TRIGGER PreventDeleteReservedPavilions
 ON Pavilions
 FOR DELETE
 AS
