@@ -68,30 +68,17 @@ namespace EducationalPracticePavilions.View
                 MessageBox.Show(errors.ToString());
                 return;
             }
-
+            //добавление павильона
             if (_currentPavilion.IdPavilion == 0)
-            {
+                PavilionsBase.GetContext().Pavilions.Add(_currentPavilion);
+                //проверка статуса на Забронировано или Арендовано
                 try
                 {
-                    // Check if adding a new Pavilion will exceed the limit
                     int MaxPavilionsCount = _currentPavilion.Mall.PavilionCount.Value;
+                    
+                    PavilionsBase.GetContext().SaveChanges();
+                    MessageBox.Show("Информация сохранена");
 
-                    var mallInfo = PavilionsBase.GetContext().Malls
-                        .Where(m => m.IdShoppingMall == _currentPavilion.Mall.IdShoppingMall)
-                        .Select(m => new
-                        {
-                            PavilionCount = m.Pavilions.Count()
-                        })
-                        .FirstOrDefault();
-
-                    if (_currentPavilion.Mall != null && mallInfo != null)
-                    {
-                        int CurrentCountOfPavilions = mallInfo.PavilionCount;
-                        if (CurrentCountOfPavilions > MaxPavilionsCount)
-                            MessageBox.Show("Превышен лимит на количество Pavilions в данном Mall.");
-                    }
-                    else
-                        MessageBox.Show("Ошибка с mallInfo");
 
 
 
@@ -108,9 +95,6 @@ namespace EducationalPracticePavilions.View
                     //);
 
                     // The stored procedure will handle adding the Pavilion to the database
-                    PavilionsBase.GetContext().Pavilions.Add(_currentPavilion);
-                    PavilionsBase.GetContext().SaveChanges();
-                    MessageBox.Show("Информация сохранена");
                 }
                 catch (DbEntityValidationException ex)
                 {
@@ -123,7 +107,6 @@ namespace EducationalPracticePavilions.View
                         }
                     }
                 }
-            }
         }
     }
 }

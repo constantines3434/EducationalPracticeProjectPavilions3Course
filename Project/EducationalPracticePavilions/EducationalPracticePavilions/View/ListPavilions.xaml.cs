@@ -101,17 +101,16 @@ namespace EducationalPracticePavilions.View
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show("Нельзя удалить: статус Забронировано или арендован");
                     }
                 }
             }
         }
-        //переименовать
         private void AddPavilion_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new InterfacePavilions(null, ref _currentMall));
         }
-        private void EditMall_Click(object sender, RoutedEventArgs e)
+        private void EditPavilion_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new InterfacePavilions((sender as Button).DataContext as Pavilion, ref _currentMall));
         }

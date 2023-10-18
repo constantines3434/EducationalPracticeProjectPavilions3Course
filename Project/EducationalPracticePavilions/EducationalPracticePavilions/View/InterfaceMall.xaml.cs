@@ -73,7 +73,7 @@ namespace EducationalPracticePavilions.View
                 MessageBox.Show(errors.ToString());
                 return;
             }
-
+            //добавление
             if (_currentMall.IdShoppingMall == 0)
                 PavilionsBase.GetContext().Malls.Add(_currentMall);
             try

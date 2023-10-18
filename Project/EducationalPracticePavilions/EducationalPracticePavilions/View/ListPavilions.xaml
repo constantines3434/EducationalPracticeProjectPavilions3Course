@@ -75,7 +75,7 @@
                         <TextBlock Text="{Binding CostPerMeter, StringFormat='стоимость кв. м.: {0} рублей'}" Grid.Row="6" FontSize="14" HorizontalAlignment="Left"/>
                         <TextBlock Text="{Binding Mall.StatusMall.StatusMallName, StringFormat='Статус ТЦ: {0}'}" Grid.Row="6" Margin="5 5 5 15" HorizontalAlignment="Right" FontSize="14" FontWeight="Bold" />
                         <Button Content="Удалить" HorizontalAlignment="Center" Grid.Row="7"  Click="DeleteButton_Click"/>
-                        <Button Content="Редактировать" HorizontalAlignment="Center" Grid.Row="8"  Click="EditMall_Click"/>
+                        <Button Content="Редактировать" HorizontalAlignment="Center" Grid.Row="8"  Click="EditPavilion_Click"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
