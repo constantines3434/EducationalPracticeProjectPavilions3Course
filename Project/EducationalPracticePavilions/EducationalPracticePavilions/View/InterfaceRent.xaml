@@ -1,4 +1,4 @@
-﻿<Page x:Class="EducationalPracticePavilions.View.InterfacePavilions"
+﻿<Page x:Class="EducationalPracticePavilions.View.InterfaceRent"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:EducationalPracticePavilions.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="InterfacePavilions">
+      Title="InterfaceRent">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock
-            Text="Номер этажа"
+            Text="Название ТЦ"
             Grid.Row="0"
             Grid.Column="0"/>
         <TextBlock
@@ -32,78 +32,84 @@
             Grid.Row="1"
             Grid.Column="0"/>
         <TextBlock
-            Text="Площадь"
+            Text="Арендатор"
             Grid.Row="2"
             Grid.Column="0"/>
-        <TextBlock
-            Text="Статус павильона"
-            TextWrapping="Wrap"
-            Grid.Row="3"
-            Grid.Column="0"/>
-        <TextBlock
-            Text="коэф. доб. стоим. павильона"
-            TextWrapping="Wrap"
-            Grid.Row="4" Margin="0,34,0,0" VerticalAlignment="Top"/>
-        <TextBlock
-            Text="Стоимость кв.м."
-            Grid.Row="5"
-            Grid.Column="0"/>
-        <TextBlock
-            Text="Стоимость кв.м."
-            TextWrapping="Wrap"
-            Grid.Row="5"
-            Grid.Column="0"/>
-        <TextBox
-            Width="550"
-            MaxLength="100"
-            Grid.Column="1"
-            Grid.Row="0"
-            HorizontalAlignment="Left"
-            Text="{Binding FloorPavilion}"
-            BorderBrush="Black"
-            BorderThickness="1,1,1,1"/>
-        <TextBox
-            Width="550"
-            MaxLength="100"
-            Grid.Column="1"
-            Grid.Row="1"
-            HorizontalAlignment="Left"
-            Text="{Binding NamePavilions}"
-            BorderBrush="Black"
-            BorderThickness="1,1,1,1"/>
-        <TextBox
-            Width="550"
-            MaxLength="100"
-            Grid.Column="1"
-            Grid.Row="2"
-            HorizontalAlignment="Left"
-            Text="{Binding SquarePavilions}"
-            BorderBrush="Black"
-            BorderThickness="1,1,1,1"/>
+        
         <ComboBox
-            x:Name="ComboStatus"
-            DisplayMemberPath="StatusName"
-            Grid.Row="3"
+            x:Name="ComboMallsName"
+            DisplayMemberPath="NameMalls"
+            Grid.Row="0"
             Grid.Column="1"
             Width="300"
             HorizontalAlignment="Left"
-            SelectedItem="{Binding StatusPavilions}" Margin="0,12,0,0" VerticalAlignment="Top"
+            SelectedItem="{Binding Malls}" Margin="0,12,0,0" VerticalAlignment="Top"
             />
+        <Button x:Name="ButtonСonfirmMall"
+                Click="ButtonСonfirmMall_Click"
+                Content="Подтвердить ТЦ"
+                Grid.Column="1"
+                Grid.Row="0"
+                HorizontalAlignment="Right"
+                />
+        <ComboBox
+            x:Name="ComboPavilionsInMall"
+            DisplayMemberPath="NamePavilions"
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="300"
+            HorizontalAlignment="Left"
+            SelectedItem="{Binding Pavilions}" Margin="0,12,0,0" VerticalAlignment="Top"
+            SelectionChanged="ComboMallsName_SelectionChanged"
+            />
+        <ComboBox
+            x:Name="ComboTenant"
+            DisplayMemberPath="CompanyName"
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="300"
+            HorizontalAlignment="Left"
+            SelectedItem="{Binding Tenants}" Margin="0,12,0,0" VerticalAlignment="Top"
+            />
+        <TextBlock
+            Text="Начало аренды"
+            Grid.Row="3"
+            Grid.Column="0"/>
+        <TextBox
+            Width="550"
+            MaxLength="100"
+            Grid.Column="1"
+            Grid.Row="3"
+            HorizontalAlignment="Left"
+            Text="{Binding StartOfLease}"
+            BorderBrush="Black"
+            BorderThickness="1,1,1,1"/>
+        <TextBlock
+            Text="Конец аренды"
+            Grid.Row="4"
+            Grid.Column="0"/>
         <TextBox
             Width="550"
             MaxLength="100"
             Grid.Column="1"
             Grid.Row="4"
             HorizontalAlignment="Left"
-            Text="{Binding ValueAddedFactor}" Margin="0,26,0,0" VerticalAlignment="Top"/>
-        <TextBox
-            Width="550"
-            MaxLength="100"
-            Grid.Column="1"
+            Text="{Binding EndOfLease}"
+            BorderBrush="Black"
+            BorderThickness="1,1,1,1"/>
+        <TextBlock
+            Text="Статус аренды"
             Grid.Row="5"
+            Grid.Column="0"/>
+        <ComboBox
+            x:Name="ComboStatusRent"
+            DisplayMemberPath="StatusRentName"
+            Grid.Row="5"
+            Grid.Column="1"
+            Width="300"
             HorizontalAlignment="Left"
-            Text="{Binding CostPerMeter}" Margin="0,26,0,0" VerticalAlignment="Top"/>
-
+            SelectedItem="{Binding StatusRent}" Margin="0,12,0,0" VerticalAlignment="Top"
+            />
         <Button x:Name="ButtonSave"
                 Click="ButtonSave_Click"
                 Content="Сохранение"
@@ -111,8 +117,8 @@
                 Grid.Row="11"
                 HorizontalAlignment="Left"
                 />
-        <Button x:Name="TransitionToTheRentButton"
-                Click="TransitionToTheRentButton_Click"
+        <Button x:Name="TransitionToThePavilionsButton"
+                Click="TransitionToThePavilionsButton_Click"
                 Content="Переход к аренде"
                 Grid.Column="1"
                 Grid.Row="11"

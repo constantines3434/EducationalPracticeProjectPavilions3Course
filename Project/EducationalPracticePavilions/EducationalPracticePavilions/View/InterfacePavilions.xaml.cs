@@ -39,11 +39,9 @@ namespace EducationalPracticePavilions.View
             DataContext = _currentPavilion;
             ComboStatus.ItemsSource = PavilionsBase.GetContext().StatusPavilions.ToList();
         }
-
-
-        private void TransitionToThePavilionsButton_Click(object sender, RoutedEventArgs e)
+        private void TransitionToTheRentButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.MainFrame.Navigate(new InterfaceRent());
         }
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
@@ -78,20 +76,6 @@ namespace EducationalPracticePavilions.View
                     
                     PavilionsBase.GetContext().SaveChanges();
                     MessageBox.Show("Информация сохранена");
-
-                    // Call the stored procedure to add the Pavilion
-                    //PavilionsBase.GetContext().AddPavilionToMall(
-                    //    _currentPavilion.IdShoppingMall,
-                    //    _currentPavilion.NamePavilions,
-                    //    _currentPavilion.FloorPavilion,
-                    //    _currentPavilion.IdStatusPavilion,
-                    //    _currentPavilion.SquarePavilions,
-                    //    _currentPavilion.CostPerMeter,
-                    //    MaxPavilionsCount, // You may need to adjust this parameter as needed
-                    //    _currentPavilion.ValueAddedFactor
-                    //);
-
-                    // The stored procedure will handle adding the Pavilion to the database
                 }
                 catch (DbEntityValidationException ex)
                 {
