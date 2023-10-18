@@ -75,28 +75,20 @@
             Text="Начало аренды"
             Grid.Row="3"
             Grid.Column="0"/>
-        <TextBox
-            Width="550"
-            MaxLength="100"
-            Grid.Column="1"
-            Grid.Row="3"
-            HorizontalAlignment="Left"
-            Text="{Binding StartOfLease}"
-            BorderBrush="Black"
-            BorderThickness="1,1,1,1"/>
+        <DatePicker x:Name="DatePickerStartOfLease"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Margin="0,12,0,0"/>
         <TextBlock
             Text="Конец аренды"
             Grid.Row="4"
             Grid.Column="0"/>
-        <TextBox
-            Width="550"
-            MaxLength="100"
-            Grid.Column="1"
-            Grid.Row="4"
-            HorizontalAlignment="Left"
-            Text="{Binding EndOfLease}"
-            BorderBrush="Black"
-            BorderThickness="1,1,1,1"/>
+        <DatePicker x:Name="DatePickerEndOfLease"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Margin="0,12,0,0"/>
         <TextBlock
             Text="Статус аренды"
             Grid.Row="5"

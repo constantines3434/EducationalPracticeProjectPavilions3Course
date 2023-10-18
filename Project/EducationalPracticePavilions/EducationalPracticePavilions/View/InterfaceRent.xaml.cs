@@ -35,12 +35,10 @@ namespace EducationalPracticePavilions.View
             ComboTenant.ItemsSource = PavilionsBase.GetContext().Tenants.ToList();
             ComboStatusRent.ItemsSource = PavilionsBase.GetContext().StatusRents.ToList();
         }
-
         private void ComboMallsName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Получаем выбранный Mall
             Mall selectedMall = ComboMallsName.SelectedItem as Mall;
-
             if (selectedMall != null)
             {
                 // Выполните запрос к базе данных для получения Pavilions, относящихся к этому Mall
@@ -51,7 +49,6 @@ namespace EducationalPracticePavilions.View
                 ComboPavilionsInMall.ItemsSource = pavilionsInMall;
             }
         }
-
         private void ButtonСonfirmMall_Click(object sender, RoutedEventArgs e)
         {
             // Обработка выбора Mall
@@ -67,53 +64,76 @@ namespace EducationalPracticePavilions.View
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             currentRent.StatusRent = ComboStatusRent.SelectedItem as StatusRent;
+            currentRent.Tenant = ComboTenant.SelectedItem as Tenant;
 
             StringBuilder errors = new StringBuilder();
 
-            // Проверьте, что элементы ComboMallsName и ComboPavilionsInMall выбраны
             if (ComboMallsName.SelectedItem == null || ComboPavilionsInMall.SelectedItem == null)
             {
                 errors.AppendLine("Выберите Торговый центр и Павильон.");
             }
 
-            if (string.IsNullOrWhiteSpace(currentRent.StartOfLease.ToString()))
+            // Убедитесь, что объект currentRent был инициализирован
+            if (currentRent != null)
             {
-                errors.AppendLine("Укажите корректно начало аренды.");
+                // Получите выбранную дату из DatePicker
+                if (DatePickerStartOfLease.SelectedDate != null)
+                {
+                    currentRent.StartOfLease = DatePickerStartOfLease.SelectedDate.Value;
+                }
+                else
+                {
+                    errors.AppendLine("Укажите корректно начало аренды.");
+                }
+
+                if (DatePickerEndOfLease.SelectedDate != null)
+                {
+                    currentRent.EndOfLease = DatePickerEndOfLease.SelectedDate.Value;
+                }
+                else
+                {
+                    errors.AppendLine("Укажите корректно конец аренды.");
+                }
+
+                if (currentRent.Tenant != null) // Убедитесь, что объект Tenant был инициализирован
+                {
+                    // Получите выбранные элементы ComboMallsName и ComboPavilionsInMall
+                    Mall selectedMall = ComboMallsName.SelectedItem as Mall;
+                    Pavilion selectedPavilion = ComboPavilionsInMall.SelectedItem as Pavilion;
+
+                    // Получите идентификаторы для вызова хранимой процедуры
+                    int idShoppingMall = selectedMall.IdShoppingMall;
+                    int idPavilion = selectedPavilion.IdPavilion;
+
+                    // Вызов хранимой процедуры с актуальными параметрами
+                    try
+                    {
+                        PavilionsBase.GetContext().RentOrReservePavilion(idShoppingMall, idPavilion,
+                            currentRent.Tenant.IdTenant, currentRent.StartOfLease, currentRent.EndOfLease,
+                            currentRent.StatusRent.IdStatusRent);
+
+                        MessageBox.Show("Процедура выполнена успешно.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ошибка выполнения процедуры: " + ex.Message);
+                    }
+                }
+                else
+                {
+                    errors.AppendLine("Выберите арендатора.");
+                }
             }
-            if (string.IsNullOrWhiteSpace(currentRent.EndOfLease.ToString()))
+            else
             {
-                errors.AppendLine("Укажите корректно конец аренды.");
+                errors.AppendLine("Объект currentRent не был инициализирован.");
             }
 
             if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());
-                return;
-            }
-
-            // Получите выбранные элементы ComboMallsName и ComboPavilionsInMall
-            Mall selectedMall = ComboMallsName.SelectedItem as Mall;
-            Pavilion selectedPavilion = ComboPavilionsInMall.SelectedItem as Pavilion;
-
-            // Получите идентификаторы для вызова хранимой процедуры
-            int idShoppingMall = selectedMall.IdShoppingMall;
-            int idPavilion = selectedPavilion.IdPavilion;
-
-            // Вызов хранимой процедуры с актуальными параметрами
-            try
-            {
-                PavilionsBase.GetContext().RentOrReservePavilion(idShoppingMall, idPavilion,
-                    currentRent.Tenant.IdTenant, currentRent.StartOfLease, currentRent.EndOfLease,
-                    currentRent.StatusRent.IdStatusRent);
-
-                Console.WriteLine("Процедура выполнена успешно.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка выполнения процедуры: " + ex.Message);
             }
         }
 
     }
-
 }
