@@ -106,14 +106,13 @@ namespace EducationalPracticePavilions.View
             }
         }
         //переименовать
-        private void AddMall_Click(object sender, RoutedEventArgs e)
+        private void AddPavilion_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new InterfaceMall(null));
+            Manager.MainFrame.Navigate(new InterfacePavilions(null, ref _currentMall));
         }
-
         private void EditMall_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new InterfaceMall((sender as Button).DataContext as Mall));
+            Manager.MainFrame.Navigate(new InterfacePavilions((sender as Button).DataContext as Pavilion, ref _currentMall));
         }
     }
 }

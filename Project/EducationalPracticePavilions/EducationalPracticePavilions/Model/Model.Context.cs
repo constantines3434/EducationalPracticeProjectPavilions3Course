@@ -18,20 +18,16 @@ namespace EducationalPracticePavilions.Model
     public partial class PavilionsBase : DbContext
     {
         private static PavilionsBase context_;
-
         public PavilionsBase()
             : base("name=PavilionsBase")
         {
         }
-
         public static PavilionsBase GetContext()
         {
             if (context_ == null)
                 context_ = new PavilionsBase();
             return context_;
         }
-
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

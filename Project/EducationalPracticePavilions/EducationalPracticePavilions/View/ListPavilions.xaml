@@ -31,8 +31,8 @@
                 <ComboBox Width="225" Name="ComboFloor" SelectionChanged="ComboFloor_SelectionChanged"/>
             </StackPanel>
             <StackPanel  Orientation="Horizontal" >
-                <Button Margin="20" Grid.Row="1" Width="225" Name="AddMall" Click="AddMall_Click" HorizontalAlignment="Center"
-                        Background="LightGray" Content="Добавить ТЦ"/>
+                <Button Margin="20" Grid.Row="1" Width="225" Name="AddPavilion" Click="AddPavilion_Click" HorizontalAlignment="Center"
+                        Background="LightGray" Content="Добавить Павильон"/>
             </StackPanel>
         </WrapPanel>
         <ListView Grid.Row="2" Name="ListViewPavilions" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
