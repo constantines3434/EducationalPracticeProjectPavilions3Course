@@ -79,9 +79,6 @@ namespace EducationalPracticePavilions.View
                     PavilionsBase.GetContext().SaveChanges();
                     MessageBox.Show("Информация сохранена");
 
-
-
-
                     // Call the stored procedure to add the Pavilion
                     //PavilionsBase.GetContext().AddPavilionToMall(
                     //    _currentPavilion.IdShoppingMall,

@@ -31,6 +31,7 @@ namespace EducationalPracticePavilions.Model
             return context_;
         }
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -93,6 +94,35 @@ namespace EducationalPracticePavilions.Model
                 new ObjectParameter("PavilionId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeletePavilion", pavilionIdParameter);
+        }
+    
+        public virtual int RentOrReservePavilion(Nullable<int> idShoppingMall, Nullable<int> idPavilion, Nullable<int> idTenant, Nullable<System.DateTime> startOfLease, Nullable<System.DateTime> endOfLease, Nullable<int> idStatusRent)
+        {
+            var idShoppingMallParameter = idShoppingMall.HasValue ?
+                new ObjectParameter("IdShoppingMall", idShoppingMall) :
+                new ObjectParameter("IdShoppingMall", typeof(int));
+    
+            var idPavilionParameter = idPavilion.HasValue ?
+                new ObjectParameter("IdPavilion", idPavilion) :
+                new ObjectParameter("IdPavilion", typeof(int));
+    
+            var idTenantParameter = idTenant.HasValue ?
+                new ObjectParameter("IdTenant", idTenant) :
+                new ObjectParameter("IdTenant", typeof(int));
+    
+            var startOfLeaseParameter = startOfLease.HasValue ?
+                new ObjectParameter("StartOfLease", startOfLease) :
+                new ObjectParameter("StartOfLease", typeof(System.DateTime));
+    
+            var endOfLeaseParameter = endOfLease.HasValue ?
+                new ObjectParameter("EndOfLease", endOfLease) :
+                new ObjectParameter("EndOfLease", typeof(System.DateTime));
+    
+            var idStatusRentParameter = idStatusRent.HasValue ?
+                new ObjectParameter("IdStatusRent", idStatusRent) :
+                new ObjectParameter("IdStatusRent", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RentOrReservePavilion", idShoppingMallParameter, idPavilionParameter, idTenantParameter, startOfLeaseParameter, endOfLeaseParameter, idStatusRentParameter);
         }
     }
 }

@@ -285,6 +285,14 @@
         <Function Name="DeletePavilion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PavilionId" Type="int" Mode="In" />
         </Function>
+        <Function Name="RentOrReservePavilion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdShoppingMall" Type="int" Mode="In" />
+          <Parameter Name="IdPavilion" Type="int" Mode="In" />
+          <Parameter Name="IdTenant" Type="int" Mode="In" />
+          <Parameter Name="StartOfLease" Type="date" Mode="In" />
+          <Parameter Name="EndOfLease" Type="date" Mode="In" />
+          <Parameter Name="IdStatusRent" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="Хранилище PavilionsBaseModelContainer">
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
@@ -707,6 +715,14 @@
           <FunctionImport Name="DeletePavilion">
             <Parameter Name="PavilionId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="RentOrReservePavilion">
+            <Parameter Name="IdShoppingMall" Mode="In" Type="Int32" />
+            <Parameter Name="IdPavilion" Mode="In" Type="Int32" />
+            <Parameter Name="IdTenant" Mode="In" Type="Int32" />
+            <Parameter Name="StartOfLease" Mode="In" Type="DateTime" />
+            <Parameter Name="EndOfLease" Mode="In" Type="DateTime" />
+            <Parameter Name="IdStatusRent" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -841,6 +857,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AddPavilionToMall" FunctionName="Хранилище PavilionsBaseModel.AddPavilionToMall" />
           <FunctionImportMapping FunctionImportName="DeletePavilion" FunctionName="Хранилище PavilionsBaseModel.DeletePavilion" />
+          <FunctionImportMapping FunctionImportName="RentOrReservePavilion" FunctionName="Хранилище PavilionsBaseModel.RentOrReservePavilion" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
