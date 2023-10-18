@@ -17,7 +17,7 @@
 
         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock Text="Введите коэффициент добавочной стоимости ТЦ" Width="175" HorizontalAlignment="Left"
+                <TextBlock Text="Коэф. доб. стоим. ТЦ:" Width="175" HorizontalAlignment="Left"
                            TextAlignment="Right"/>
                 <TextBox Width="225" Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" HorizontalAlignment="Left"/>
             </StackPanel>
@@ -55,6 +55,7 @@
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
                         <TextBlock
                             VerticalAlignment="Center"
@@ -66,14 +67,15 @@
                             FontSize="20"
                             Grid.Row="0"
                             Text="{Binding Mall.NameMalls}"/>
-                        <TextBlock Text="{Binding StatusPavilion.StatusMall.StatusMallName, StringFormat='Статус: {0}'}" Grid.Row="2" Margin="5 5 5 15" HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" />
                         <TextBlock Text="{Binding FloorPavilion, StringFormat='Этаж: {0}'}" Grid.Row="3" FontSize="14" HorizontalAlignment="Left"/>
                         <TextBlock Text= "{Binding NamePavilions, StringFormat='Название павильона: {0}'}" Grid.Row="3" FontSize="14" HorizontalAlignment="Right"/>
                         <TextBlock Text="{Binding SquarePavilions, StringFormat='Площадь павильона: {0}'}" Grid.Row="4" FontSize="14" HorizontalAlignment="Left"/>
                         <TextBlock Text="{Binding StatusPavilion.StatusName, StringFormat='Статус павильона: {0}'}" Grid.Row="4" FontSize="14" HorizontalAlignment="Right"/>
                         <TextBlock Text="{Binding ValueAddedFactor, StringFormat='коэффициент добавочной стоимости павильона: {0}'}" Grid.Row="5" FontSize="14" HorizontalAlignment="Left"/>
-                        <Button Content="Удалить" HorizontalAlignment="Center" Grid.Row="6"  Click="DeleteButton_Click"/>
-                        <Button Content="Редактировать" HorizontalAlignment="Center" Grid.Row="7"  Click="EditMall_Click"/>
+                        <TextBlock Text="{Binding CostPerMeter, StringFormat='стоимость кв. м.: {0} рублей'}" Grid.Row="6" FontSize="14" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding Mall.StatusMall.StatusMallName, StringFormat='Статус: {0}'}" Grid.Row="6" Margin="5 5 5 15" HorizontalAlignment="Right" FontSize="14" FontWeight="Bold" />
+                        <Button Content="Удалить" HorizontalAlignment="Center" Grid.Row="7"  Click="DeleteButton_Click"/>
+                        <Button Content="Редактировать" HorizontalAlignment="Center" Grid.Row="8"  Click="EditMall_Click"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

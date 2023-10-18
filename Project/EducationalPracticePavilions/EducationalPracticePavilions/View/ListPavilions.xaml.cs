@@ -11,10 +11,15 @@ namespace EducationalPracticePavilions.View
     public partial class ListPavilions : Page
     {
         private List<Pavilion> _pavilions;
+        private Mall _currentMall = null;
 
-        public ListPavilions()
+        public ListPavilions(Mall selectedMall)
         {
             InitializeComponent();
+            if (selectedMall != null)
+                _currentMall = selectedMall;
+            // Загрузка всех павильонов
+            _pavilions = PavilionsBase.GetContext().Pavilions.ToList();
 
             // Загрузка статусов ТЦ в ComboStatus
             var allStatuses = PavilionsBase.GetContext().StatusPavilions.ToList();
@@ -31,26 +36,27 @@ namespace EducationalPracticePavilions.View
             ComboFloor.ItemsSource = allFloors;
             ComboFloor.SelectedIndex = 0;
 
-            // Загрузка всех павильонов
-            _pavilions = PavilionsBase.GetContext().Pavilions.ToList();
+            
+            _currentMall = selectedMall;
             UpdateMalls();
         }
 
         private void UpdateMalls()
         {
-            var currentPavilion = _pavilions;
+            var currentPavilion = _pavilions.Where(p => p.IdShoppingMall == _currentMall.IdShoppingMall).ToList();
 
             if (ComboFloor.SelectedIndex > 0)
             {
                 currentPavilion = currentPavilion.Where(p => p.FloorPavilion == (int)ComboFloor.SelectedItem).ToList();
             }
+
             // Применяем фильтрацию по коэффициенту добавочной стоимости
             if (!string.IsNullOrEmpty(TBoxSearch.Text) && double.TryParse(TBoxSearch.Text, out double searchValue))
             {
-                
                 currentPavilion = currentPavilion.Where(p => p.ValueAddedFactor > 0.1 && p.ValueAddedFactor <= searchValue).ToList();
             }
-            // Применяем фильтрацию по статусу ТЦ
+
+            // Применяем фильтрацию по статусу Павильона
             var selectedStatus = ComboStatus.SelectedItem as StatusPavilion;
             if (selectedStatus != null && selectedStatus.StatusName != "Все статусы")
             {
@@ -59,6 +65,7 @@ namespace EducationalPracticePavilions.View
 
             ListViewPavilions.ItemsSource = currentPavilion;
         }
+
 
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {

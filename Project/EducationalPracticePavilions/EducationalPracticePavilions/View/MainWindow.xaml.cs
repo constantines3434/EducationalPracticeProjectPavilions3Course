@@ -28,8 +28,8 @@ namespace EducationalPracticePavilions
             Manager.MainFrame = MainFrame;
             //MainFrame.Navigate(new EmployeesPage());
             //MainFrame.Navigate(new InterfaceMall(null));
-            //MainFrame.Navigate(new ListMalls());
-            MainFrame.Navigate(new ListPavilions());
+            MainFrame.Navigate(new ListMalls());
+           // MainFrame.Navigate(new ListPavilions());
 
         }
 
