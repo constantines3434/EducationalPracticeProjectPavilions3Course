@@ -64,7 +64,7 @@
                             TextWrapping="Wrap"
                             HorizontalAlignment="Center"
                             Margin="5, 5"
-                            FontSize="20"
+                            FontSize="15"
                             Grid.Row="0"
                             Text="{Binding Mall.NameMalls}"/>
                         <TextBlock Text="{Binding FloorPavilion, StringFormat='Этаж: {0}'}" Grid.Row="3" FontSize="14" HorizontalAlignment="Left"/>

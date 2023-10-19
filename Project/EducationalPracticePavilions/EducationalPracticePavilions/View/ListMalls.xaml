@@ -81,7 +81,7 @@
                             TextWrapping="Wrap"
                             HorizontalAlignment="Center"
                             Margin="5, 5"
-                            FontSize="20"
+                            FontSize="15"
                             Grid.Row="0"
                             Text="{Binding NameMalls}"/>
                         <TextBlock Text="{Binding Price, StringFormat={}{0:N2} РУБ}" Grid.Row="2" Margin="5 5 5 15" HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" />

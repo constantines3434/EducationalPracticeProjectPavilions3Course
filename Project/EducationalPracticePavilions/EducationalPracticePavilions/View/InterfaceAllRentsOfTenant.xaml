@@ -51,7 +51,7 @@
                             TextWrapping="Wrap"
                             HorizontalAlignment="Center"
                             Margin="5, 5"
-                            FontSize="20"
+                            FontSize="15"
                             Grid.Row="0"
                             Text="{Binding MallName}"/>
                         <TextBlock Text="{Binding CityName, StringFormat='Город: {0}'}" Grid.Row="3" FontSize="14" HorizontalAlignment="Left"/>
@@ -60,7 +60,6 @@
                         <TextBlock Text="{Binding EndOfLease, StringFormat='Конец аренды: {0}'}" Grid.Row="5" FontSize="14" HorizontalAlignment="Left"/>
                         <TextBlock Text="{Binding RentCost, StringFormat='Стоимость аренды: {0} рублей'}" Grid.Row="6" FontSize="14" HorizontalAlignment="Left"/>
                         <TextBlock Text="{Binding StatusRentName, StringFormat='Статус аренды: {0}'}" Grid.Row="7" FontSize="14" HorizontalAlignment="Left"/>
-                        <Button Content="Удалить" HorizontalAlignment="Center" Grid.Row="8"  Click="DeleteRent_Click"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

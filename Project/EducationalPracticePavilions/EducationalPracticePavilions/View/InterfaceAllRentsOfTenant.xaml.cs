@@ -65,11 +65,5 @@ namespace EducationalPracticePavilions.View
                 }
             }
         }
-
-
-        private void DeleteRent_Click(object sender, RoutedEventArgs e)
-        {
-            // Добавьте код для удаления выбранной аренды
-        }
     }
 }
