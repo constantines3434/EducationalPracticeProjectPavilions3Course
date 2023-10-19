@@ -1,0 +1,4 @@
+без триггеров работает
+
+триггеры
+PreventDeleteReservedPavilions.sql

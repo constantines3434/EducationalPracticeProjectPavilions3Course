@@ -97,7 +97,7 @@ namespace EducationalPracticePavilions.View
 
                 if (currentRent.Tenant != null) // Убедитесь, что объект Tenant был инициализирован
                 {
-                    // Получите выбранные элементы ComboMallsName и ComboPavilionsInMall
+                    // выбранные элементы ComboMallsName и ComboPavilionsInMall
                     Mall selectedMall = ComboMallsName.SelectedItem as Mall;
                     Pavilion selectedPavilion = ComboPavilionsInMall.SelectedItem as Pavilion;
 
@@ -128,12 +128,10 @@ namespace EducationalPracticePavilions.View
             {
                 errors.AppendLine("Объект currentRent не был инициализирован.");
             }
-
             if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());
             }
         }
-
     }
 }
