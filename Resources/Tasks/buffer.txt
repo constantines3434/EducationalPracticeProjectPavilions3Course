@@ -1,1 +1,23 @@
 1) преобразовывать картинку в varbinary
+
+Авторизация
+
+страницы:
+Менеджер С:
+
+	      ListMalls
+		=>
+	      InterfaceMall
+		=>
+	      ListPavilions
+		=>
+	      InterfacePavilions
+		=>
+	      InterfaceRent
+
+Администратор:
+	      InterfaceAdministrator
+		=>
+	      InterfaceAddEditEmployee
+		=>
+	      InterfaceAllRentsOfTenant	    

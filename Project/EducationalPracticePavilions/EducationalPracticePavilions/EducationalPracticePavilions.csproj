@@ -157,14 +157,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EmployeesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AddEditPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\InterfaceAddEditEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -206,14 +198,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="View\EmployeesPage.xaml.cs">
-      <DependentUpon>EmployeesPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Commands\Manager.cs" />
     <Compile Include="ViewModel\ViewModelEmployees.cs" />
-    <Compile Include="View\AddEditPage.xaml.cs">
-      <DependentUpon>AddEditPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ListPavilions.xaml.cs">
       <DependentUpon>ListPavilions.xaml</DependentUpon>
     </Compile>
