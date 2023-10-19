@@ -285,6 +285,7 @@
         <Function Name="DeletePavilion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PavilionId" Type="int" Mode="In" />
         </Function>
+        <Function Name="ExtendLeaseAndUpdateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="RentOrReservePavilion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdShoppingMall" Type="int" Mode="In" />
           <Parameter Name="IdPavilion" Type="int" Mode="In" />
@@ -715,6 +716,7 @@
           <FunctionImport Name="DeletePavilion">
             <Parameter Name="PavilionId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ExtendLeaseAndUpdateStatus" />
           <FunctionImport Name="RentOrReservePavilion">
             <Parameter Name="IdShoppingMall" Mode="In" Type="Int32" />
             <Parameter Name="IdPavilion" Mode="In" Type="Int32" />
@@ -857,6 +859,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AddPavilionToMall" FunctionName="Хранилище PavilionsBaseModel.AddPavilionToMall" />
           <FunctionImportMapping FunctionImportName="DeletePavilion" FunctionName="Хранилище PavilionsBaseModel.DeletePavilion" />
+          <FunctionImportMapping FunctionImportName="ExtendLeaseAndUpdateStatus" FunctionName="Хранилище PavilionsBaseModel.ExtendLeaseAndUpdateStatus" />
           <FunctionImportMapping FunctionImportName="RentOrReservePavilion" FunctionName="Хранилище PavilionsBaseModel.RentOrReservePavilion" />
         </EntityContainerMapping>
       </Mapping>

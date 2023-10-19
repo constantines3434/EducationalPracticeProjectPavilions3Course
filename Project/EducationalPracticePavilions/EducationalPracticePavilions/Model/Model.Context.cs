@@ -31,7 +31,6 @@ namespace EducationalPracticePavilions.Model
             return context_;
         }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -94,6 +93,11 @@ namespace EducationalPracticePavilions.Model
                 new ObjectParameter("PavilionId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeletePavilion", pavilionIdParameter);
+        }
+    
+        public virtual int ExtendLeaseAndUpdateStatus()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ExtendLeaseAndUpdateStatus");
         }
     
         public virtual int RentOrReservePavilion(Nullable<int> idShoppingMall, Nullable<int> idPavilion, Nullable<int> idTenant, Nullable<System.DateTime> startOfLease, Nullable<System.DateTime> endOfLease, Nullable<int> idStatusRent)
