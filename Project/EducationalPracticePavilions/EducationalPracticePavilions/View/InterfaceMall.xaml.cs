@@ -23,9 +23,8 @@ namespace EducationalPracticePavilions.View
     /// </summary>
     public partial class InterfaceMall : Page
     {
-        private string con = @"Data Source=WIN-OMJN02Q49QC; Initial Catalog=PavilionsBase; Integrated Security=True";
-
         private Mall _currentMall = new Mall();
+        public event EventHandler DataUpdated;
         public InterfaceMall(Mall selectedMall)
         {
             InitializeComponent();
@@ -43,6 +42,10 @@ namespace EducationalPracticePavilions.View
             ComboStatus.ItemsSource = statusMalls;
 
             ComboCities.ItemsSource = PavilionsBase.GetContext().Cities.ToList();
+        }
+        private void OnDataUpdated()
+        {
+            DataUpdated?.Invoke(this, EventArgs.Empty);
         }
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
@@ -80,11 +83,7 @@ namespace EducationalPracticePavilions.View
             {
                 // Попробуйте сохранить изменения
                 PavilionsBase.GetContext().SaveChanges();
-
-                // Теперь вызовите метод Upload с идентификатором магазина
-                var uploader = new ImageUploader(con);
-                uploader.Upload(Image1, _currentMall.IdShoppingMall);
-
+                OnDataUpdated(); // Сигнализируйте об обновлении данных 
                 MessageBox.Show("Информация сохранена");
                 //   Manager.MainFrame.GoBack();
             }
@@ -114,7 +113,21 @@ namespace EducationalPracticePavilions.View
                 }
             }
         }
+        private byte[] ConvertBitmapImageToByteArray(BitmapImage bitmapImage)
+        {
+            byte[] byteArray;
 
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+
+            using (MemoryStream stream = new MemoryStream())
+            {
+                encoder.Save(stream);
+                byteArray = stream.ToArray();
+            }
+
+            return byteArray;
+        }
         private void Select_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -129,62 +142,15 @@ namespace EducationalPracticePavilions.View
                 bitmap.EndInit();
 
                 Image1.Source = bitmap;
-
-                // Освобождаем ресурсы OpenFileDialog после использования
+                byte[] imageBytes = ConvertBitmapImageToByteArray(bitmap);
+                _currentMall.ImageShoppingMall = imageBytes;
+                imageBytes = null;
                 openFileDialog = null;
             }
         }
-
         private void TransitionToThePavilionsButton_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new ListPavilions((sender as Button).DataContext as Mall));
-        }
-    }
-    class ImageUploader
-    {
-        private readonly string _connectionString;
-
-        public ImageUploader(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-
-        /// <summary>
-        /// Загрузка изображения в БД
-        /// </summary>
-        public void Upload(System.Windows.Controls.Image image, int Id)
-        {
-            if (image.Source is BitmapImage bitmapImage)
-            {
-                using (var connection = new SqlConnection(_connectionString))
-                using (var command = connection.CreateCommand())
-                {
-                    // Вставка изображения в базу данных для конкретной записи Malls (указываем IdShoppingMall)
-                    command.CommandText = "UPDATE Malls SET ImageShoppingMall = @image WHERE IdShoppingMall = @Id";
-                    using (var stream = new MemoryStream())
-                    {
-                        BitmapEncoder encoder = new JpegBitmapEncoder();
-                        encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
-                        encoder.Save(stream);
-                        stream.Position = 0;
-
-                        var sqlParameterId = new SqlParameter("@Id", SqlDbType.Int)
-                        {
-                            Value = Id
-                        };
-                        command.Parameters.Add(sqlParameterId);
-
-                        var sqlParameterImage = new SqlParameter("@image", SqlDbType.VarBinary, (int)stream.Length)
-                        {
-                            Value = stream.ToArray()
-                        };
-                        command.Parameters.Add(sqlParameterImage);
-                    }
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    //MessageBox.Show("Работает Upload");
-                }
-            }
         }
     }
 }

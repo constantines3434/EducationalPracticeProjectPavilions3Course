@@ -24,7 +24,7 @@ namespace EducationalPracticePavilions.View
             InitializeComponent();
             ListViewEmployees.ItemsSource = PavilionsBase.GetContext().Employees.ToList();
         }
-        private void UpdateMalls()
+        private void UpdateEmployees()
         {
             var currentEmployee = PavilionsBase.GetContext().Employees.ToList();
             // Поиск по фамилии
@@ -40,19 +40,7 @@ namespace EducationalPracticePavilions.View
         }
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateMalls();
-        }
-        private void ComboStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            UpdateMalls();
-        }
-        private void CheckActual_Checked(object sender, RoutedEventArgs e)
-        {
-            UpdateMalls();
-        }
-        private void ComboCities_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            UpdateMalls();
+            UpdateEmployees();
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -70,11 +58,10 @@ namespace EducationalPracticePavilions.View
 
                         if (employeeToDelete != null)
                         {
-                            // Установите IdRole на 4
                             employeeToDelete.IdRole = 4;
                             // Сохраните изменения
                             PavilionsBase.GetContext().SaveChanges();
-                            UpdateMalls();
+                            UpdateEmployees();
                         }
                     }
                     catch (Exception ex)
@@ -84,15 +71,22 @@ namespace EducationalPracticePavilions.View
                 }
             }
         }
+        private void HandleDataUpdated(object sender, EventArgs e)
+        {
+            UpdateEmployees();
+        }
         private void AddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new InterfaceAddEditEmployee(null));
+            InterfaceAddEditEmployee addEditEmployee = new InterfaceAddEditEmployee(null);
+            addEditEmployee.DataUpdated += HandleDataUpdated; // Подпишитесь на событие
+            Manager.MainFrame.Navigate(addEditEmployee);
         }
-
         private void EditEmployee_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new InterfaceAddEditEmployee((sender as Button).DataContext as Employee));
-
+            Employee selectedEmployee = (Employee)(sender as Button).DataContext;
+            InterfaceAddEditEmployee addEditEmployee = new InterfaceAddEditEmployee(selectedEmployee);
+            addEditEmployee.DataUpdated += HandleDataUpdated; // Подпишитесь на событие
+            Manager.MainFrame.Navigate(addEditEmployee);
         }
     }
 }

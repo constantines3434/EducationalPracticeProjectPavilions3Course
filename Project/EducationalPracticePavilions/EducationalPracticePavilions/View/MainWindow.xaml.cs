@@ -26,12 +26,13 @@ namespace EducationalPracticePavilions
         {
             InitializeComponent();
             Manager.MainFrame = MainFrame;
+            //MainFrame.Navigate(new Authorization());
             //MainFrame.Navigate(new EmployeesPage());
             //MainFrame.Navigate(new InterfaceMall(null));
-            //MainFrame.Navigate(new ListMalls());
+            MainFrame.Navigate(new ListMalls());
             // MainFrame.Navigate(new ListPavilions());
             //MainFrame.Navigate(new InterfaceRent());
-            MainFrame.Navigate(new InterfaceAdministrator());
+            //MainFrame.Navigate(new InterfaceAdministrator());
             //MainFrame.Navigate(new InterfaceAddEditEmployee());
         }
 

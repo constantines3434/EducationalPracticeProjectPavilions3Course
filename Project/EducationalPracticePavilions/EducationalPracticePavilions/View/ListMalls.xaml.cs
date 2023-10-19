@@ -131,15 +131,23 @@ namespace EducationalPracticePavilions.View
                 }       
             }
         }
-
+        private void HandleDataUpdated(object sender, EventArgs e)
+        {
+            UpdateMalls();
+        }
         private void AddMall_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new InterfaceMall(null));
+            InterfaceMall interfaceMall = new InterfaceMall(null);
+            interfaceMall.DataUpdated += HandleDataUpdated;
+            Manager.MainFrame.Navigate(interfaceMall);
         }
 
         private void EditMall_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new InterfaceMall((sender as Button).DataContext as Mall));
+            Mall selectedMall = (Mall)(sender as Button).DataContext;
+            InterfaceMall addEditMall = new InterfaceMall(selectedMall);
+            addEditMall.DataUpdated += HandleDataUpdated; // Подпишитесь на событие
+            Manager.MainFrame.Navigate(addEditMall); ;   
 
         }
     }
