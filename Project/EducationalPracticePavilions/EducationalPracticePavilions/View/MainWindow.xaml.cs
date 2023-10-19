@@ -31,7 +31,8 @@ namespace EducationalPracticePavilions
             //MainFrame.Navigate(new ListMalls());
             // MainFrame.Navigate(new ListPavilions());
             //MainFrame.Navigate(new InterfaceRent());
-            MainFrame.Navigate(new InterfaceAdministrator());
+            //MainFrame.Navigate(new InterfaceAdministrator());
+            MainFrame.Navigate(new InterfaceAddEditEmployee());
         }
 
         private void ButtonBackClick(object sender, RoutedEventArgs e)

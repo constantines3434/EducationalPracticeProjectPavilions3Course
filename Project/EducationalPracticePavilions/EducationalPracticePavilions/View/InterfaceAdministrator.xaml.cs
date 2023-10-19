@@ -86,12 +86,12 @@ namespace EducationalPracticePavilions.View
         }
         private void AddEmployee_Click(object sender, RoutedEventArgs e)
         {
-         //   Manager.MainFrame.Navigate(new InterfaceMall(null));
+            Manager.MainFrame.Navigate(new InterfaceAddEditEmployee(null));
         }
 
         private void EditEmployee_Click(object sender, RoutedEventArgs e)
         {
-            //Manager.MainFrame.Navigate(new InterfaceMall((sender as Button).DataContext as Mall));
+            Manager.MainFrame.Navigate(new InterfaceAddEditEmployee((sender as Button).DataContext as Employee));
 
         }
     }

@@ -125,6 +125,9 @@
     <Compile Include="View\Captcha.xaml.cs">
       <DependentUpon>Captcha.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\InterfaceAddEditEmployee.xaml.cs">
+      <DependentUpon>InterfaceAddEditEmployee.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\InterfaceAdministrator.xaml.cs">
       <DependentUpon>InterfaceAdministrator.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InterfaceAddEditEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
