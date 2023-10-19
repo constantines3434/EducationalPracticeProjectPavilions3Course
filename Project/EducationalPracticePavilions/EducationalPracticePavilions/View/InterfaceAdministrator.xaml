@@ -17,19 +17,16 @@
 
         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock Text="Коэф. доб. стоим. ТЦ:" Width="175" HorizontalAlignment="Left"
+                <TextBlock Text="Поиск по фамилии:" Width="175" HorizontalAlignment="Left"
                            TextAlignment="Right"/>
                 <TextBox Width="225" Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" HorizontalAlignment="Left"/>
             </StackPanel>
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock Text="Выберите статус:" Width="175" TextAlignment="Right"/>
-            </StackPanel>
             <StackPanel  Orientation="Horizontal" >
-                <Button Margin="20" Grid.Row="1" Width="225" Name="AddMall" Click="AddMall_Click" HorizontalAlignment="Center"
+                <Button Margin="20" Grid.Row="1" Width="225" Name="AddEmployee" Click="AddEmployee_Click" HorizontalAlignment="Center"
                         Background="LightGray" Content="Добавить Сотрудника"/>
             </StackPanel>
         </WrapPanel>
-        <ListView Grid.Row="2" Name="ListViewMalls" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        <ListView Grid.Row="2" Name="ListViewEmployees" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   HorizontalContentAlignment="Center">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -74,7 +71,7 @@
                             Margin="5, 5"
                             FontSize="20"
                             Grid.Row="0"
-                            Text="{Binding Roles.NameRole}"/>
+                            Text="{Binding Role.NameRole}"/>
                         <TextBlock Text="{Binding Surname}" Grid.Row="2" Margin="5 5 5 15" HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" />
                         <TextBlock Text="{Binding NameEmployee}" Grid.Row="3" FontSize="14" HorizontalAlignment="Left"/>
                         <TextBlock Text= "{Binding Patronimic}" Grid.Row="3" FontSize="14" HorizontalAlignment="Right"/>
@@ -82,7 +79,7 @@
                         <TextBlock Text="{Binding PasswordEmployee, StringFormat='Пароль: {0}'}" Grid.Row="4" FontSize="14" HorizontalAlignment="Right"/>
                         <TextBlock Text="{Binding PhoneNumber, StringFormat='Номер телефона: {0}'}" Grid.Row="5" FontSize="14" HorizontalAlignment="Left"/>
                         <Button Content="Удалить" HorizontalAlignment="Center" Grid.Row="6"  Click="DeleteButton_Click"/>
-                        <Button Content="Редактировать" HorizontalAlignment="Center" Grid.Row="7"  Click="EditMall_Click"/>
+                        <Button Content="Редактировать" HorizontalAlignment="Center" Grid.Row="7"  Click="EditEmployee_Click"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -29,7 +29,7 @@ namespace EducationalPracticePavilions.View
                 _currentEmployee= selectedEmployee;
             }
             DataContext = _currentEmployee;
-            ComboBoxStatusEmployee.ItemsSource = PavilionsBase.GetContext().StatusEmployees.ToList();
+            //ComboBoxStatusEmployee.ItemsSource = PavilionsBase.GetContext().StatusEmployees.ToList();
             ComboBoxRoleEmployee.ItemsSource = PavilionsBase.GetContext().Roles.ToList();
         }
 
@@ -47,8 +47,8 @@ namespace EducationalPracticePavilions.View
                 errors.AppendLine("Укажите корректно логин работника");
             if (string.IsNullOrWhiteSpace(_currentEmployee.PasswordEmployee))
                 errors.AppendLine("Укажите корректно пароль работника");
-            if (_currentEmployee.StatusEmployee == null)
-                errors.AppendLine("Корректно выберите статус работника");
+            //if (_currentEmployee.StatusEmployee == null)
+            //    errors.AppendLine("Корректно выберите статус работника");
             if (_currentEmployee.Role == null)
                 errors.AppendLine("Корректно выберите роль работника");
             if (string.IsNullOrWhiteSpace(_currentEmployee.PhoneNumber))

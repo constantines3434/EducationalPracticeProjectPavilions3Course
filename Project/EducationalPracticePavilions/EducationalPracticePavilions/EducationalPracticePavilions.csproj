@@ -107,9 +107,6 @@
     <Compile Include="Model\StatePavilion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\StatusEmployee.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\StatusMall.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

@@ -31,7 +31,6 @@ namespace EducationalPracticePavilions.Model
             return context_;
         }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -44,7 +43,6 @@ namespace EducationalPracticePavilions.Model
         public virtual DbSet<Rent> Rents { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<StatePavilion> StatePavilions { get; set; }
-        public virtual DbSet<StatusEmployee> StatusEmployees { get; set; }
         public virtual DbSet<StatusMall> StatusMalls { get; set; }
         public virtual DbSet<StatusPavilion> StatusPavilions { get; set; }
         public virtual DbSet<StatusRent> StatusRents { get; set; }
