@@ -49,11 +49,6 @@ namespace EducationalPracticePavilions.View
                 ComboPavilionsInMall.ItemsSource = pavilionsInMall;
             }
         }
-        private void ButtonСonfirmMall_Click(object sender, RoutedEventArgs e)
-        {
-            // Обработка выбора Mall
-        }
-
         private void TransitionToThePavilionsButton_Click(object sender, RoutedEventArgs e)
         {
             // Переход к аренде с выбранным Mall и Pavilion
@@ -133,5 +128,20 @@ namespace EducationalPracticePavilions.View
                 MessageBox.Show(errors.ToString());
             }
         }
+        /// <summary>
+        /// Обновление статуса всех павильнов
+        /// </summary>
+        private void ButtonReschedulingTheRentalPeriodForAllPavilions_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                PavilionsBase.GetContext().ExtendLeaseAndUpdateStatus();
+                MessageBox.Show("Процедура выполнена успешно.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка выполнения процедуры: " + ex.Message);
+            }
+}
     }
 }

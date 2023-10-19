@@ -31,6 +31,7 @@ namespace EducationalPracticePavilions.Model
             return context_;
         }
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

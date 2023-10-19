@@ -45,11 +45,12 @@
             HorizontalAlignment="Left"
             SelectedItem="{Binding Malls}" Margin="0,12,0,0" VerticalAlignment="Top"
             />
-        <Button x:Name="ButtonСonfirmMall"
-                Click="ButtonСonfirmMall_Click"
-                Content="Подтвердить ТЦ"
+        <Button x:Name="ButtonReschedulingTheRentalPeriodForAllPavilions"
+                Click="ButtonReschedulingTheRentalPeriodForAllPavilions_Click"
+                Content="Перенос срока аренды"
                 Grid.Column="1"
-                Grid.Row="0"
+                Grid.Row="3"
+                Height="40"
                 HorizontalAlignment="Right"
                 />
         <ComboBox
@@ -113,8 +114,8 @@
                 Click="TransitionToThePavilionsButton_Click"
                 Content="Переход к аренде"
                 Grid.Column="1"
-                Grid.Row="11"
-                HorizontalAlignment="Right" Height="30" Margin="0,0,5,34" Grid.RowSpan="2" VerticalAlignment="Bottom"
+                Grid.Row="6"
+                HorizontalAlignment="Right" Height="30"  Grid.RowSpan="2" VerticalAlignment="Center"
                 />
     </Grid>
 </Page>
