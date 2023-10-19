@@ -260,10 +260,19 @@
           <Parameter Name="PavilionCount" Type="int" Mode="In" />
           <Parameter Name="ValueAddedFactor" Type="float" Mode="In" />
         </Function>
+        <Function Name="CalculateRentCost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+          <Parameter Name="Area" Type="float" Mode="In" />
+          <Parameter Name="LevelCost" Type="float" Mode="In" />
+          <Parameter Name="ComplexCost" Type="float" Mode="In" />
+          <Parameter Name="Multiplier" Type="float" Mode="In" />
+        </Function>
         <Function Name="DeletePavilion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PavilionId" Type="int" Mode="In" />
         </Function>
         <Function Name="ExtendLeaseAndUpdateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetTenantRents" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TenantId" Type="int" Mode="In" />
+        </Function>
         <Function Name="RentOrReservePavilion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdShoppingMall" Type="int" Mode="In" />
           <Parameter Name="IdPavilion" Type="int" Mode="In" />
@@ -661,6 +670,9 @@
             <Parameter Name="PavilionId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ExtendLeaseAndUpdateStatus" />
+          <FunctionImport Name="GetTenantRents" ReturnType="Collection(PavilionsBaseModel.GetTenantRents_Result)">
+            <Parameter Name="TenantId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="RentOrReservePavilion">
             <Parameter Name="IdShoppingMall" Mode="In" Type="Int32" />
             <Parameter Name="IdPavilion" Mode="In" Type="Int32" />
@@ -670,6 +682,15 @@
             <Parameter Name="IdStatusRent" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="GetTenantRents_Result">
+          <Property Type="String" Name="MallName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CityName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PavilionsName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="StartOfLease" Nullable="true" />
+          <Property Type="DateTime" Name="EndOfLease" Nullable="true" />
+          <Property Type="Double" Name="RentCost" Nullable="true" />
+          <Property Type="String" Name="StatusRentName" Nullable="true" MaxLength="8" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -795,6 +816,19 @@
           <FunctionImportMapping FunctionImportName="AddPavilionToMall" FunctionName="Хранилище PavilionsBaseModel.AddPavilionToMall" />
           <FunctionImportMapping FunctionImportName="DeletePavilion" FunctionName="Хранилище PavilionsBaseModel.DeletePavilion" />
           <FunctionImportMapping FunctionImportName="ExtendLeaseAndUpdateStatus" FunctionName="Хранилище PavilionsBaseModel.ExtendLeaseAndUpdateStatus" />
+          <FunctionImportMapping FunctionImportName="GetTenantRents" FunctionName="Хранилище PavilionsBaseModel.GetTenantRents">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PavilionsBaseModel.GetTenantRents_Result">
+                <ScalarProperty Name="MallName" ColumnName="MallName" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="PavilionsName" ColumnName="PavilionsName" />
+                <ScalarProperty Name="StartOfLease" ColumnName="StartOfLease" />
+                <ScalarProperty Name="EndOfLease" ColumnName="EndOfLease" />
+                <ScalarProperty Name="RentCost" ColumnName="RentCost" />
+                <ScalarProperty Name="StatusRentName" ColumnName="StatusRentName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="RentOrReservePavilion" FunctionName="Хранилище PavilionsBaseModel.RentOrReservePavilion" />
         </EntityContainerMapping>
       </Mapping>

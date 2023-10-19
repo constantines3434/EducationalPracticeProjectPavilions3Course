@@ -18,16 +18,19 @@ namespace EducationalPracticePavilions.Model
     public partial class PavilionsBase : DbContext
     {
         private static PavilionsBase context_;
+
         public PavilionsBase()
             : base("name=PavilionsBase")
         {
         }
+
         public static PavilionsBase GetContext()
         {
             if (context_ == null)
                 context_ = new PavilionsBase();
             return context_;
         }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -94,6 +97,15 @@ namespace EducationalPracticePavilions.Model
         public virtual int ExtendLeaseAndUpdateStatus()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ExtendLeaseAndUpdateStatus");
+        }
+    
+        public virtual ObjectResult<GetTenantRents_Result> GetTenantRents(Nullable<int> tenantId)
+        {
+            var tenantIdParameter = tenantId.HasValue ?
+                new ObjectParameter("TenantId", tenantId) :
+                new ObjectParameter("TenantId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTenantRents_Result>("GetTenantRents", tenantIdParameter);
         }
     
         public virtual int RentOrReservePavilion(Nullable<int> idShoppingMall, Nullable<int> idPavilion, Nullable<int> idTenant, Nullable<System.DateTime> startOfLease, Nullable<System.DateTime> endOfLease, Nullable<int> idStatusRent)
