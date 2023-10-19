@@ -68,12 +68,11 @@
             Grid.Column="0"/>
         <ComboBox
             x:Name="ComboSex"
-            DisplayMemberPath="Gender"
             Grid.Row="11"
             Grid.Column="1"
             Width="300"
             HorizontalAlignment="Left"
-            SelectedItem="{Binding Employees}"/>
+            />
         <TextBox
             Width="550"
             MaxLength="100"

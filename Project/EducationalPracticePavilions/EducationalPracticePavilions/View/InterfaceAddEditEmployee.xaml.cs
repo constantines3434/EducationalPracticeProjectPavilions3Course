@@ -1,6 +1,7 @@
 ﻿using EducationalPracticePavilions.Model;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
@@ -26,6 +27,11 @@ namespace EducationalPracticePavilions.View
         private string con = @"Data Source=WIN-OMJN02Q49QC; Initial Catalog=PavilionsBase; Integrated Security=True";
 
         private Employee _currentEmployee = new Employee();
+        List<string> Gender = new List<string>
+        {
+            "М",
+            "Ж"
+        };
         public InterfaceAddEditEmployee(Employee selectedEmployee)
         {
             InitializeComponent();
@@ -33,8 +39,8 @@ namespace EducationalPracticePavilions.View
                 _currentEmployee = selectedEmployee;
 
             DataContext = _currentEmployee;
-            //ComboRole.ItemsSource = PavilionsBase.GetContext().Employees.ToList();
-            //ComboSex.ItemsSource = PavilionsBase.GetContext().Employees.ToList();
+            ComboRole.ItemsSource = PavilionsBase.GetContext().Roles.ToList();
+            ComboSex.ItemsSource = Gender;
         }
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
@@ -79,20 +85,6 @@ namespace EducationalPracticePavilions.View
 
                 MessageBox.Show("Информация сохранена");
                 //   Manager.MainFrame.GoBack();
-            }
-            catch (DbUpdateException ex)
-            {
-                if (ex.InnerException != null && ex.InnerException.InnerException is SqlException sqlEx)
-                {
-                    if (sqlEx.Message.Contains("Запрещено изменять статус ТЦ на \"план\", так как есть забронированные павильоны."))
-                    {
-                        MessageBox.Show("Запрещено изменять статус ТЦ на 'план', так как есть забронированные павильоны.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Произошла ошибка при сохранении изменений.");
-                    }
-                }
             }
             catch (DbEntityValidationException ex)
             {
