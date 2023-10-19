@@ -132,9 +132,9 @@ namespace EducationalPracticePavilions.View
                 openFileDialog = null;
             }
         }
-        private void TransitionToThePavilionsButton_Click(object sender, RoutedEventArgs e)
+        private void TransitionToTheAllRentsOfTenantButton_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new InterfaceAdministrator());
+            Manager.MainFrame.Navigate(new InterfaceAllRentsOfTenant());
         }
     }
 }

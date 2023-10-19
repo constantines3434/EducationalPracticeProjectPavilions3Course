@@ -154,9 +154,9 @@
                 Grid.Row="12"
                 HorizontalAlignment="Left" Height="NaN" Margin="5,5,0,0"
                 />
-        <Button x:Name="TransitionToThePavilionsButton"
-                Click="TransitionToThePavilionsButton_Click"
-                Content="Переход к павильонам"
+        <Button x:Name="TransitionToTheAllRentsOfTenantButton"
+                Click="TransitionToTheAllRentsOfTenantButton_Click"
+                Content="Аренды арендатора"
                 Grid.Column="1"
                 Grid.Row="12"
                 HorizontalAlignment="Right" Height="30" Margin="0,5,5,0" VerticalAlignment="Top" 
