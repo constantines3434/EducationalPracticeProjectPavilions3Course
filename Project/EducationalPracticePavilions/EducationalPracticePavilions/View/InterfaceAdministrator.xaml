@@ -57,7 +57,7 @@
                             <Image.Source>
                                 <Binding Path="Photo">
                                     <Binding.TargetNullValue>
-                                        <ImageSource>/Resources/NullPhoto.jpg</ImageSource>
+                                        <ImageSource>\Resources\NullPhoto.jpg</ImageSource>
                                     </Binding.TargetNullValue>
                                 </Binding>
                             </Image.Source>

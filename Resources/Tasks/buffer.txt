@@ -20,4 +20,20 @@
 		=>			+
 	      InterfaceAddEditEmployee
 		=>			+
-	      InterfaceAllRentsOfTenant	    
+	      InterfaceAllRentsOfTenant	
+
+
+
+
+
+
+<Image Source="\Resources\emblem.png"
+               Grid.Row="0"
+               HorizontalAlignment="Center"/>
+        <TextBlock
+                    Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    TextAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="Тип пользователя"
+                    FontSize="15"/>    

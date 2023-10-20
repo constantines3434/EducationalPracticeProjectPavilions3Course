@@ -12,16 +12,13 @@ namespace EducationalPracticePavilions.View
     {
         private List<Pavilion> _pavilions;
         private Mall _currentMall = null;
-
         public ListPavilions(Mall selectedMall)
         {
             InitializeComponent();
             if (selectedMall != null)
                 _currentMall = selectedMall;
-            // Загрузка всех павильонов
             _pavilions = PavilionsBase.GetContext().Pavilions.ToList();
 
-            // Загрузка статусов ТЦ в ComboStatus
             var allStatuses = PavilionsBase.GetContext().StatusPavilions.ToList();
             allStatuses.Insert(0, new StatusPavilion
             {
@@ -30,17 +27,13 @@ namespace EducationalPracticePavilions.View
             ComboStatus.ItemsSource = allStatuses;
             ComboStatus.SelectedIndex = 0;
 
-            // Загрузка этажей в ComboFloor
-            List<int> allFloors = new List<int> { 1, 2, 3, 4 /* Добавьте сколько угодно значений */ };
-            allFloors.Insert(0, 0); // Добавьте "Все этажи" в начало списка
+            List<int> allFloors = new List<int> { 1, 2, 3, 4 };
+            allFloors.Insert(0, 0);
             ComboFloor.ItemsSource = allFloors;
             ComboFloor.SelectedIndex = 0;
-
-            
             _currentMall = selectedMall;
             UpdateMalls();
         }
-
         private void UpdateMalls()
         {
             var currentPavilion = _pavilions.Where(p => p.IdShoppingMall == _currentMall.IdShoppingMall).ToList();
@@ -49,24 +42,17 @@ namespace EducationalPracticePavilions.View
             {
                 currentPavilion = currentPavilion.Where(p => p.FloorPavilion == (int)ComboFloor.SelectedItem).ToList();
             }
-
-            // Применяем фильтрацию по коэффициенту добавочной стоимости
             if (!string.IsNullOrEmpty(TBoxSearch.Text) && double.TryParse(TBoxSearch.Text, out double searchValue))
             {
                 currentPavilion = currentPavilion.Where(p => p.ValueAddedFactor > 0.1 && p.ValueAddedFactor <= searchValue).ToList();
             }
-
-            // Применяем фильтрацию по статусу Павильона
             var selectedStatus = ComboStatus.SelectedItem as StatusPavilion;
             if (selectedStatus != null && selectedStatus.StatusName != "Все статусы")
             {
                 currentPavilion = currentPavilion.Where(p => p.StatusPavilion.StatusName == selectedStatus.StatusName).ToList();
             }
-
             ListViewPavilions.ItemsSource = currentPavilion;
         }
-
-
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateMalls();
@@ -81,14 +67,12 @@ namespace EducationalPracticePavilions.View
         {
             UpdateMalls();
         }
-
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             Pavilion selectedPavilion = (Pavilion)ListViewPavilions.SelectedItem;
 
             if (selectedPavilion != null)
             {
-                //if(selectedPavilion.IdStatusPavilion != )
                 if (MessageBox.Show("Вы точно хотите удалить выбранный элемент?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     try

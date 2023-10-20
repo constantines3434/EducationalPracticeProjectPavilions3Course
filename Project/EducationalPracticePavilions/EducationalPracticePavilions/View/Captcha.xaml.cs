@@ -26,7 +26,6 @@ namespace EducationalPracticePavilions.View
             InitializeComponent();
             CaptchaTextLoad();
         }
-
         private void CaptchaTextLoad()
         {
             Random random = new Random();
@@ -46,7 +45,6 @@ namespace EducationalPracticePavilions.View
             } while (true);
             CaptchaBlock.Text = cap;
         }
-
         private void CaptchaButton_Click(object sender, RoutedEventArgs e)
         {
             if (CaptchaTextBox.Text == CaptchaBlock.Text)

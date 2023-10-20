@@ -37,21 +37,14 @@ namespace EducationalPracticePavilions.View
         }
         private void ComboMallsName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Получаем выбранный Mall
             Mall selectedMall = ComboMallsName.SelectedItem as Mall;
             if (selectedMall != null)
             {
-                // Выполните запрос к базе данных для получения Pavilions, относящихся к этому Mall
                 List<Pavilion> pavilionsInMall = PavilionsBase.GetContext().Pavilions
                     .Where(p => p.IdShoppingMall == selectedMall.IdShoppingMall)
                     .ToList();
-                // Установите pavilionsInMall в качестве источника данных для ComboPavilionsInMall
                 ComboPavilionsInMall.ItemsSource = pavilionsInMall;
             }
-        }
-        private void TransitionToThePavilionsButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Переход к аренде с выбранным Mall и Pavilion
         }
         /// <summary>
         /// Сохранение аренды

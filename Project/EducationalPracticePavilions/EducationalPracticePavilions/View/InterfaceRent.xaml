@@ -110,12 +110,5 @@
                 Grid.Row="11"
                 HorizontalAlignment="Left"
                 />
-        <Button x:Name="TransitionToThePavilionsButton"
-                Click="TransitionToThePavilionsButton_Click"
-                Content="Переход к аренде"
-                Grid.Column="1"
-                Grid.Row="6"
-                HorizontalAlignment="Right" Height="30"  Grid.RowSpan="2" VerticalAlignment="Center"
-                />
     </Grid>
 </Page>

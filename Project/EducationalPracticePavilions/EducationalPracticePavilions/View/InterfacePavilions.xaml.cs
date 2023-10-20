@@ -46,8 +46,6 @@ namespace EducationalPracticePavilions.View
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
-
-            // Присвоение значения статуса
             _currentPavilion.StatusPavilion = ComboStatus.SelectedItem as StatusPavilion;
 
             if (_currentPavilion.FloorPavilion <= 0)
@@ -66,10 +64,8 @@ namespace EducationalPracticePavilions.View
                 MessageBox.Show(errors.ToString());
                 return;
             }
-            //добавление павильона
             if (_currentPavilion.IdPavilion == 0)
                 PavilionsBase.GetContext().Pavilions.Add(_currentPavilion);
-                //проверка статуса на Забронировано или Арендовано
                 try
                 {
                     int MaxPavilionsCount = _currentPavilion.Mall.PavilionCount.Value;

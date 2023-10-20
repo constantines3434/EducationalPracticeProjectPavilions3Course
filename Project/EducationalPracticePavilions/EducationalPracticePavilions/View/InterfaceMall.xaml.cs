@@ -40,7 +40,6 @@ namespace EducationalPracticePavilions.View
                 statusMalls.Remove(statusToRemove);
 
             ComboStatus.ItemsSource = statusMalls;
-
             ComboCities.ItemsSource = PavilionsBase.GetContext().Cities.ToList();
         }
         private void OnDataUpdated()
@@ -50,10 +49,7 @@ namespace EducationalPracticePavilions.View
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
-
-            // Присвоение значения статуса
             _currentMall.StatusMall = ComboStatus.SelectedItem as StatusMall;
-            // Присвоение значения статуса
             _currentMall.City = ComboCities.SelectedItem as City;
 
             if (string.IsNullOrWhiteSpace(_currentMall.NameMalls))
@@ -81,9 +77,8 @@ namespace EducationalPracticePavilions.View
                 PavilionsBase.GetContext().Malls.Add(_currentMall);
             try
             {
-                // Попробуйте сохранить изменения
                 PavilionsBase.GetContext().SaveChanges();
-                OnDataUpdated(); // Сигнализируйте об обновлении данных 
+                OnDataUpdated(); // Обновление данных 
                 MessageBox.Show("Информация сохранена");
                 //   Manager.MainFrame.GoBack();
             }

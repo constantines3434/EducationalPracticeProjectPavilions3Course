@@ -58,7 +58,6 @@ namespace EducationalPracticePavilions.View
         private void UpdateMalls()
         {
             var currentMalls = PavilionsBase.GetContext().Malls.ToList();
-
             if (ComboStatus.SelectedIndex > 0)
             {
                 var selectedStatus = ComboStatus.SelectedItem as StatusMall;
@@ -75,7 +74,7 @@ namespace EducationalPracticePavilions.View
                         .ToList();
                 }
             }
-            // Применяем фильтрацию по коэффициенту добавочной стоимости
+            // Фильтрация по коэффициенту добавочной стоимости
             if (!string.IsNullOrEmpty(TBoxSearch.Text) && double.TryParse(TBoxSearch.Text, out double searchValue))
             {
                 currentMalls = currentMalls
@@ -108,7 +107,6 @@ namespace EducationalPracticePavilions.View
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            // Получите выбранный элемент Mall из ListViewMalls
             Mall selectedMall = (Mall)ListViewMalls.SelectedItem;
 
             if (selectedMall != null)
@@ -118,7 +116,6 @@ namespace EducationalPracticePavilions.View
                 {
                     try
                     {
-                        // Удаление выбранного Mall из исходного списка
                         PavilionsBase.GetContext().Malls.Remove(selectedMall);
                         PavilionsBase.GetContext().SaveChanges();
 
@@ -141,14 +138,12 @@ namespace EducationalPracticePavilions.View
             interfaceMall.DataUpdated += HandleDataUpdated;
             Manager.MainFrame.Navigate(interfaceMall);
         }
-
         private void EditMall_Click(object sender, RoutedEventArgs e)
         {
             Mall selectedMall = (Mall)(sender as Button).DataContext;
             InterfaceMall addEditMall = new InterfaceMall(selectedMall);
-            addEditMall.DataUpdated += HandleDataUpdated; // Подпишитесь на событие
+            addEditMall.DataUpdated += HandleDataUpdated;
             Manager.MainFrame.Navigate(addEditMall); ;   
-
         }
     }
 }

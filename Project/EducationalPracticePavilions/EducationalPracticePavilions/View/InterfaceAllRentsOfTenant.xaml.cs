@@ -18,11 +18,6 @@ using System.Windows.Shapes;
 
 namespace EducationalPracticePavilions.View
 {
-    /// <summary>
-    /// Логика взаимодействия для InterfaceAllRentsOfTenant.xaml
-    /// </summary>
-    /// // Создайте класс для хранения данных аренды
-
     public partial class InterfaceAllRentsOfTenant : Page
     {
         public InterfaceAllRentsOfTenant()
@@ -32,7 +27,6 @@ namespace EducationalPracticePavilions.View
             int numTenant = ComboTenant.SelectedIndex;
             UpdateTenantRents(numTenant);
         }
-
         private void UpdateTenantRents(int tenantId)
         {
             using (SqlConnection connection = new SqlConnection(@"Data Source=WIN-OMJN02Q49QC; Initial Catalog=PavilionsBase; Integrated Security=True"))
@@ -55,12 +49,11 @@ namespace EducationalPracticePavilions.View
         {
             if (ComboTenant.SelectedIndex >= 0)
             {
-                // Получаем выбранный арендатор из ComboBox
                 Tenant selectedTenant = ComboTenant.SelectedItem as Tenant;
 
                 if (selectedTenant != null)
                 {
-                    int tenantId = selectedTenant.IdTenant; // Предполагая, что IdTenant - это идентификатор арендатора
+                    int tenantId = selectedTenant.IdTenant;
                     UpdateTenantRents(tenantId);
                 }
             }

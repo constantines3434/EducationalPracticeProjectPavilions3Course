@@ -44,7 +44,6 @@ namespace EducationalPracticePavilions.View
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            // Получите выбранный элемент Mall из ListViewMalls
             Employee selectedEmployee = (Employee)ListViewEmployees.SelectedItem;
 
             if (selectedEmployee != null)
@@ -59,7 +58,6 @@ namespace EducationalPracticePavilions.View
                         if (employeeToDelete != null)
                         {
                             employeeToDelete.IdRole = 4;
-                            // Сохраните изменения
                             PavilionsBase.GetContext().SaveChanges();
                             UpdateEmployees();
                         }
